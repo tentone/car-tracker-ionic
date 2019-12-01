@@ -7,6 +7,7 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AppRouterModule} from './app.router.module';
 import {AppComponent} from './app.component';
 import {TranslateModule} from '@ngx-translate/core';
+import {ScreensModule} from './screens/screens.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,7 +22,8 @@ import {TranslateModule} from '@ngx-translate/core';
       statusTap: false,
       swipeBackEnabled: false
     }),
-    AppRouterModule
+    AppRouterModule,
+    ScreensModule
   ],
   providers: [
     StatusBar,
