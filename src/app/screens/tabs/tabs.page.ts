@@ -8,25 +8,27 @@ import {App} from '../../app';
 export class TabsPage {
   get app() { return App; }
 
-  constructor() {}
-
   /**
    * List of pages available from the menu.
-   *
-   * Used to create the page content for booth desktop and mobile.
    */
   public pages = [
     {
-      route: 'tabs/map',
-      tab: 'map',
-      icon: 'map',
-      label: 'map',
+        route: 'tabs/trackers',
+        tab: 'trackers',
+        icon: 'locate',
+        label: 'trackers',
     },
     {
-      route: 'tabs/map',
-      tab: 'map',
-      icon: 'map',
-      label: 'map',
+        route: 'tabs/trackers',
+        tab: 'map',
+        icon: 'map',
+        label: 'map',
+    },
+    {
+        route: 'tabs/settings',
+        tab: 'settings',
+        icon: 'settings',
+        label: 'settings',
     }
   ];
 }

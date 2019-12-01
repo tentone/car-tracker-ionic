@@ -1,5 +1,8 @@
 export const LocaleEN = {
-	// Locales
-	pt: 'Portuguese',
-	en: 'English'
+	en: 'English',
+
+	// Menu
+	trackers: 'Trackers',
+	map: 'Map',
+	settings: 'Settings'
 };

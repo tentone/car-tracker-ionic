@@ -1,10 +1,8 @@
-<ion-tabs style="padding-top: 65px">
+<ion-tabs>
   <ion-tab-bar style="overflow-x: auto">
-    <ng-template *ngFor="let page of this.pages">
-      <ion-tab-button (click)="app.navigator.navigate(page.route);" tab="{{page.tab}}">
+      <ion-tab-button *ngFor="let page of this.pages" (click)="app.navigator.navigate(page.route);" tab="{{page.tab}}">
         <ion-icon name="{{page.icon}}"></ion-icon>
-        <ion-label>{{page.label | translate }}</ion-label>
+        <ion-label>{{page.label | translate}}</ion-label>
       </ion-tab-button>
-    </ng-template>
   </ion-tab-bar>
 </ion-tabs>
