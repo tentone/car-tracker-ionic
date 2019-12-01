@@ -1,8 +1,9 @@
 {
   "name": "cartracker",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "tentone",
+  "description": "Car tracking application using the ionic framework.",
+  "homepage": "https://github.com/tentone",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -13,35 +14,48 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/common": "~8.1.2",
-    "@angular/core": "~8.1.2",
-    "@angular/forms": "~8.1.2",
-    "@angular/platform-browser": "~8.1.2",
-    "@angular/platform-browser-dynamic": "~8.1.2",
-    "@angular/router": "~8.1.2",
-    "@ionic-native/core": "^5.0.0",
+    "@angular/cdk": "^8.2.2",
+    "@angular/common": "^8.2.9",
+    "@angular/core": "^8.2.9",
+    "@angular/forms": "^8.2.9",
+    "@angular/platform-browser": "^8.2.9",
+    "@angular/platform-browser-dynamic": "^8.2.9",
+    "@angular/pwa": "^0.803.8",
+    "@angular/router": "^8.2.9",
+    "@angular/service-worker": "^8.2.9",
+    "@ionic-native/core": "^5.15.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.7.1",
+    "@types/mapbox-gl": "^0.54.4",
     "core-js": "^2.5.4",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.10.2",
+    "mapbox-gl": "^1.4.0"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "~0.801.2",
-    "@angular-devkit/build-angular": "~0.801.2",
-    "@angular-devkit/core": "~8.1.2",
-    "@angular-devkit/schematics": "~8.1.2",
-    "@angular/cli": "~8.1.2",
-    "@angular/compiler": "~8.1.2",
-    "@angular/compiler-cli": "~8.1.2",
-    "@angular/language-service": "~8.1.2",
+    "@angular-devkit/architect": "~0.803.8",
+    "@angular-devkit/build-angular": "~0.803.8",
+    "@angular-devkit/core": "~8.3.8",
+    "@angular-devkit/schematics": "~8.3.8",
+    "@angular/cli": "~8.3.8",
+    "@angular/compiler": "~8.2.9",
+    "@angular/compiler-cli": "~8.2.9",
+    "@angular/language-service": "~8.2.9",
     "@ionic/angular-toolkit": "^2.1.1",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "@ngx-translate/core": "^11.0.1",
     "codelyzer": "^5.0.0",
+    "cordova-res": "^0.8.1",
+    "cordova-plugin-device": "^2.0.2",
+    "cordova-plugin-ionic-keyboard": "^2.2.0",
+    "cordova-plugin-ionic-webview": "^4.1.3",
+    "cordova-plugin-splashscreen": "^5.0.2",
+    "cordova-plugin-statusbar": "^2.4.2",
+    "cordova-plugin-whitelist": "^1.3.3",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.1.0",
@@ -49,10 +63,26 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
+    "native-run": "^0.2.9",
     "protractor": "~5.4.0",
-    "ts-node": "~7.0.0",
-    "tslint": "~5.15.0",
-    "typescript": "~3.4.3"
+    "ts-node": "~8.4.1",
+    "tslint": "~5.20.0",
+    "typescript": "~3.5.3"
   },
-  "description": "An Ionic project"
+  "cordova": {
+    "plugins": {
+      "phonegap-nfc": {},
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
+      "cordova-plugin-ionic-keyboard": {}
+    },
+    "platforms": [
+      "android"
+    ]
+  }
 }
