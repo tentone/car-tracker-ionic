@@ -1,9 +1,10 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {TabsPage} from './screens/tabs/tabs.page';
-import {TrackersPage} from './screens/trackers/trackers.page';
-import {MapPage} from './screens/map/map.page';
-import {SettingsPage} from './screens/settings/settings.page';
+import {TrackersPage} from './screens/tabs/trackers/trackers.page';
+import {MapPage} from './screens/tabs/map/map.page';
+import {SettingsPage} from './screens/tabs/settings/settings.page';
+import {TestPage} from './screens/tabs/test/test.page';
 
 export const AppRoutes: Routes = [
   {
@@ -11,31 +12,20 @@ export const AppRoutes: Routes = [
     component: TabsPage,
     children: [
       {
+        path: 'test',
+        component: TestPage
+      },
+      {
         path: 'trackers',
-        children: [
-          {
-            path: '',
-            component: TrackersPage
-          }
-        ]
+        component: TrackersPage
       },
       {
         path: 'map',
-        children: [
-          {
-            path: '',
-            component: MapPage
-          }
-        ]
+        component: MapPage
       },
       {
         path: 'settings',
-        children: [
-          {
-            path: '',
-            component: SettingsPage
-          }
-        ]
+        component: SettingsPage
       },
       {
         path: '',

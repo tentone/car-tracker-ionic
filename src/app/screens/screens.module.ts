@@ -5,9 +5,10 @@ import {FormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
 import {RouterModule} from '@angular/router';
 import {TabsPage} from './tabs/tabs.page';
-import {TrackersPage} from './trackers/trackers.page';
-import {MapPage} from './map/map.page';
-import {SettingsPage} from './settings/settings.page';
+import {TrackersPage} from './tabs/trackers/trackers.page';
+import {MapPage} from './tabs/map/map.page';
+import {SettingsPage} from './tabs/settings/settings.page';
+import {TestPage} from './tabs/test/test.page';
 
 @NgModule({
     imports: [
@@ -21,6 +22,7 @@ import {SettingsPage} from './settings/settings.page';
         TabsPage,
         TrackersPage,
         MapPage,
+        TestPage,
         SettingsPage
     ]
 })

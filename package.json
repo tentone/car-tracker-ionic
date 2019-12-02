@@ -7,10 +7,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "run": "ionic cordova run android --livereload --debug",
+    "build": "ionic cordova build android --prod"
   },
   "private": true,
   "dependencies": {

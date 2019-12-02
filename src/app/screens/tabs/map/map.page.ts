@@ -1,8 +1,8 @@
 import {AfterContentChecked, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {GPSPosition} from '../../utils/gps-position';
+import {GPSPosition} from '../../../utils/gps-position';
 import * as mapboxgl from 'mapbox-gl';
-import {Settings} from '../../data/settings';
-import {Environment} from '../../../environments/environment';
+import {Settings} from '../../../data/settings';
+import {Environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-map',
