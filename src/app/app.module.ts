@@ -8,6 +8,7 @@ import {AppRouterModule} from './app.router.module';
 import {AppComponent} from './app.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {ScreensModule} from './screens/screens.module';
+import {SMS} from '@ionic-native/sms/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import {ScreensModule} from './screens/screens.module';
     ScreensModule
   ],
   providers: [
+    SMS,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
