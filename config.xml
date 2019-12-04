@@ -25,11 +25,11 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <allow-navigation href="http://localhost:8100" sessionid="d1f2b715" />
-    <config-file target="AndroidManifest.xml" parent="/*">
-    	<uses-permission android:name="android.permission.SEND_SMS" />
-    	<uses-permission android:name="android.permission.RECEIVE_SMS" />
-	    <uses-permission android:name="android.permission.READ_CONTACTS" />
-	</config-file>
+    <config-file parent="/*" target="AndroidManifest.xml">
+        <uses-permission android:name="android.permission.SEND_SMS" />
+        <uses-permission android:name="android.permission.RECEIVE_SMS" />
+        <uses-permission android:name="android.permission.READ_CONTACTS" />
+    </config-file>
     <platform name="android">
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:networkSecurityConfig="@xml/network_security_config" />
