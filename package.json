@@ -22,9 +22,11 @@
     "@ionic-native/sms": "^5.0.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
+    "@ionic-native/android-permissions": "^5.17.1",
     "@ionic/angular": "^4.10.1",
     "@types/mapbox-gl": "^0.54.4",
     "cordova-android": "8.1.0",
+    "cordova-plugin-android-permissions": "^1.0.2",
     "cordova-sms-plugin": "^1.0.0",
     "core-js": "^2.5.4",
     "mapbox-gl": "^1.4.0",
@@ -79,7 +81,8 @@
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-sms-plugin": {}
+      "cordova-sms-plugin": {},
+      "cordova-plugin-android-permissions": {}
     },
     "platforms": [
       "android"

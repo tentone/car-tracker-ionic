@@ -1,22 +1,29 @@
 import {Component} from '@angular/core';
-import {SMS} from '@ionic-native/sms/ngx';
+import {SMS, SmsOptions} from '@ionic-native/sms/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 @Component({
   selector: 'app-test',
   templateUrl: 'test.page.html'
 })
 export class TestPage {
-  constructor(public sms: SMS) {
+  constructor(public androidPermissions: AndroidPermissions, public sms: SMS) {
   }
 
   public sendSMS() {
-    let options = {
-      replaceLineBreaks: false, // true to replace \n by a new line, false by default
+    let options: SmsOptions = {
+      replaceLineBreaks: false,
       android: {
         intent: ''
       }
     };
 
-    this.sms.send('+351915939715', 'Hello world!');
+    this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.SEND_SMS).then(() => {
+      if (this.sms.hasPermission()) {
+        this.sms.send('+351915939715', 'Hello world!', options);
+      }
+    });
+
+
   }
 }
