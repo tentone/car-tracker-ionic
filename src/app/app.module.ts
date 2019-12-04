@@ -3,12 +3,12 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
 import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AppRouterModule} from './app.router.module';
 import {AppComponent} from './app.component';
 import {TranslateModule} from '@ngx-translate/core';
 import {ScreensModule} from './screens/screens.module';
 import {SMS} from '@ionic-native/sms/ngx';
+import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,7 +28,7 @@ import {SMS} from '@ionic-native/sms/ngx';
   ],
   providers: [
     SMS,
-    StatusBar,
+    AndroidPermissions,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
