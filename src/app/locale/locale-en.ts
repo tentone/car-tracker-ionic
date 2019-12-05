@@ -4,5 +4,6 @@ export const LocaleEN = {
 	// Menu
 	trackers: 'Trackers',
 	map: 'Map',
-	settings: 'Settings'
+	settings: 'Settings',
+	test: 'Test'
 };

@@ -8,7 +8,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 })
 export class TestPage {
   constructor(public androidPermissions: AndroidPermissions, public sms: SMS) {}
-
+  
   public sendSMS() {
     this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.SEND_SMS).then(() => {
       let options: SmsOptions = {

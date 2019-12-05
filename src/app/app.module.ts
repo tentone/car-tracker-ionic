@@ -9,6 +9,7 @@ import {TranslateModule} from '@ngx-translate/core';
 import {ScreensModule} from './screens/screens.module';
 import {SMS} from '@ionic-native/sms/ngx';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
+import {Geolocation} from '@ionic-native/geolocation/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,7 @@ import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
   ],
   providers: [
     SMS,
+    Geolocation,
     AndroidPermissions,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
