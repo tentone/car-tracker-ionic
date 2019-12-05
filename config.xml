@@ -26,6 +26,9 @@
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <allow-navigation href="http://localhost:8100" sessionid="d1f2b715" />
     <platform name="android">
+        <custom-preference name="android-manifest/uses-permission/@android:name" value="android.permission.SEND_SMS" />
+        <custom-preference name="android-manifest/uses-permission/@android:name" value="android.permission.RECEIVE_SMS" />
+        <custom-preference name="android-manifest/uses-permission/@android:name" value="android.permission.READ_CONTACTS" />
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:networkSecurityConfig="@xml/network_security_config" />
         </edit-config>
