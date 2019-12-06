@@ -6,4 +6,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+
+  <!-- Map style -->
+  <ion-item>
+    <ion-label>{{'mapStyle' | translate}}</ion-label>
+    <ion-select interface="alert">
+      <ion-select-option [value]="mapStyles.VECTOR">{{'vector' | translate}}</ion-select-option>
+      <ion-select-option [value]="mapStyles.SATELLITE">{{'satellite' | translate}}</ion-select-option>
+      <ion-select-option [value]="mapStyles.MIXED">{{'mixed' | translate}}</ion-select-option>
+      <ion-select-option [value]="mapStyles.LIGHT">{{'light' | translate}}</ion-select-option>
+      <ion-select-option [value]="mapStyles.DARK">{{'dark' | translate}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <!-- Version -->
+  <ion-item>
+    <ion-label>{{'version' | translate}}</ion-label>
+    <ion-text>{{environment.version}}</ion-text>
+  </ion-item>
+</ion-content>

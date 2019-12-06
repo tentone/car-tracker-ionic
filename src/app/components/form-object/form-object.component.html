@@ -1,0 +1,56 @@
+<ion-list class="ion-no-padding ion-no-margin">
+	<ng-template *ngFor="let row of this.layout" [ngIf]="row.isActive === undefined || row.isActive(this.object, row)">
+        <ion-item lines="full" class="ion-margin-horizontal ion-no-padding">
+            <div style="padding-top: 5px; padding-bottom: 5px;">
+                <ng-template [ngIf]="row.required && this.fieldEmpty(this.object, row)">
+                    <ion-note color="danger" style="font-size: 11px; font-weight: bold;">{{'requiredField' | translate}}</ion-note>
+                </ng-template>
+                <ion-label class="ion-text-wrap">{{(row.label !== undefined ? row.label : row.attribute) | translate}}</ion-label>
+            </div>
+            <!-- Text -->
+            <ng-template [ngIf]="row.type === dynamicForm.TEXT">
+                    <ion-input type="text" class="ion-text-end" [disabled]="!this.editable"
+                        [ngModelOptions]="{standalone: true}"
+                        (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);"
+                        [ngModel]="this.getAttribute(this.object, row.attribute)"></ion-input>
+            </ng-template>
+            <!-- Number -->
+            <ng-template [ngIf]="row.type === dynamicForm.NUMBER">
+                    <ion-input type="number" class="ion-text-end" [disabled]="!this.editable"
+                        [ngModelOptions]="{standalone: true}"
+                        (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);"
+                        [ngModel]="this.getAttribute(this.object, row.attribute)"></ion-input>
+            </ng-template>
+            <!-- Password -->
+            <ng-template [ngIf]="row.type === dynamicForm.PASSWORD">
+                    <ion-input type="password" class="ion-text-end" [disabled]="!this.editable"
+                        [ngModelOptions]="{standalone: true}"
+                        (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);"
+                        [ngModel]="this.getAttribute(this.object, row.attribute)"></ion-input>
+            </ng-template>
+            <!-- Text multiline -->
+            <ng-template [ngIf]="row.type === dynamicForm.TEXT_MULTILINE">
+                    <ion-textarea autoGrow class="ion-text-end" [disabled]="!this.editable"
+                        [ngModelOptions]="{standalone: true}"
+                        (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);"
+                        [ngModel]="this.getAttribute(this.object, row.attribute)"></ion-textarea>
+            </ng-template>
+            <!-- Checkbox -->
+            <ng-template [ngIf]="row.type === dynamicForm.CHECKBOX">
+                    <ion-checkbox slot="end" [disabled]="!this.editable" [ngModelOptions]="{standalone: true}"
+                        (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);"
+                        [ngModel]="this.getAttribute(this.object, row.attribute)"></ion-checkbox>
+            </ng-template>
+            <!-- Options -->
+            <ng-template [ngIf]="row.type === dynamicForm.OPTIONS">
+
+                <ion-select slot="end" [disabled]="!this.editable" interface="alert" [ngModelOptions]="{standalone: true}" (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);" [ngModel]="this.getAttribute(this.object, row.attribute)">
+                    <ion-select-option *ngFor="let option of row.options" [value]=option.value>{{option.label | translate}}</ion-select-option>
+                </ion-select>
+            </ng-template>
+        </ion-item>
+	</ng-template>
+</ion-list>
+
+
+

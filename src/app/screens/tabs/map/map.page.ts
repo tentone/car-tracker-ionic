@@ -100,7 +100,8 @@ export class MapPage implements OnInit, AfterContentChecked {
       this.geolocation.getCurrentPosition().then((data) => {
         this.setMarker(data.coords.latitude, data.coords.longitude);
       }).catch((error) => {
-        Modal.alert('Error', 'Error getting location.');
+        // TODO <CHANGE THIS>
+        alert('Error getting location.' + error);
       });
 
       // Watch for changes in the GPS position

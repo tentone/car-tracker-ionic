@@ -6,10 +6,13 @@
   </ion-toolbar>
 </ion-header>
 
+<!-- Search bar -->
+<ion-searchbar [debounce]="100" (ionChange)="onSearch($event)"></ion-searchbar>
+
 <ion-content>
   <ion-list>
     <ng-template *ngFor="let tracker of this.trackers">
-      <ion-item button (click)="app.navigator.navigate(tracker.route)">
+      <ion-item button (click)="app.navigator.navigate('/tabs/trackers/add')">
         <ion-icon style="padding: 10px;" name="{{tracker.icon}}"></ion-icon>
         <ion-label>{{tracker.label | translate }}</ion-label>
         <ion-icon slot="end" name="arrow-dropright"></ion-icon>

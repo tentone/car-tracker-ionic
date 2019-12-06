@@ -1,17 +1,20 @@
-/**
- * Generate a UUID used to indetify the window manager.
- *
- * .toUpperCase() here flattens concatenated strings to save heap memory space.
- *
- * http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript/21963136#21963136
- */
-export const generateUUID = function() {
-    var lut = [];
-    for (var i = 0; i < 256; i ++) {
-        lut[i] = (i < 16 ? '0' : '') + (i).toString(16);
-    }
+var lut = [];
+for (var i = 0; i < 256; i ++) {
+    lut[i] = (i < 16 ? '0' : '') + (i).toString(16);
+}
 
-    return function() {
+/**
+ * Class contains utils for UUID (V4).
+ */
+export class UUIDUtils {
+    /**
+     * Generate a UUID used to indetification.
+     *
+     * .toUpperCase() here flattens concatenated strings to save heap memory space.
+     *
+     * http://stackoverflow.com/questions/105034/how-to-create-a-guid-uuid-in-javascript/21963136#21963136
+     */
+    static generate(): string {
         var d0 = Math.random() * 0xffffffff | 0;
         var d1 = Math.random() * 0xffffffff | 0;
         var d2 = Math.random() * 0xffffffff | 0;
@@ -22,5 +25,5 @@ export const generateUUID = function() {
             lut[ d3 & 0xff ] + lut[ d3 >> 8 & 0xff ] + lut[ d3 >> 16 & 0xff ] + lut[ d3 >> 24 & 0xff ];
 
         return uuid.toUpperCase();
-    };
-}();
+    }
+}
