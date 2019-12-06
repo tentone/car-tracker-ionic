@@ -5,7 +5,10 @@ import {Component} from '@angular/core';
   templateUrl: 'trackers.page.html'
 })
 export class TrackersPage {
+  /**
+   * List of tracker to be listed in this page.
+   */
+  public trackers = [];
 
   constructor() {}
-
 }

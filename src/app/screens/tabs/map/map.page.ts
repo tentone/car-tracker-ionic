@@ -64,6 +64,53 @@ export class MapPage implements OnInit, AfterContentChecked {
     this.enable3DBuildings();
   }
 
+  public ngAfterContentChecked() {
+    if (!this.visible && this.mapContainer.nativeElement.offsetParent !== null) {
+      this.visible = true;
+      this.map.resize();
+    } else if (this.visible && this.mapContainer.nativeElement.offsetParent === null) {
+      this.visible = false;
+    }
+  }
+
+  /**
+   * Update main marker position and center the map on it.
+   */
+  public setMarker(longitude: number, latitude: number, flyTo: boolean = true) {
+    if (this.marker === null) {
+      this.marker = new mapboxgl.Marker();
+      this.marker.addTo(this.map);
+    }
+
+    this.marker.setLngLat([longitude, latitude]);
+
+    if (flyTo) {
+      setTimeout(() => {
+        this.map.flyTo({center: [longitude, latitude]});
+      }, 100);
+    }
+  }
+
+  /**
+   * Get position from GPS or browser location API.
+   */
+  public getGPSPosition() {
+    this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(() => {
+      // Get the current position
+      this.geolocation.getCurrentPosition().then((data) => {
+        this.setMarker(data.coords.latitude, data.coords.longitude);
+      }).catch((error) => {
+        Modal.alert('Error', 'Error getting location.');
+      });
+
+      // Watch for changes in the GPS position
+      let watch = this.geolocation.watchPosition();
+      watch.subscribe((data) => {
+        this.setMarker(data.coords.latitude, data.coords.longitude, false);
+      });
+    });
+  }
+
   /**
    * Create and draw trackers to represent all the assets retrieved from the API.
    */
@@ -130,15 +177,6 @@ export class MapPage implements OnInit, AfterContentChecked {
     return marker;
   }
 
-  public ngAfterContentChecked() {
-    if (!this.visible && this.mapContainer.nativeElement.offsetParent !== null) {
-      this.visible = true;
-      this.map.resize();
-    } else if (this.visible && this.mapContainer.nativeElement.offsetParent === null) {
-      this.visible = false;
-    }
-  }
-
   /**
    * Use to enable a 3D extruded building layer.
    */
@@ -176,45 +214,6 @@ export class MapPage implements OnInit, AfterContentChecked {
           'fill-extrusion-opacity': .6
         }
       }, labelLayerId);
-    });
-  }
-
-
-  /**
-   * Update main marker position and center the map on it.
-   */
-  public setMarker(longitude: number, latitude: number, flyTo: boolean = true) {
-    if (this.marker === null) {
-      this.marker = new mapboxgl.Marker();
-      this.marker.addTo(this.map);
-    }
-
-    this.marker.setLngLat([longitude, latitude]);
-
-    if (flyTo) {
-      setTimeout(() => {
-        this.map.flyTo({center: [longitude, latitude]});
-      }, 100);
-    }
-  }
-
-  /**
-   * Get position from GPS or browser location API.
-   */
-  public getGPSPosition() {
-    this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(() => {
-      // Get the current position
-      this.geolocation.getCurrentPosition().then((data) => {
-        this.setMarker(data.coords.latitude, data.coords.longitude);
-      }).catch((error) => {
-        Modal.alert('Error', 'Error getting location.');
-      });
-
-      // Watch for changes in the GPS position
-      let watch = this.geolocation.watchPosition();
-      watch.subscribe((data) => {
-        this.setMarker(data.coords.latitude, data.coords.longitude, false);
-      });
     });
   }
 }

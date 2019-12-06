@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {Platform} from '@ionic/angular';
 import {TranslateService} from '@ngx-translate/core';
 import {Locale} from './locale/locale';
@@ -8,7 +8,11 @@ import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 
 @Component({
   selector: 'app-root',
-  templateUrl: 'app.component.html'
+  templateUrl: 'app.component.html',
+  encapsulation: ViewEncapsulation.None,
+  styleUrls: [
+    '../../node_modules/mapbox-gl/dist/mapbox-gl.css'
+  ]
 })
 export class AppComponent {
   constructor(public platform: Platform, public splashScreen: SplashScreen, public translate: TranslateService, public router: Router) {

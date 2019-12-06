@@ -7,5 +7,13 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ng-template *ngFor="let tracker of this.trackers">
+      <ion-item button (click)="app.navigator.navigate(tracker.route)">
+        <ion-icon style="padding: 10px;" name="{{tracker.icon}}"></ion-icon>
+        <ion-label>{{tracker.label | translate }}</ion-label>
+        <ion-icon slot="end" name="arrow-dropright"></ion-icon>
+      </ion-item>
+    </ng-template>
+  </ion-list>
 </ion-content>
