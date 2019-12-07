@@ -1,6 +1,6 @@
 import {NavigationStart, Router} from '@angular/router';
 import {Environment} from '../environments/environment';
-import {UrlUtils} from './utils/url-utils';
+import {URLUtils} from './utils/url-utils';
 import {AppRoutes} from './app.router.module';
 
 /**
@@ -202,7 +202,7 @@ export class Navigation {
 		}
 
 		if (data === undefined || data === null) {
-			data = UrlUtils.getQueryParameters();
+			data = URLUtils.getQueryParameters();
 			if (Object.keys(data).length === 0) {
 				data = null;
 			}

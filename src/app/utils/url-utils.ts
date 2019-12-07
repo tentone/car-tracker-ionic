@@ -1,4 +1,7 @@
-export class UrlUtils {
+/**
+ * URL utils class is used to manage URL data and URL processing.
+ */
+export class URLUtils {
 	/**
 	 * Get the query parameter from the browser URL.
 	 *
@@ -37,5 +40,4 @@ export class UrlUtils {
 
 		return data.join('&').replace(/%20/g, '+');
 	}
-
 }
