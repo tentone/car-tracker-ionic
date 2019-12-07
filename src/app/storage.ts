@@ -1,5 +1,5 @@
-import {Tracker} from "./data/tracker";
-import {Settings} from "./data/settings";
+import {Tracker} from './data/tracker';
+import {Settings} from './data/settings';
 
 /**
  * The storage class is used to access and store all persistent data used in the application.
@@ -16,4 +16,6 @@ export class Storage {
 	 * List of the trackers stored in the application.
 	 */
 	public static trackers: Tracker[];
+
+
 }

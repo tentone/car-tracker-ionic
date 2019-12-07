@@ -9,6 +9,8 @@ import {TrackersPage} from './tabs/trackers/trackers.page';
 import {MapPage} from './tabs/map/map.page';
 import {SettingsPage} from './tabs/settings/settings.page';
 import {TestPage} from './tabs/test/test.page';
+import {TrackersAddPage} from './tabs/trackers/add/trackers-add.page';
+import {FormObjectComponent} from '../components/form-object/form-object.component';
 
 @NgModule({
     imports: [
@@ -21,9 +23,11 @@ import {TestPage} from './tabs/test/test.page';
     declarations: [
         TabsPage,
         TrackersPage,
+        TrackersAddPage,
         MapPage,
         TestPage,
-        SettingsPage
+        SettingsPage,
+        FormObjectComponent
     ]
 })
 export class ScreensModule { }

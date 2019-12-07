@@ -7,5 +7,7 @@
 </ion-header>
 
 <ion-content>
-
+  <form-object [object]="this.tracker"></form-object>
+  <ion-button (click)="addTracker();">{{'add' | translate}}</ion-button>
+  <ion-button>{{'cancel' | translate}}</ion-button>
 </ion-content>

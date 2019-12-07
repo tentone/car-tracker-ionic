@@ -4,11 +4,11 @@ import {App} from '../../app';
 import {Environment} from '../../../environments/environment';
 
 @Component({
-	selector: 'dynamic-form',
+	selector: 'form-object',
 	templateUrl: 'form-object.component.html'
 })
 export class FormObjectComponent implements OnChanges {
-	get dynamicForm() { return FormObjectTypes; }
+	get types() { return FormObjectTypes; }
 	get app() { return App; }
 
 	/**

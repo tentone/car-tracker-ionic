@@ -8,41 +8,41 @@
                 <ion-label class="ion-text-wrap">{{(row.label !== undefined ? row.label : row.attribute) | translate}}</ion-label>
             </div>
             <!-- Text -->
-            <ng-template [ngIf]="row.type === dynamicForm.TEXT">
+            <ng-template [ngIf]="row.type === types.TEXT">
                     <ion-input type="text" class="ion-text-end" [disabled]="!this.editable"
                         [ngModelOptions]="{standalone: true}"
                         (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);"
                         [ngModel]="this.getAttribute(this.object, row.attribute)"></ion-input>
             </ng-template>
             <!-- Number -->
-            <ng-template [ngIf]="row.type === dynamicForm.NUMBER">
+            <ng-template [ngIf]="row.type === types.NUMBER">
                     <ion-input type="number" class="ion-text-end" [disabled]="!this.editable"
                         [ngModelOptions]="{standalone: true}"
                         (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);"
                         [ngModel]="this.getAttribute(this.object, row.attribute)"></ion-input>
             </ng-template>
             <!-- Password -->
-            <ng-template [ngIf]="row.type === dynamicForm.PASSWORD">
+            <ng-template [ngIf]="row.type === types.PASSWORD">
                     <ion-input type="password" class="ion-text-end" [disabled]="!this.editable"
                         [ngModelOptions]="{standalone: true}"
                         (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);"
                         [ngModel]="this.getAttribute(this.object, row.attribute)"></ion-input>
             </ng-template>
             <!-- Text multiline -->
-            <ng-template [ngIf]="row.type === dynamicForm.TEXT_MULTILINE">
+            <ng-template [ngIf]="row.type === types.TEXT_MULTILINE">
                     <ion-textarea autoGrow class="ion-text-end" [disabled]="!this.editable"
                         [ngModelOptions]="{standalone: true}"
                         (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);"
                         [ngModel]="this.getAttribute(this.object, row.attribute)"></ion-textarea>
             </ng-template>
             <!-- Checkbox -->
-            <ng-template [ngIf]="row.type === dynamicForm.CHECKBOX">
+            <ng-template [ngIf]="row.type === types.CHECKBOX">
                     <ion-checkbox slot="end" [disabled]="!this.editable" [ngModelOptions]="{standalone: true}"
                         (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);"
                         [ngModel]="this.getAttribute(this.object, row.attribute)"></ion-checkbox>
             </ng-template>
             <!-- Options -->
-            <ng-template [ngIf]="row.type === dynamicForm.OPTIONS">
+            <ng-template [ngIf]="row.type === types.OPTIONS">
 
                 <ion-select slot="end" [disabled]="!this.editable" interface="alert" [ngModelOptions]="{standalone: true}" (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);" [ngModel]="this.getAttribute(this.object, row.attribute)">
                     <ion-select-option *ngFor="let option of row.options" [value]=option.value>{{option.label | translate}}</ion-select-option>

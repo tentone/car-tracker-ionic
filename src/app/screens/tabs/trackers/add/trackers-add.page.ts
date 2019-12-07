@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {Tracker} from '../../../../data/tracker';
 
 @Component({
   selector: 'app-trackers-add',
@@ -6,9 +7,15 @@ import {Component} from '@angular/core';
 })
 export class TrackersAddPage {
   /**
-   * List of tracker to be listed in this page.
+   * Tracker being edited on this page.
    */
-  public trackers = [];
+  public tracker: Tracker;
 
-  constructor() {}
+  constructor() {
+    this.tracker = new Tracker();
+  }
+
+  public addTracker() {
+    console.log(this.tracker);
+  }
 }

@@ -5,6 +5,7 @@ import {TrackersPage} from './screens/tabs/trackers/trackers.page';
 import {MapPage} from './screens/tabs/map/map.page';
 import {SettingsPage} from './screens/tabs/settings/settings.page';
 import {TestPage} from './screens/tabs/test/test.page';
+import {TrackersAddPage} from './screens/tabs/trackers/add/trackers-add.page';
 
 export const AppRoutes: Routes = [
   {
@@ -18,6 +19,10 @@ export const AppRoutes: Routes = [
       {
         path: 'trackers',
         component: TrackersPage
+      },
+      {
+        path: 'trackers/add',
+        component: TrackersAddPage
       },
       {
         path: 'map',

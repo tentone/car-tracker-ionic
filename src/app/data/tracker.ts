@@ -1,5 +1,8 @@
 import {UUIDUtils} from '../utils/uuid-utils';
 
+/**
+ * Tracker represents a GPS tracker, contains all the metadata required to communicate with the tracker.
+ */
 export class Tracker {
     /**
      * UUID used to identify the tracker.
@@ -23,11 +26,37 @@ export class Tracker {
 
     /**
      * PIN number of the tracker used for authentication.
+     *
+     * Usually it is a 4 digit numeric pin.
      */
     public pin: string;
 
+    /**
+     * Indicates if the tracker is active and should be displayed on the map.
+     */
+    public active: boolean = true;
+
     constructor() {
         this.uuid = UUIDUtils.generate();
+        this.name = '';
+        this.number = '';
+        this.pin = '';
+        this.color = '';
+    }
+
+    public setSMSMode() {
+        let msg: string = '700' + this.pin;
+        // TODO <ADD CODE HERE>
+    }
+
+    public changePIN(newPin: number) {
+        let msg: string = '777' + this.pin + newPin;
+        // TODO <ADD CODE HERE>
+    }
+
+    public rconf() {
+        let msg: string = 'RCONF';
+        // TODO <ADD CODE HERE>
     }
 
 }
