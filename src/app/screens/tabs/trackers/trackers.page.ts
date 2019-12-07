@@ -7,17 +7,11 @@ import {App} from '../../../app';
 })
 export class TrackersPage {
   get app() { return App; }
-  /**
-   * List of tracker to be listed in this page.
-   */
-  public trackers = [];
 
   /**
    * Text used to filter tracker by its name.
    */
   public search: string = '';
-
-  constructor() {}
 
   /**
    * Update the search term used.

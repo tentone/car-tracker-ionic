@@ -34,10 +34,11 @@ export class Tracker {
     /**
      * Indicates if the tracker is active and should be displayed on the map.
      */
-    public active: boolean = true;
+    public active: boolean;
 
     constructor() {
         this.uuid = UUIDUtils.generate();
+        this.active = true;
         this.name = '';
         this.number = '';
         this.pin = '';

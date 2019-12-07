@@ -1,11 +1,14 @@
 import {Component} from '@angular/core';
 import {Tracker} from '../../../../data/tracker';
+import {App} from '../../../../app';
 
 @Component({
   selector: 'app-trackers-add',
   templateUrl: 'trackers-add.page.html'
 })
 export class TrackersAddPage {
+  get app() { return App; }
+
   /**
    * Tracker being edited on this page.
    */
@@ -15,7 +18,12 @@ export class TrackersAddPage {
     this.tracker = new Tracker();
   }
 
-  public addTracker() {
-    console.log(this.tracker);
+  /**
+   * Add tracker into the list.
+   */
+  public add() {
+    App.trackers.push(this.tracker);
+    App.store();
+    App.navigator.pop();
   }
 }

@@ -5,8 +5,9 @@
                 <ng-template [ngIf]="row.required && this.fieldEmpty(this.object, row)">
                     <ion-note color="danger" style="font-size: 11px; font-weight: bold;">{{'requiredField' | translate}}</ion-note>
                 </ng-template>
-                <ion-label class="ion-text-wrap">{{(row.label !== undefined ? row.label : row.attribute) | translate}}</ion-label>
+                <ion-label>{{(row.label !== undefined ? row.label : row.attribute) | translate}}</ion-label>
             </div>
+
             <!-- Text -->
             <ng-template [ngIf]="row.type === types.TEXT">
                     <ion-input type="text" class="ion-text-end" [disabled]="!this.editable"
@@ -37,14 +38,14 @@
             </ng-template>
             <!-- Checkbox -->
             <ng-template [ngIf]="row.type === types.CHECKBOX">
-                    <ion-checkbox slot="end" [disabled]="!this.editable" [ngModelOptions]="{standalone: true}"
+                    <ion-checkbox [disabled]="!this.editable" [ngModelOptions]="{standalone: true}"
                         (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);"
                         [ngModel]="this.getAttribute(this.object, row.attribute)"></ion-checkbox>
             </ng-template>
             <!-- Options -->
             <ng-template [ngIf]="row.type === types.OPTIONS">
 
-                <ion-select slot="end" [disabled]="!this.editable" interface="alert" [ngModelOptions]="{standalone: true}" (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);" [ngModel]="this.getAttribute(this.object, row.attribute)">
+                <ion-select [disabled]="!this.editable" interface="alert" [ngModelOptions]="{standalone: true}" (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);" [ngModel]="this.getAttribute(this.object, row.attribute)">
                     <ion-select-option *ngFor="let option of row.options" [value]=option.value>{{option.label | translate}}</ion-select-option>
                 </ion-select>
             </ng-template>

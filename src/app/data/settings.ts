@@ -10,5 +10,7 @@ export class Settings {
         SATELLITE: 'mapbox://styles/mapbox/satellite-v9',
         MIXED: 'mapbox://styles/mapbox/satellite-streets-v10'
     };
+
+    public mapStyle: string = Settings.MAP_STYLES.VECTOR;
 }
 

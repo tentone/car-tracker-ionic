@@ -12,6 +12,7 @@ export const LocaleEN = {
 	cancel: 'Cancel',
 	delete: 'Delete',
 	version: 'Version',
+	update: 'Update',
 
 	// Attributes
 	uuid: 'UUID',
@@ -19,6 +20,7 @@ export const LocaleEN = {
 	number: 'Phone Number',
 	pin: 'PIN',
 	color: 'Color',
+	active: 'Active',
 
 	// Maps
 	mapStyle: 'Map Style',

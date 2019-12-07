@@ -23,7 +23,7 @@ export class LocalStorage {
      * @return Value obtained from the storage.
      */
     static get(key) {
-        var value = window.localStorage.getItem(key);
+        let value = window.localStorage.getItem(key);
 
         try {
             return JSON.parse(value);

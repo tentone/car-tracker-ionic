@@ -1,19 +1,18 @@
-import {AfterContentChecked, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {GPSPosition} from '../../../data/gps-position';
 import * as mapboxgl from 'mapbox-gl';
-import {Settings} from '../../../data/settings';
-import {Environment} from '../../../../environments/environment';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
-import {Modal} from '../../modal';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
+import {App} from '../../../app';
+import {ActivatedRoute} from '@angular/router';
+import {ScreenComponent} from '../../screen';
 
 @Component({
   selector: 'app-map',
   templateUrl: 'map.page.html'
 })
-export class MapPage implements OnInit, AfterContentChecked {
+export class MapPage extends ScreenComponent implements OnInit {
   @ViewChild('mapContainer', {static: true}) mapContainer: ElementRef;
-
 
   /**
    * Mapboxgl instance to display and control the map view.
@@ -35,22 +34,21 @@ export class MapPage implements OnInit, AfterContentChecked {
    */
   public trackers: mapboxgl.Marker[] = [];
 
-  /**
-   * Indicates if the component is visible or not.
-   *
-   * Used to keep track of the component state and refresh the size of the map
-   */
-  public visible: boolean = false;
+  constructor(public androidPermissions: AndroidPermissions, public geolocation: Geolocation, public route: ActivatedRoute, public elementRef: ElementRef) {
+    super(route, elementRef);
+  }
 
-  constructor(public androidPermissions: AndroidPermissions, public geolocation: Geolocation) {}
+  public display() {
+    if (this.map !== null) {
+      this.map.setStyle(App.settings.mapStyle);
+      this.map.resize();
+    }
+  }
 
   public ngOnInit() {
-    // @ts-ignore
-    mapboxgl.accessToken = Environment.mapbox;
-
     this.map = new mapboxgl.Map({
       container: this.mapContainer.nativeElement,
-      style: Settings.MAP_STYLES.VECTOR,
+      style: App.settings.mapStyle,
       zoom: 13,
       center: [0, 0]
     });
@@ -62,15 +60,6 @@ export class MapPage implements OnInit, AfterContentChecked {
 
     this.getGPSPosition();
     this.enable3DBuildings();
-  }
-
-  public ngAfterContentChecked() {
-    if (!this.visible && this.mapContainer.nativeElement.offsetParent !== null) {
-      this.visible = true;
-      this.map.resize();
-    } else if (this.visible && this.mapContainer.nativeElement.offsetParent === null) {
-      this.visible = false;
-    }
   }
 
   /**
