@@ -20,7 +20,7 @@ export class ScreenComponent implements AfterContentChecked {
 
     constructor(public route: ActivatedRoute, public elementRef: ElementRef) {
         this.route.params.subscribe(() => {
-            // this.display();
+            this.display();
         });
     }
 

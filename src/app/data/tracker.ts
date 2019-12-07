@@ -1,4 +1,10 @@
 import {UUIDUtils} from '../utils/uuid-utils';
+import {App} from '../app';
+
+export const TrackerMode = {
+    SMS: 700,
+    GPRS: 710
+};
 
 /**
  * Tracker represents a GPS tracker, contains all the metadata required to communicate with the tracker.
@@ -22,7 +28,7 @@ export class Tracker {
     /**
      * Phone number of the tracker used to send and receive messages.
      */
-    public number: string;
+    public phoneNumber: string;
 
     /**
      * PIN number of the tracker used for authentication.
@@ -30,6 +36,11 @@ export class Tracker {
      * Usually it is a 4 digit numeric pin.
      */
     public pin: string;
+
+    /**
+     * Battery level, 5 is 100%, 1 is 20%; the battery is from 1 to 5.
+     */
+    public battery: number;
 
     /**
      * Indicates if the tracker is active and should be displayed on the map.
@@ -40,24 +51,26 @@ export class Tracker {
         this.uuid = UUIDUtils.generate();
         this.active = true;
         this.name = '';
-        this.number = '';
+        this.phoneNumber = '';
         this.pin = '';
-        this.color = '';
+
+        this.color = null;
+        this.battery = null;
     }
 
-    public setSMSMode() {
-        let msg: string = '700' + this.pin;
-        // TODO <ADD CODE HERE>
+    public setMode(mode: number) {
+        App.sendSMS(this.phoneNumber,  mode + '' + this.pin);
+    }
+
+    public getLocation() {
+        App.sendSMS(this.phoneNumber, '669' + this.pin);
     }
 
     public changePIN(newPin: number) {
-        let msg: string = '777' + this.pin + newPin;
-        // TODO <ADD CODE HERE>
+        App.sendSMS(this.phoneNumber, '777' + newPin + this.pin);
     }
 
-    public rconf() {
-        let msg: string = 'RCONF';
-        // TODO <ADD CODE HERE>
+    public readConf() {
+        App.sendSMS(this.phoneNumber, 'RCONF');
     }
-
 }

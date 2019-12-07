@@ -6,6 +6,9 @@ import {Tracker} from './data/tracker';
 import {LocalStorage} from './utils/local-storage';
 import * as mapboxgl from 'mapbox-gl';
 import {Environment} from '../environments/environment';
+import {SMS, SmsOptions} from '@ionic-native/sms/ngx';
+import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
+import {SmsRetriever} from '@ionic-native/sms-retriever/ngx';
 
 /**
  * The app class is used to access and store all persistent data used in the application.
@@ -23,6 +26,10 @@ export class App {
      */
     public static navigator: Navigation;
 
+    public static androidPermissions: AndroidPermissions;
+    public static sms: SMS;
+    public static smsReceiver: SmsRetriever;
+
     /**
      * Application general settings.
      */
@@ -38,15 +45,47 @@ export class App {
      *
      * @param platform Platform object created from the app root.
      * @param router Router object created from the app root.
+     * @param androidPermissions
+     * @param sms
+     * @param smsReceiver
      */
-    public static initialize(platform: Platform, router: Router) {
+    public static initialize(platform: Platform, router: Router, androidPermissions: AndroidPermissions, sms: SMS, smsReceiver: SmsRetriever) {
         // @ts-ignore
         mapboxgl.accessToken = Environment.mapbox;
 
         this.navigator = new Navigation(router);
         this.platform = platform;
+        this.androidPermissions = androidPermissions;
+        this.sms = sms;
+        this.smsReceiver = smsReceiver;
 
         this.load();
+    }
+
+    /**
+     * Send SMS to phone number.
+     *
+     * @param phoneNumber
+     * @param message
+     * @param onSuccess
+     */
+    public static sendSMS(phoneNumber: string, message: string, onSuccess?: Function) {
+        this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.SEND_SMS).then(() => {
+            let options: SmsOptions = {
+                replaceLineBreaks: false,
+                android: {
+                    intent: ''
+                }
+            };
+
+            if (this.sms.hasPermission()) {
+                this.sms.send(phoneNumber, message, options).then(() => {
+                    if (onSuccess !== undefined) {
+                        onSuccess();
+                    }
+                });
+            }
+        });
     }
 
     /**

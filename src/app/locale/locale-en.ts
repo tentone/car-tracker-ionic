@@ -17,7 +17,7 @@ export const LocaleEN = {
 	// Attributes
 	uuid: 'UUID',
 	name: 'Name',
-	number: 'Phone Number',
+	phoneNumber: 'Phone Number',
 	pin: 'PIN',
 	color: 'Color',
 	active: 'Active',
@@ -28,5 +28,8 @@ export const LocaleEN = {
 	satellite: 'Satellite',
 	mixed: 'Mixed',
 	light: 'Light',
-	dark: 'Dark'
+	dark: 'Dark',
+
+	// Error
+	requiredField: 'Required Field'
 };
