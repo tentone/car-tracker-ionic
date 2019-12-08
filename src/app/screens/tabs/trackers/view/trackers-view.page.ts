@@ -13,7 +13,7 @@ export class TrackersViewPage extends ScreenComponent {
   /**
    * Tracker being edited on this page.
    */
-  public tracker: Tracker;
+  public tracker: Tracker = null;
 
   public display() {
     this.tracker = App.navigator.getData();

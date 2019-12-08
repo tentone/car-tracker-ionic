@@ -100,6 +100,14 @@ export class App {
         this.trackers = LocalStorage.get('trackers');
         if (this.trackers === null) {
             this.trackers = [];
+        } else {
+            for (let j = 0; j < this.trackers.length; j++) {
+                let tracker = new Tracker();
+                for (let i in tracker) {
+                    tracker[i] = this.trackers[j][i];
+                }
+                this.trackers[j] = tracker;
+            }
         }
     }
 
