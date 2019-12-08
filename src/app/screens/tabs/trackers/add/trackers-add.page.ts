@@ -1,20 +1,21 @@
 import {Component} from '@angular/core';
 import {Tracker} from '../../../../data/tracker';
 import {App} from '../../../../app';
+import {ScreenComponent} from '../../../screen';
 
 @Component({
   selector: 'app-trackers-add',
   templateUrl: 'trackers-add.page.html'
 })
-export class TrackersAddPage {
+export class TrackersAddPage extends ScreenComponent {
   get app() { return App; }
 
   /**
    * Tracker being edited on this page.
    */
-  public tracker: Tracker;
+  public tracker: Tracker = new Tracker();
 
-  constructor() {
+  public display() {
     this.tracker = new Tracker();
   }
 
