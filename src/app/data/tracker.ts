@@ -1,12 +1,6 @@
 import {UUIDUtils} from '../utils/uuid-utils';
 import {App} from '../app';
 
-export const TrackerMode = {
-    SMS: 700,
-    GPRS: 710
-};
-
-
 export const TrackerMessageDirection = {
     SENT: 1,
     RECEIVED: 2
@@ -14,7 +8,6 @@ export const TrackerMessageDirection = {
 
 export class TrackerMessage {
     public from: string;
-
     public direction: number;
     public message: string;
 }
@@ -71,10 +64,6 @@ export class Tracker {
         this.battery = null;
     }
 
-    public setMode(mode: number) {
-        App.sendSMS(this.phoneNumber,  mode + '' + this.pin);
-    }
-
     public getLocation() {
         App.sendSMS(this.phoneNumber, 'g1234');
     }
@@ -87,19 +76,27 @@ export class Tracker {
     public changePIN(newPin: number) {
         App.sendSMS(this.phoneNumber, 'password' + this.pin + ' ' + newPin);
     }
-    
 
     /**
-     * Set control number used for the GPS to return requested information, alarm messages etc.
+     * Set admin number used for the admin related information.
+     *
+     * @param phoneNumber Phone number use for control.
+     */
+    public setAdminNumber(phoneNumber: string) {
+        App.sendSMS(this.phoneNumber, 'admin' + this.pin + ' ' + phoneNumber);
+    }
+
+    /**
+     * Set sos number used for the GPS to return requested information, alarm messages etc.
      *
      * @param phoneNumber Phone number use for control.
      * @param slot Slot being set can be 1, 2 or 3.
      */
-    public setControlNumber(phoneNumber: string, slot: number) {
+    public setSOSNumber(phoneNumber: string, slot: number) {
         if (slot < 1 || slot > 3) {
            throw new Error('Invalid control number slot.');
         }
 
-        App.sendSMS(this.phoneNumber, phoneNumber + this.pin + ' ' + slot);
+        App.sendSMS(this.phoneNumber, '10' + slot + '#' + phoneNumber + '#');
     }
 }

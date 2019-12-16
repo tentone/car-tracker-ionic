@@ -16,7 +16,7 @@
 ### SMS Commands
 
 | Command              | Function                                                     | Response    |
-| -------------------- | ------------------------------------------------------------ | ----------- |
+| -------------------- | :----------------------------------------------------------- | ----------- |
 | admin[pw] [phone]    | Set the admin phone number                                   | admin ok    |
 | apn[pw] [value]      | Set the APN value for the SIM card carrier                   | apn ok      |
 | password[pw] [newpw] | Change the password of the device, by default the password is 123456. | password ok |
