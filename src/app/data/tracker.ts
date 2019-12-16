@@ -76,7 +76,7 @@ export class Tracker {
     }
 
     public getLocation() {
-        App.sendSMS(this.phoneNumber, '669' + this.pin);
+        App.sendSMS(this.phoneNumber, 'g1234');
     }
 
     /**
@@ -85,12 +85,9 @@ export class Tracker {
      * @param newPin New pin to be set on the tracker.
      */
     public changePIN(newPin: number) {
-        App.sendSMS(this.phoneNumber, '777' + newPin + this.pin);
+        App.sendSMS(this.phoneNumber, 'password' + this.pin + ' ' + newPin);
     }
-
-    public readConf() {
-        App.sendSMS(this.phoneNumber, 'RCONF');
-    }
+    
 
     /**
      * Set control number used for the GPS to return requested information, alarm messages etc.

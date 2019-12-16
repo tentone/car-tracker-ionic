@@ -9,7 +9,8 @@
 <ion-content>
   <form-object [object]="this.tracker"></form-object>
 
-  <ion-button expand="block" (click)="this.tracker.setControlNumber('351915939715', 1);">Set Control number</ion-button>
+  <ion-button expand="block" (click)="this.tracker.setControlNumber('+351915939715', 1);">Admin number</ion-button>
+  <ion-button expand="block" (click)="this.tracker.setControlNumber('+351915939715', 1);">Admin number</ion-button>
   <ion-button expand="block" (click)="this.tracker.setMode(trackerMode.SMS);">Set SMS Mode</ion-button>
   <ion-button expand="block" (click)="this.tracker.setMode(trackerMode.GPRS);">Set GPRS Mode</ion-button>
   <ion-button expand="block" (click)="this.tracker.getLocation();">Get Location</ion-button>
