@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Tracker, TrackerMode} from '../../../../data/tracker';
+import {Tracker} from '../../../../data/tracker';
 import {App} from '../../../../app';
 import {ScreenComponent} from '../../../screen';
 
@@ -8,8 +8,6 @@ import {ScreenComponent} from '../../../screen';
   templateUrl: 'trackers-view.page.html'
 })
 export class TrackersViewPage extends ScreenComponent {
-  get trackerMode() { return TrackerMode; }
-
   /**
    * Tracker being edited on this page.
    */
