@@ -87,6 +87,7 @@ export class MapPage extends ScreenComponent implements OnInit {
     this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(() => {
       // Get the current position
       this.geolocation.getCurrentPosition().then((data) => {
+        console.log('Position received', data);
         this.setMarker(data.coords.latitude, data.coords.longitude);
       }).catch((error) => {
         // TODO <CHANGE THIS>
@@ -96,6 +97,7 @@ export class MapPage extends ScreenComponent implements OnInit {
       // Watch for changes in the GPS position
       let watch = this.geolocation.watchPosition();
       watch.subscribe((data) => {
+        console.log('Position updated', data);
         this.setMarker(data.coords.latitude, data.coords.longitude, false);
       });
     });

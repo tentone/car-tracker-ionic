@@ -11,6 +11,7 @@ export class FormObjectComponent implements OnChanges {
 	get types() { return FormObjectTypes; }
 	get app() { return App; }
 
+
 	/**
 	 * Layout of the dynamic form, is an array of form entry descriptions.
 	 *
@@ -196,5 +197,20 @@ export class FormObjectComponent implements OnChanges {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Select a contact from the system contact manager.
+	 *
+	 * @param object
+	 * @param attribute
+	 */
+	public selectContact(object: any, attribute: any) {
+		App.contacts.pickContact().then((data) => {
+			if (data.phoneNumbers.length > 0) {
+				this.setAttribute(object, attribute, data.phoneNumbers[0].value)
+			}
+			console.log(data);
+		});
 	}
 }

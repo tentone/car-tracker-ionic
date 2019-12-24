@@ -37,4 +37,10 @@ export const FormObjectTypes = {
 	 * Has to include an additional options:[{label: string, value: any}, ...] in the object.
 	 */
 	OPTIONS: 5,
+
+	/**
+	 * Phone number, selectable from the device contacts.
+	 */
+	PHONE: 6,
+
 };

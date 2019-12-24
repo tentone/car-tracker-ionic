@@ -20,6 +20,7 @@ import {SettingsPage} from './screens/tabs/settings/settings.page';
 import {FormObjectComponent} from './components/form-object/form-object.component';
 import {TrackersViewPage} from './screens/tabs/trackers/view/trackers-view.page';
 import {SmsRetriever} from '@ionic-native/sms-retriever/ngx';
+import {Contacts} from '@ionic-native/contacts/ngx';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import {SmsRetriever} from '@ionic-native/sms-retriever/ngx';
   providers: [
     SMS,
     SmsRetriever,
+    Contacts,
     Geolocation,
     AndroidPermissions,
     SplashScreen,

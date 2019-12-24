@@ -59,7 +59,6 @@ export class Tracker {
         this.name = '';
         this.phoneNumber = '';
         this.pin = '';
-
         this.color = null;
         this.battery = null;
     }

@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {SmsRetriever} from '@ionic-native/sms-retriever/ngx';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
+import {Contacts} from '@ionic-native/contacts/ngx';
 import {SMS} from '@ionic-native/sms/ngx';
 
 @Component({
@@ -18,9 +19,9 @@ import {SMS} from '@ionic-native/sms/ngx';
   ]
 })
 export class AppComponent {
-  constructor(public platform: Platform, public splashScreen: SplashScreen, public translate: TranslateService, public router: Router, public androidPermissions: AndroidPermissions, public sms: SMS, public smsReceiver: SmsRetriever) {
+  constructor(public platform: Platform, public splashScreen: SplashScreen, public translate: TranslateService, public router: Router, public androidPermissions: AndroidPermissions, public sms: SMS, public smsReceiver: SmsRetriever, public contacts: Contacts) {
     Locale.initialize(this.translate);
-    App.initialize(this.platform, this.router, androidPermissions, sms, smsReceiver);
+    App.initialize(this.platform, this.router, androidPermissions, sms, smsReceiver, contacts);
 
     this.platform.ready().then(() => {
       this.splashScreen.hide();

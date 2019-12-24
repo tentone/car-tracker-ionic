@@ -4,13 +4,10 @@
     - AS5000 GPS Tracker
 
 
-
-
 ### Features
  - Manage multiple GPS car trackers.
  - Store and list messages exchanged with the car tracker.
  - Export stored data as file.
-
 
 
 ### SMS Commands
@@ -30,6 +27,12 @@
 | C10#                 | List the SOS phone numbers registered in the device.         |             |
 
 
+### Ionic plugins
+
+```
+cordova-plugin-sms-retriever-manager
+cordova-plugin-android-permissions
+```
 
 
 ### Libraries
@@ -37,15 +40,10 @@
  - https://www.npmjs.com/package/cordova-plugin-sms-receive
 
 
-
-
 ### Cordova
  - You can replace icon.png and splash.png.
  - Run `ionic cordova resources` to generate icon and splash screen sizes.
 
 
-
-
 ### License
 - This project is distributed under MIT license. (Available on the project Git repository on GitHub).
-
