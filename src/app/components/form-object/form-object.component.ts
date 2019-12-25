@@ -1,5 +1,5 @@
 import {Component, Input, OnChanges} from '@angular/core';
-import {FormObjectTypes} from './form-object-types';
+import {FormObjectType} from './form-object-type';
 import {App} from '../../app';
 import {Environment} from '../../../environments/environment';
 
@@ -8,7 +8,7 @@ import {Environment} from '../../../environments/environment';
 	templateUrl: 'form-object.component.html'
 })
 export class FormObjectComponent implements OnChanges {
-	get types() { return FormObjectTypes; }
+	get types() { return FormObjectType; }
 	get app() { return App; }
 
 
@@ -57,11 +57,11 @@ export class FormObjectComponent implements OnChanges {
 
 			let type = layout[i].type;
 
-			if (type === FormObjectTypes.TEXT || type === FormObjectTypes.TEXT_MULTILINE || type === FormObjectTypes.PASSWORD) {
+			if (type === FormObjectType.TEXT || type === FormObjectType.TEXT_MULTILINE || type === FormObjectType.PASSWORD) {
 				object[attribute] = '';
-			} else if (type === FormObjectTypes.CHECKBOX) {
+			} else if (type === FormObjectType.CHECKBOX) {
 				object[attribute] = false;
-			} else if (type === FormObjectTypes.NUMBER) {
+			} else if (type === FormObjectType.NUMBER) {
 				object[attribute] = 0;
 			} else {
 				object[attribute] = null;
@@ -84,11 +84,11 @@ export class FormObjectComponent implements OnChanges {
 			let type = null;
 
 			if (typeof object[i] === 'string') {
-				type = FormObjectTypes.TEXT;
+				type = FormObjectType.TEXT;
 			} else if (typeof object[i] === 'number') {
-				type = FormObjectTypes.NUMBER;
+				type = FormObjectType.NUMBER;
 			} else if (typeof object[i] === 'boolean') {
-				type = FormObjectTypes.CHECKBOX;
+				type = FormObjectType.CHECKBOX;
 			}
 
 			if (type !== null) {

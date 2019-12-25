@@ -3,7 +3,7 @@
  *
  * Some type of field might require additional parameters specified in their documentation.
  */
-export class FormObjectFields {
+export class FormObjectField {
 	/**
 	 * Type of the field (number, text, etc).
 	 */

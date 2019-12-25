@@ -14,7 +14,7 @@ export class TrackersAddPage extends ScreenComponent {
    * Tracker being edited on this page.
    */
   public tracker: Tracker = new Tracker();
-
+  
   public display() {
     this.tracker = new Tracker();
   }

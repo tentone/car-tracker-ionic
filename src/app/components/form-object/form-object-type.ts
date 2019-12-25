@@ -3,7 +3,7 @@
  *
  * Form layout are declared in an array each element contains at least {type: number, attribute: string, label: string} values.
  */
-export const FormObjectTypes = {
+export const FormObjectType = {
 	/**
 	 * Simple single line text option.
 	 */
