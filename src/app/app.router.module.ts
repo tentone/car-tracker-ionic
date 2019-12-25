@@ -4,7 +4,6 @@ import {TabsPage} from './screens/tabs/tabs.page';
 import {TrackersPage} from './screens/tabs/trackers/trackers.page';
 import {MapPage} from './screens/tabs/map/map.page';
 import {SettingsPage} from './screens/tabs/settings/settings.page';
-import {TestPage} from './screens/tabs/test/test.page';
 import {TrackersAddPage} from './screens/tabs/trackers/add/trackers-add.page';
 import {TrackersViewPage} from './screens/tabs/trackers/view/trackers-view.page';
 
@@ -13,10 +12,6 @@ export const AppRoutes: Routes = [
     path: 'tabs',
     component: TabsPage,
     children: [
-      {
-        path: 'test',
-        component: TestPage
-      },
       {
         path: 'trackers',
         component: TrackersPage

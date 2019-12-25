@@ -15,7 +15,6 @@ import {TabsPage} from './screens/tabs/tabs.page';
 import {TrackersPage} from './screens/tabs/trackers/trackers.page';
 import {TrackersAddPage} from './screens/tabs/trackers/add/trackers-add.page';
 import {MapPage} from './screens/tabs/map/map.page';
-import {TestPage} from './screens/tabs/test/test.page';
 import {SettingsPage} from './screens/tabs/settings/settings.page';
 import {FormObjectComponent} from './components/form-object/form-object.component';
 import {TrackersViewPage} from './screens/tabs/trackers/view/trackers-view.page';
@@ -30,7 +29,6 @@ import {Contacts} from '@ionic-native/contacts/ngx';
     TrackersAddPage,
     TrackersViewPage,
     MapPage,
-    TestPage,
     SettingsPage,
     FormObjectComponent
   ],

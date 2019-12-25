@@ -13,12 +13,6 @@ export class TabsPage {
    */
   public pages = [
     {
-        route: 'tabs/test',
-        tab: 'test',
-        icon: 'bug',
-        label: 'test',
-    },
-    {
         route: 'tabs/trackers',
         tab: 'trackers',
         icon: 'locate',
