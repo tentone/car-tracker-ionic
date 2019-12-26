@@ -31,5 +31,6 @@ export const LocaleEN = {
 	dark: 'Dark',
 
 	// Error
-	requiredField: 'Required Field'
+	requiredField: 'Required Field',
+	errorLocation: 'Error getting location.'
 };

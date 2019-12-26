@@ -6,6 +6,8 @@ import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 import {App} from '../../../app';
 import {ActivatedRoute} from '@angular/router';
 import {ScreenComponent} from '../../screen';
+import {Locale} from '../../../locale/locale';
+import {Modal} from '../../modal';
 
 @Component({
   selector: 'app-map',
@@ -50,25 +52,25 @@ export class MapPage extends ScreenComponent {
       this.controls = new mapboxgl.NavigationControl();
       this.map.addControl(this.controls);
 
-      this.marker = null;
+      this.marker = new mapboxgl.Marker();
+      this.marker.setLngLat([0, 0]);
+      this.marker.addTo(this.map);
 
       this.enable3DBuildings();
     }
 
     this.map.setStyle(App.settings.mapStyle);
-    this.map.resize();
     this.getCurrentPosition();
+
+    setTimeout(() => {
+      this.map.resize();
+    }, 100);
   }
 
   /**
    * Update main marker position and center the map on it.
    */
   public setMarker(longitude: number, latitude: number, flyTo: boolean = true) {
-    if (this.marker === null) {
-      this.marker = new mapboxgl.Marker();
-      this.marker.addTo(this.map);
-    }
-
     this.marker.setLngLat([longitude, latitude]);
 
     if (flyTo) {
@@ -86,22 +88,24 @@ export class MapPage extends ScreenComponent {
       this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(() => {
         // Get the current position
         this.geolocation.getCurrentPosition().then((data) => {
-          this.setMarker(data.coords.latitude, data.coords.longitude);
+          this.setMarker(data.coords.longitude, data.coords.latitude);
         }).catch((error) => {
-          // TODO <CHANGE THIS>
-          alert('Error getting location.' + error);
+          Modal.alert(Locale.get('error'), Locale.get('errorLocation') + ' (' + error + ')');
+          console.warn('CarTracker: Error getting location.', error);
         });
 
         // Watch for changes in the GPS position
         let watch = this.geolocation.watchPosition();
         watch.subscribe((data) => {
-          this.setMarker(data.coords.latitude, data.coords.longitude, false);
+          this.setMarker(data.coords.longitude, data.coords.latitude, false);
         });
       });
-    } else {
-
+    } else if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        console.log(position);
+        this.setMarker(position.coords.longitude, position.coords.latitude);
+      });
     }
-
   }
 
   /**
@@ -142,71 +146,5 @@ export class MapPage extends ScreenComponent {
         }
       }, labelLayerId);
     });
-  }
-
-  /**
-   * Create and draw trackers marks.
-   */
-  public drawMarkers() {
-    for (let i = 0; i < this.trackers.length; i++) {
-      this.trackers[i].remove();
-    }
-
-    this.trackers = [];
-
-    // TODO <TEST CODE>
-    this.trackers.push(this.createMarker(new GPSPosition(0, 0), ''));
-  }
-
-  /**
-   * Create an marker representing an asset in the world map.
-   *
-   * @param position GPS position of the map.
-   * @param text Text to be shown.
-   */
-  public createMarker(position: GPSPosition, text: string): mapboxgl.Marker {
-    // create a DOM element for the marker
-    const element = document.createElement('div');
-    element.className = 'marker';
-    element.style.width = '40px';
-    element.style.height = '40px';
-
-    const icon = document.createElement('img');
-    element.appendChild(icon);
-
-    // create the popup
-    const popup = new mapboxgl.Popup({
-      offset: 20,
-      closeButton: false,
-      closeOnClick: false
-    });
-    popup.setText(text);
-
-    // @ts-ignore
-    element.asset = asset;
-    element.addEventListener('click', function() {
-      // @ts-ignore
-      // TODO <ON CLICK>
-    });
-
-    // @ts-ignore
-    element.popup = popup;
-    // @ts-ignore
-    element.map = this.map;
-    element.addEventListener('mouseenter', function() {
-      // @ts-ignore
-      this.popup.addTo(this.map);
-    });
-    element.addEventListener('mouseleave', function() {
-      // @ts-ignore
-      this.popup.remove();
-    });
-
-    let marker = new mapboxgl.Marker(element);
-    marker.setLngLat([position.longitude, position.latitude]);
-    marker.setPopup(popup);
-    marker.addTo(this.map);
-
-    return marker;
   }
 }

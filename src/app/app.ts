@@ -63,8 +63,17 @@ export class App {
         this.smsReceiver = smsReceiver;
         this.contacts = contacts;
 
-        this.smsReceiver.getAppHash().then((res: any) => console.log(res)).catch((error: any) => console.error(error));
-        this.smsReceiver.startWatching().then((res: any) => console.log(res)).catch((error: any) => console.error(error));
+        this.smsReceiver.getAppHash().then((res: any) => {
+            console.log(res);
+        }).catch((error: any) => {
+            console.error(error);
+        });
+
+        this.smsReceiver.startWatching().then((res: any) => {
+            console.log(res);
+        }).catch((error: any) => {
+            console.error(error);
+        });
 
         this.load();
     }
