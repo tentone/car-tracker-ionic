@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Tracker} from '../../../../data/tracker';
 import {App} from '../../../../app';
 import {ScreenComponent} from '../../../screen';
+import {TrackersLayout} from '../trackers-layout';
 
 @Component({
   selector: 'app-trackers-add',
@@ -9,6 +10,7 @@ import {ScreenComponent} from '../../../screen';
 })
 export class TrackersAddPage extends ScreenComponent {
   get app() { return App; }
+  get layout() { return TrackersLayout.layout; }
 
   /**
    * Tracker being edited on this page.

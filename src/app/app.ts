@@ -63,15 +63,18 @@ export class App {
         this.smsReceiver = smsReceiver;
         this.contacts = contacts;
 
+        this.smsReceiver.getAppHash().then((res: any) => console.log(res)).catch((error: any) => console.error(error));
+        this.smsReceiver.startWatching().then((res: any) => console.log(res)).catch((error: any) => console.error(error));
+
         this.load();
     }
 
     /**
      * Send SMS to phone number.
      *
-     * @param phoneNumber
-     * @param message
-     * @param onSuccess
+     * @param phoneNumber Destination phone number.
+     * @param message Message content
+     * @param onSuccess OnSuccess callback function.
      */
     public static sendSMS(phoneNumber: string, message: string, onSuccess?: Function) {
         this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.SEND_SMS).then(() => {

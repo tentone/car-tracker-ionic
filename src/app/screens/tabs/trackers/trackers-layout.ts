@@ -14,9 +14,14 @@ export class TrackersLayout {
       required: true
     },
     {
-      attribute: 'name',
-      type: FormObjectType.TEXT,
+      attribute: 'pin',
+      type: FormObjectType.PASSWORD,
       required: false
-    }
+    },
+    {
+      attribute: 'active',
+      type: FormObjectType.CHECKBOX,
+      required: false
+    },
   ];
 }

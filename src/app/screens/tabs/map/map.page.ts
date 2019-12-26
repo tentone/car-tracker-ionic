@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {GPSPosition} from '../../../data/gps-position';
 import * as mapboxgl from 'mapbox-gl';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
@@ -11,7 +11,7 @@ import {ScreenComponent} from '../../screen';
   selector: 'app-map',
   templateUrl: 'map.page.html'
 })
-export class MapPage extends ScreenComponent implements OnInit {
+export class MapPage extends ScreenComponent {
   @ViewChild('mapContainer', {static: true}) mapContainer: ElementRef;
 
   /**
@@ -39,27 +39,25 @@ export class MapPage extends ScreenComponent implements OnInit {
   }
 
   public display() {
-    if (this.map !== null) {
-      this.map.setStyle(App.settings.mapStyle);
-      this.map.resize();
+    if (this.map === null) {
+      this.map = new mapboxgl.Map({
+        container: this.mapContainer.nativeElement,
+        style: App.settings.mapStyle,
+        zoom: 13,
+        center: [0, 0]
+      });
+
+      this.controls = new mapboxgl.NavigationControl();
+      this.map.addControl(this.controls);
+
+      this.marker = null;
+
+      this.enable3DBuildings();
     }
-  }
 
-  public ngOnInit() {
-    this.map = new mapboxgl.Map({
-      container: this.mapContainer.nativeElement,
-      style: App.settings.mapStyle,
-      zoom: 13,
-      center: [0, 0]
-    });
-
-    this.controls = new mapboxgl.NavigationControl();
-    this.map.addControl(this.controls);
-
-    this.marker = null;
-
-    this.getGPSPosition();
-    this.enable3DBuildings();
+    this.map.setStyle(App.settings.mapStyle);
+    this.map.resize();
+    this.getCurrentPosition();
   }
 
   /**
@@ -83,28 +81,71 @@ export class MapPage extends ScreenComponent implements OnInit {
   /**
    * Get position from GPS or browser location API.
    */
-  public getGPSPosition() {
-    this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(() => {
-      // Get the current position
-      this.geolocation.getCurrentPosition().then((data) => {
-        console.log('Position received', data);
-        this.setMarker(data.coords.latitude, data.coords.longitude);
-      }).catch((error) => {
-        // TODO <CHANGE THIS>
-        alert('Error getting location.' + error);
-      });
+  public getCurrentPosition() {
+    if (window.cordova) {
+      this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(() => {
+        // Get the current position
+        this.geolocation.getCurrentPosition().then((data) => {
+          this.setMarker(data.coords.latitude, data.coords.longitude);
+        }).catch((error) => {
+          // TODO <CHANGE THIS>
+          alert('Error getting location.' + error);
+        });
 
-      // Watch for changes in the GPS position
-      let watch = this.geolocation.watchPosition();
-      watch.subscribe((data) => {
-        console.log('Position updated', data);
-        this.setMarker(data.coords.latitude, data.coords.longitude, false);
+        // Watch for changes in the GPS position
+        let watch = this.geolocation.watchPosition();
+        watch.subscribe((data) => {
+          this.setMarker(data.coords.latitude, data.coords.longitude, false);
+        });
       });
+    } else {
+
+    }
+
+  }
+
+  /**
+   * Use to enable a 3D extruded building layer.
+   */
+  public enable3DBuildings() {
+    this.map.on('load', () => {
+      let layers = this.map.getStyle().layers;
+
+      let labelLayerId;
+      for (let i = 0; i < layers.length; i++) {
+        if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
+          labelLayerId = layers[i].id;
+          break;
+        }
+      }
+
+      this.map.addLayer({
+        id: '3d-buildings',
+        source: 'composite',
+        'source-layer': 'building',
+        filter: ['==', 'extrude', 'true'],
+        type: 'fill-extrusion',
+        minzoom: 15,
+        paint: {
+          'fill-extrusion-color': '#aaa',
+          'fill-extrusion-height': [
+            'interpolate', ['linear'], ['zoom'],
+            15, 0,
+            15.05, ['get', 'height']
+          ],
+          'fill-extrusion-base': [
+            'interpolate', ['linear'], ['zoom'],
+            15, 0,
+            15.05, ['get', 'min_height']
+          ],
+          'fill-extrusion-opacity': .6
+        }
+      }, labelLayerId);
     });
   }
 
   /**
-   * Create and draw trackers to represent all the assets retrieved from the API.
+   * Create and draw trackers marks.
    */
   public drawMarkers() {
     for (let i = 0; i < this.trackers.length; i++) {
@@ -167,45 +208,5 @@ export class MapPage extends ScreenComponent implements OnInit {
     marker.addTo(this.map);
 
     return marker;
-  }
-
-  /**
-   * Use to enable a 3D extruded building layer.
-   */
-  public enable3DBuildings() {
-    this.map.on('load', () => {
-      let layers = this.map.getStyle().layers;
-
-      let labelLayerId;
-      for (let i = 0; i < layers.length; i++) {
-        if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
-          labelLayerId = layers[i].id;
-          break;
-        }
-      }
-
-      this.map.addLayer({
-        id: '3d-buildings',
-        source: 'composite',
-        'source-layer': 'building',
-        filter: ['==', 'extrude', 'true'],
-        type: 'fill-extrusion',
-        minzoom: 15,
-        paint: {
-          'fill-extrusion-color': '#aaa',
-          'fill-extrusion-height': [
-            'interpolate', ['linear'], ['zoom'],
-            15, 0,
-            15.05, ['get', 'height']
-          ],
-          'fill-extrusion-base': [
-            'interpolate', ['linear'], ['zoom'],
-            15, 0,
-            15.05, ['get', 'min_height']
-          ],
-          'fill-extrusion-opacity': .6
-        }
-      }, labelLayerId);
-    });
   }
 }

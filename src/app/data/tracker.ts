@@ -6,6 +6,10 @@ export const TrackerMessageDirection = {
     RECEIVED: 2
 };
 
+export const TrackerCategory = {
+    AS5000: 1,
+};
+
 export class TrackerMessage {
     public from: string;
     public direction: number;

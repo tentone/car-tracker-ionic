@@ -28,11 +28,10 @@
 
 
 ### Ionic plugins
-
-```
-cordova-plugin-sms-retriever-manager
-cordova-plugin-android-permissions
-```
+ - Here is a list of the ionic plugins required to run the project
+   - cordova-plugin-sms-retriever-manager
+   - cordova-plugin-android-permissions
+   - cordova-plugin-sms-retriever-manager
 
 
 ### Libraries
