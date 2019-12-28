@@ -64,7 +64,7 @@ export class App {
         this.contacts = contacts;
 
         this.load();
-
+        
         if (App.settings.smsHash.length === 0) {
             this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_SMS).then((success) => {
                 this.smsRetriever.getAppHash().then((res: any) => {
