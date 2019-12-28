@@ -91,9 +91,7 @@
       "cordova-sms-plugin": {},
       "cordova-plugin-sms": {},
       "cordova-plugin-geolocation": {},
-      "cordova-plugin-sms-retriever-manager": {
-        "PLAY_SERVICES_VERSION": "15.0.1"
-      },
+      "cordova-plugin-sms-retriever-manager": {},
       "cordova-plugin-contacts": {}
     },
     "platforms": [
