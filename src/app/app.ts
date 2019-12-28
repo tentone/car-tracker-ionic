@@ -66,20 +66,25 @@ export class App {
         this.load();
 
         if (App.settings.smsHash.length === 0) {
-            this.smsRetriever.getAppHash().then((res: any) => {
-                console.log(res);
-                App.startSMSRetriever();
+            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_SMS).then((success) => {
+                this.smsRetriever.getAppHash().then((res: any) => {
+                    console.log(res);
+                    App.startSMSRetriever();
+                });
             });
+
         } else {
             App.startSMSRetriever();
         }
     }
 
     public static startSMSRetriever() {
-        this.smsRetriever.startWatching().then((res: any) => {
-            console.log(res);
-        }).catch((error: any) => {
-            console.error(error);
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_SMS).then((success) => {
+            this.smsRetriever.startWatching().then((res: any) => {
+                console.log(res);
+            }).catch((error: any) => {
+                console.error(error);
+            });
         });
     }
 
