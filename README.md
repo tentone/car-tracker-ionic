@@ -3,6 +3,13 @@
  - Compatible with SMS based trackers, here a list of some known trackers.
     - AS5000 GPS Tracker
 
+### Setup
+ - Install NodeJS and NPM and install dependencies
+```
+npm install
+ionic cordova plugin
+npm run start
+```
 
 ### Features
  - Manage multiple GPS car trackers.
@@ -26,13 +33,9 @@
 | D10[n]#[phone]#      | Delete SOS phone number on slot n.                           |             |
 | C10#                 | List the SOS phone numbers registered in the device.         |             |
 
-
-### Ionic plugins
- - Here is a list of the ionic plugins required to run the project
-   - cordova-plugin-sms-retriever-manager
-   - cordova-plugin-android-permissions
-   - cordova-plugin-sms-retriever-manager
-
+### SMS Responses
+ - Sometimes the GPS tracker sends some responses to the admin number here are some of these values
+ 
 
 ### Libraries
  - https://ionicframework.com/docs/v3/native/sms/
