@@ -29,7 +29,7 @@ export class App {
 
     public static androidPermissions: AndroidPermissions;
     public static sms: SMS;
-    public static smsReceiver: SmsRetriever;
+    public static smsRetriever: SmsRetriever;
     public static contacts: Contacts;
 
     /**
@@ -49,10 +49,10 @@ export class App {
      * @param router Router object created from the app root.
      * @param androidPermissions
      * @param sms
-     * @param smsReceiver
+     * @param smsRetriever
      * @param contacts
      */
-    public static initialize(platform: Platform, router: Router, androidPermissions: AndroidPermissions, sms: SMS, smsReceiver: SmsRetriever, contacts: Contacts) {
+    public static initialize(platform: Platform, router: Router, androidPermissions: AndroidPermissions, sms: SMS, smsRetriever: SmsRetriever, contacts: Contacts) {
         // @ts-ignore
         mapboxgl.accessToken = Environment.mapbox;
 
@@ -60,22 +60,27 @@ export class App {
         this.platform = platform;
         this.androidPermissions = androidPermissions;
         this.sms = sms;
-        this.smsReceiver = smsReceiver;
+        this.smsRetriever = smsRetriever;
         this.contacts = contacts;
 
-        this.smsReceiver.getAppHash().then((res: any) => {
-            console.log(res);
-        }).catch((error: any) => {
-            console.error(error);
-        });
-
-        this.smsReceiver.startWatching().then((res: any) => {
-            console.log(res);
-        }).catch((error: any) => {
-            console.error(error);
-        });
-
         this.load();
+
+        if (App.settings.smsHash.length === 0) {
+            this.smsRetriever.getAppHash().then((res: any) => {
+                console.log(res);
+                App.startSMSRetriever();
+            });
+        } else {
+            App.startSMSRetriever();
+        }
+    }
+
+    public static startSMSRetriever() {
+        this.smsRetriever.startWatching().then((res: any) => {
+            console.log(res);
+        }).catch((error: any) => {
+            console.error(error);
+        });
     }
 
     /**
@@ -111,6 +116,13 @@ export class App {
         this.settings = LocalStorage.get('settings');
         if (this.settings === null) {
             this.settings = new Settings();
+        } else {
+          let settings = new Settings();
+          for (let i in settings) {
+              if (this.settings[i] === undefined) {
+                 this.settings[i] = settings[i];
+              }
+          }
         }
 
         this.trackers = LocalStorage.get('trackers');

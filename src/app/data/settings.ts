@@ -11,6 +11,14 @@ export class Settings {
         MIXED: 'mapbox://styles/mapbox/satellite-streets-v10'
     };
 
+    /**
+     * Map Style to be used when displaying maps.
+     */
     public mapStyle: string = Settings.MAP_STYLES.VECTOR;
+
+    /**
+     * SMS hash generated using the SMS retriever, generated only once.
+     */
+    public smsHash: string = '';
 }
 
