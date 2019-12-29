@@ -8,7 +8,6 @@ import * as mapboxgl from 'mapbox-gl';
 import {Environment} from '../environments/environment';
 import {SMS, SmsOptions} from '@ionic-native/sms/ngx';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
-import {SmsRetriever} from '@ionic-native/sms-retriever/ngx';
 import {Contacts} from '@ionic-native/contacts/ngx';
 
 /**
@@ -29,7 +28,6 @@ export class App {
 
     public static androidPermissions: AndroidPermissions;
     public static sms: SMS;
-    public static smsRetriever: SmsRetriever;
     public static contacts: Contacts;
 
     /**
@@ -49,10 +47,9 @@ export class App {
      * @param router Router object created from the app root.
      * @param androidPermissions
      * @param sms
-     * @param smsRetriever
      * @param contacts
      */
-    public static initialize(platform: Platform, router: Router, androidPermissions: AndroidPermissions, sms: SMS, smsRetriever: SmsRetriever, contacts: Contacts) {
+    public static initialize(platform: Platform, router: Router, androidPermissions: AndroidPermissions, sms: SMS, contacts: Contacts) {
         // @ts-ignore
         mapboxgl.accessToken = Environment.mapbox;
 
@@ -60,31 +57,31 @@ export class App {
         this.platform = platform;
         this.androidPermissions = androidPermissions;
         this.sms = sms;
-        this.smsRetriever = smsRetriever;
         this.contacts = contacts;
 
         this.load();
-        
-        if (App.settings.smsHash.length === 0) {
-            this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_SMS).then((success) => {
-                this.smsRetriever.getAppHash().then((res: any) => {
-                    console.log(res);
-                    App.startSMSRetriever();
-                });
-            });
 
-        } else {
-            App.startSMSRetriever();
-        }
+        // @ts-ignore
+        SMSReceive.startWatch(() => {
+            console.log('CarTracker: SMS Receiver watching started.');
+        }, () => {
+            console.warn('CarTracker: Failed to start SMS watching.');
+        });
+
+        // SMS Received event
+        document.addEventListener('onSMSArrive', function(e: any) {
+            console.log('onSMSArrive()', e, e.data);
+        });
+
     }
 
-    public static startSMSRetriever() {
-        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.READ_SMS).then((success) => {
-            this.smsRetriever.startWatching().then((res: any) => {
-                console.log(res);
-            }).catch((error: any) => {
-                console.error(error);
-            });
+    /**
+     * Stop the SMS receiver watcher.
+     */
+    public static stopSMSReceiver() {
+        // @ts-ignore
+        SMSReceive.stopWatch(() => {
+            console.log('CarTracker: SMS Receiver watching stopped.');
         });
     }
 
