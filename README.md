@@ -3,18 +3,24 @@
  - Compatible with SMS based trackers, here a list of some known trackers.
     - AS5000 GPS Tracker
 
+
+
 ### Setup
  - Install NodeJS and NPM and install dependencies
 ```
 npm install
-ionic cordova plugin
 npm run start
 ```
 
+
+
 ### Features
+
  - Manage multiple GPS car trackers.
  - Store and list messages exchanged with the car tracker.
  - Export stored data as file.
+
+
 
 
 ### SMS Commands
@@ -33,18 +39,26 @@ npm run start
 | D10[n]#[phone]#      | Delete SOS phone number on slot n.                           |             |
 | C10#                 | List the SOS phone numbers registered in the device.         |             |
 
-### SMS Responses
- - Sometimes the GPS tracker sends some responses to the admin number here are some of these values
- 
 
-### Libraries
- - https://ionicframework.com/docs/v3/native/sms/
- - https://www.npmjs.com/package/cordova-plugin-sms-receive
+
+### SMS Responses
+
+ - Sometimes the GPS tracker sends some responses to the admin number here are some of these values
+
+| Message                     | Function                                          |
+| --------------------------- | ------------------------------------------------- |
+| 您的设备掉主电报警，请关注! | Device was powered off (disconnected from power). |
+| 指令格式错误                | Unknown instruction                               |
+|                             |                                                   |
+
 
 
 ### Cordova
- - You can replace icon.png and splash.png.
+
+ - You can replace icon.png and splash.png assets and then regenerate resources,
  - Run `ionic cordova resources` to generate icon and splash screen sizes.
+
+
 
 
 ### License

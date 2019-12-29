@@ -17,8 +17,8 @@ export class Settings {
     public mapStyle: string = Settings.MAP_STYLES.VECTOR;
 
     /**
-     * SMS hash generated using the SMS retriever, generated only once.
+     * Admin number to be set for GPS tracker to report data to.
      */
-    public smsHash: string = '';
+    public adminNumber: string = '+351915939715';
 }
 

@@ -21,6 +21,7 @@ export const LocaleEN = {
 	pin: 'PIN',
 	color: 'Color',
 	active: 'Active',
+	adminNumber: 'Admin Number',
 
 	// Maps
 	mapStyle: 'Map Style',

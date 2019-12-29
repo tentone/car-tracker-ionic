@@ -16,7 +16,7 @@ export class TrackersLayout {
     {
       attribute: 'pin',
       type: FormObjectType.PASSWORD,
-      required: false
+      required: true
     },
     {
       attribute: 'active',

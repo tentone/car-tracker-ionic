@@ -28,43 +28,42 @@ export class Tracker {
     /**
      * Name of the tracker.
      */
-    public name: string;
+    public name: string = '';
 
     /**
      * Color to represent the tracker on the map.
      */
-    public color: string;
+    public color: string = null;
 
     /**
      * Phone number of the tracker used to send and receive messages.
      */
-    public phoneNumber: string;
+    public phoneNumber: string = '';
 
     /**
      * PIN number of the tracker used for authentication.
      *
      * Usually it is a 4 digit numeric pin.
      */
-    public pin: string;
+    public pin: string = '';
 
     /**
      * Battery level, 5 is 100%, 1 is 20%; the battery is from 1 to 5.
      */
-    public battery: number;
+    public battery: number = null;
 
     /**
      * Indicates if the tracker is active and should be displayed on the map.
      */
-    public active: boolean;
+    public active: boolean = true;
+
+    /**
+     * Messages exchanged with the tracker device.
+     */
+    public messages: TrackerMessage[] = [];
 
     constructor() {
         this.uuid = UUIDUtils.generate();
-        this.active = true;
-        this.name = '';
-        this.phoneNumber = '';
-        this.pin = '';
-        this.color = null;
-        this.battery = null;
     }
 
     public getLocation() {
