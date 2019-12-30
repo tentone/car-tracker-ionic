@@ -6,7 +6,7 @@
   "homepage": "https://github.com/tentone",
   "scripts": {
     "start": "ionic cordova run android --debug",
-    "dev": "ionic cordova run android --debug --livereload --external",
+    "dev": "ionic cordova run android --debug --livereload --consolelogs",
     "build": "ionic cordova build android --prod"
   },
   "private": true,

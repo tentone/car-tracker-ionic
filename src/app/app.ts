@@ -9,6 +9,7 @@ import {Environment} from '../environments/environment';
 import {SMS, SmsOptions} from '@ionic-native/sms/ngx';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 import {Contacts} from '@ionic-native/contacts/ngx';
+declare var SMSReceive: any;
 
 /**
  * The app class is used to access and store all persistent data used in the application.
@@ -61,11 +62,10 @@ export class App {
 
         this.load();
 
-        // @ts-ignore
         SMSReceive.startWatch(() => {
             console.log('CarTracker: SMS Receiver watching started.');
         }, () => {
-            console.warn('CarTracker: Failed to start SMS watching.');
+            alert('CarTracker: Failed to start SMS watching.');
         });
 
         // SMS Received event
