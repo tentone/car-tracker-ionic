@@ -2,7 +2,8 @@
  - Mobile application to track car GPS position for SMS based trackers.
  - Only works with Android due to native plugins compatibility.
  - Compatible with SMS based trackers, here a list of some known trackers.
-    - AS5000 GPS Tracker
+    - AS5000
+    - CA-P3C
 
 
 
