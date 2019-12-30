@@ -2,7 +2,7 @@
   "name": "cartracker",
   "version": "0.0.1",
   "author": "tentone",
-  "description": "Car tracking application using the ionic framework.",
+  "description": "Car GPS tracking application using the ionic framework.",
   "homepage": "https://github.com/tentone",
   "scripts": {
     "ng": "ng serve",
