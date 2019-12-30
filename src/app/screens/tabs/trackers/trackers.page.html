@@ -12,6 +12,7 @@
 <ion-content>
   <!-- Tracker list -->
   <ion-list>
+    <!-- *ngIf="stringUtils.searchObject(search, tracker, ['name'])" -->
       <ion-item *ngFor="let tracker of app.trackers" button (click)="app.navigator.navigate('/tabs/trackers/view', tracker)">
         <ion-label>{{tracker.name | translate }}</ion-label>
         <ion-icon slot="end" name="arrow-dropright"></ion-icon>

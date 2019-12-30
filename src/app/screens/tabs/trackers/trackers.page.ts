@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {App} from '../../../app';
+import {StringUtils} from '../../../utils/string-utils';
 
 @Component({
   selector: 'app-trackers',
@@ -7,6 +8,7 @@ import {App} from '../../../app';
 })
 export class TrackersPage {
   get app() { return App; }
+  get stringUtils() { return StringUtils; }
 
   /**
    * Text used to filter tracker by its name.
