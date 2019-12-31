@@ -61,6 +61,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "ionic": "^5.4.13",
+    "cordova": "^9.0.0",
     "codelyzer": "^5.0.0",
     "cordova-res": "^0.8.1",
     "jasmine-core": "~3.4.0",
@@ -82,7 +83,9 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-android-permissions": {},
       "cordova-sms-plugin": {},
