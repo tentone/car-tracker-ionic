@@ -3,7 +3,7 @@
     <name>Car Tracker</name>
     <description>Car tracking application for SMS based GPS trackers.</description>
     <author email="tentone@outlook.com" href="https://github.com/tentone">Tentone</author>
-    <content original-src="index.html" src="http://localhost:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="*" />
     <allow-intent href="http://*/*" />
@@ -53,5 +53,4 @@
         <splash density="port-xhdpi" src="resources/android/splash/drawable-port-xhdpi-screen.png" />
         <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
     </platform>
-    <allow-navigation href="http://localhost:8100" sessionid="fbae1802" />
 </widget>
