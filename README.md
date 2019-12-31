@@ -8,7 +8,10 @@
 
 
 ### Setup
- - Install NodeJS and NPM and install dependencies
+
+- Install [Java JDK 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and Android development SDK
+
+ - Install [NodeJS](https://nodejs.org/en/) and NPM and install dependencies
 ```
 npm install
 npm run start
