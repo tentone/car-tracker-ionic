@@ -9,9 +9,12 @@
 <ion-content>
   <form-object [object]="this.tracker" [layout]="this.layout"></form-object>
 
-  <ion-button expand="block" (click)="this.tracker.setAdminNumber('+351915939715');">Admin number</ion-button>
-  <ion-button expand="block" (click)="this.tracker.setSOSNumber('+351915939715', 1);">SOS number</ion-button>
-  <ion-button expand="block" (click)="this.tracker.getLocation();">Get Location</ion-button>
+  <ion-button expand="block" (click)="this.tracker.setAdminNumber(app.settings.adminNumber);">{{'adminNumber' | translate}}</ion-button>
+  <ion-button expand="block" (click)="this.tracker.setSOSNumber(app.settings.adminNumber, 1);">{{'sosNumber' | translate}}</ion-button>
+  <ion-button expand="block" (click)="this.tracker.getLocation();">{{'updateLocation' | translate}}</ion-button>
+  <ion-button expand="block" (click)="setMoveLimit();">{{'setMoveLimit' | translate}}</ion-button>
+  <ion-button expand="block" (click)="setSpeedLimit();">{{'setSpeedLimit' | translate}}</ion-button>
+  <ion-button expand="block" (click)="this.tracker.listSOSNumbers();">{{'listSOSNumbers' | translate}}</ion-button>
 
   <ion-button expand="block" color="danger" (click)="delete();">{{'delete' | translate}}</ion-button>
 </ion-content>

@@ -87,9 +87,12 @@ export class App {
      */
     public static stopSMSReceiver() {
         // @ts-ignore
-        SMSReceive.stopWatch(() => {
-            console.log('CarTracker: SMS Receiver watching stopped.');
-        });
+        if (window.SMSReceive !== undefined) {
+            // @ts-ignore
+            window.SMSReceive.stopWatch(() => {
+                console.log('CarTracker: SMS Receiver watching stopped.');
+            });
+        }
     }
 
     /**
@@ -97,9 +100,10 @@ export class App {
      *
      * @param phoneNumber Destination phone number.
      * @param message Message content
-     * @param onSuccess OnSuccess callback function.
+     * @param onSuccess OnSuccess optional callback function.
+     * @param onError OnError optional callback function.
      */
-    public static sendSMS(phoneNumber: string, message: string, onSuccess?: Function) {
+    public static sendSMS(phoneNumber: string, message: string, onSuccess?: Function, onError?: Function) {
         this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.SEND_SMS).then(() => {
             let options: SmsOptions = {
                 replaceLineBreaks: false,
@@ -112,6 +116,10 @@ export class App {
                 this.sms.send(phoneNumber, message, options).then(() => {
                     if (onSuccess !== undefined) {
                         onSuccess();
+                    }
+                }).catch(() => {
+                    if (onError !== undefined) {
+                        onError();
                     }
                 });
             }
@@ -146,6 +154,8 @@ export class App {
                 this.trackers[j] = tracker;
             }
         }
+
+        console.log('CarTracker: Loaded data from storage.', this.trackers, this.settings);
     }
 
     /**
@@ -154,5 +164,7 @@ export class App {
     public static store() {
         LocalStorage.set('settings', this.settings);
         LocalStorage.set('trackers', this.trackers);
+
+        console.log('CarTracker: Saved data into storage.', this.trackers, this.settings);
     }
 }

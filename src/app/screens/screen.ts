@@ -20,14 +20,14 @@ export class ScreenComponent implements AfterContentChecked {
 
     constructor(public route: ActivatedRoute, public elementRef: ElementRef) {
         this.route.params.subscribe(() => {
-            this.display();
+            this.onDisplay();
         });
     }
 
     public ngAfterContentChecked() {
         if (!this.visible && this.elementRef.nativeElement.offsetParent !== null) {
             this.visible = true;
-            this.display();
+            this.onDisplay();
 
         } else if (this.visible && this.elementRef.nativeElement.offsetParent === null) {
             this.visible = false;
@@ -38,5 +38,5 @@ export class ScreenComponent implements AfterContentChecked {
     /**
      * On display method is executed when the route is entered.
      */
-    public display() {}
+    public onDisplay() {}
 }

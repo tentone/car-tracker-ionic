@@ -10,13 +10,23 @@ import {TrackersLayout} from '../trackers-layout';
 })
 export class TrackersViewPage extends ScreenComponent {
   get layout() { return TrackersLayout.layout; }
-
+  get app() { return App; }
   /**
    * Tracker being edited on this page.
    */
   public tracker: Tracker = null;
 
-  public display() {
+  public setMoveLimit() {
+    let distance = prompt('Distance (m)');
+    this.tracker.setMoveLimit(Number(distance));
+  }
+
+  public setSpeedLimit() {
+    let speed = prompt('Speed (mp/h)');
+    this.tracker.setSpeedLimit(Number(speed));
+  }
+
+  public onDisplay() {
     this.tracker = App.navigator.getData();
     if (this.tracker === null) {
       App.navigator.pop();

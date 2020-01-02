@@ -11,7 +11,6 @@ export class FormObjectComponent implements OnChanges {
 	get types() { return FormObjectType; }
 	get app() { return App; }
 
-
 	/**
 	 * Layout of the dynamic form, is an array of form entry descriptions.
 	 *
@@ -106,7 +105,6 @@ export class FormObjectComponent implements OnChanges {
 	 * Check if all required fields are filled, does not check if the field data is valid.
 	 */
 	public requiredFilled(): boolean {
-
 		for (var i = 0; i < this.layout.length; i++) {
 
 			// Ignore inactive layout rows
@@ -146,7 +144,7 @@ export class FormObjectComponent implements OnChanges {
 			sub[attrs[i]] = value;
 		} catch (e) {
 			if (!Environment.production) {
-				// console.error('Error form setAttribute', object, attribute, sub, attrs, value);
+				console.warn('CarTracker: Error assigning form attribute.', object, attribute);
 			}
 		}
 	}
@@ -169,7 +167,7 @@ export class FormObjectComponent implements OnChanges {
 			return value;
 		} catch (e) {
 			if (!Environment.production) {
-				// console.log('Form getAttribute', object, attribute, value);
+				console.warn('CarTracker: Error getting form attribute.', object, attribute);
 			}
 		}
 
@@ -202,14 +200,15 @@ export class FormObjectComponent implements OnChanges {
 	/**
 	 * Select a contact from the system contact manager.
 	 *
-	 * @param object
-	 * @param attribute
+	 * @param object Object to store the result into.
+	 * @param attribute Attribute of the result.
 	 */
 	public selectContact(object: any, attribute: any) {
 		App.contacts.pickContact().then((data) => {
 			if (data.phoneNumbers.length > 0) {
-				this.setAttribute(object, attribute, data.phoneNumbers[0].value)
+				this.setAttribute(object, attribute, data.phoneNumbers[0].value);
 			}
+
 			console.log(data);
 		});
 	}

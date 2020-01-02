@@ -23,7 +23,7 @@ export const LocaleEN = {
 	active: 'Active',
 	adminNumber: 'Admin Number',
 	sosNumber: 'SOS Number',
-
+	updateLocation: 'Update location',
 
 	// Maps
 	mapStyle: 'Map Style',
@@ -35,5 +35,6 @@ export const LocaleEN = {
 
 	// Error
 	requiredField: 'Required Field',
-	errorLocation: 'Error getting location.'
+	errorLocation: 'Error getting location.',
+	errorInvalidSlot: 'Invalid control number slot.'
 };

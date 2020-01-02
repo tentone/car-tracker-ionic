@@ -40,7 +40,7 @@ export class MapPage extends ScreenComponent {
     super(route, elementRef);
   }
 
-  public display() {
+  public onDisplay() {
     if (this.map === null) {
       this.map = new mapboxgl.Map({
         container: this.mapContainer.nativeElement,
