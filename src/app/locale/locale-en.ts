@@ -22,6 +22,8 @@ export const LocaleEN = {
 	color: 'Color',
 	active: 'Active',
 	adminNumber: 'Admin Number',
+	sosNumber: 'SOS Number',
+
 
 	// Maps
 	mapStyle: 'Map Style',
