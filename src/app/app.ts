@@ -2,7 +2,7 @@ import {Platform} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {Navigation} from './navigation';
 import {Settings} from './data/settings';
-import {Tracker} from './data/tracker';
+import {MessageDirection, Tracker, TrackerMessage} from './data/tracker';
 import {LocalStorage} from './utils/local-storage';
 import * as mapboxgl from 'mapbox-gl';
 import {Environment} from '../environments/environment';
@@ -76,7 +76,19 @@ export class App {
 
             // SMS Received event
             document.addEventListener('onSMSArrive', function(e: any) {
-                console.log('onSMSArrive()', e, e.data);
+                console.log('CarTracker: SMS message received.', e, e.data);
+
+                for (let i = 0; i < App.trackers.length; i++) {
+                    if (App.trackers[i].phoneNumber === e.data.address) {
+                        console.log('CarTracker: Added message to tracker.', App.trackers[i]);
+
+                        let msg = new TrackerMessage(MessageDirection.RECEIVED);
+                        msg.message = e.data.body;
+                        msg.date = new Date(e.data.date_sent);
+                        App.trackers[i].messages.push(msg);
+                    }
+                }
+
             });
         }, 1000);
 

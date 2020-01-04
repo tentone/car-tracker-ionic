@@ -12,9 +12,9 @@
   <ion-button expand="block" (click)="this.tracker.setAdminNumber(app.settings.adminNumber);">{{'adminNumber' | translate}}</ion-button>
   <ion-button expand="block" (click)="this.tracker.setSOSNumber(app.settings.adminNumber, 1);">{{'sosNumber' | translate}}</ion-button>
   <ion-button expand="block" (click)="this.tracker.getLocation();">{{'updateLocation' | translate}}</ion-button>
-  <ion-button expand="block" (click)="setMoveLimit();">{{'setMoveLimit' | translate}}</ion-button>
+  <ion-button expand="block" (click)="setMoveLimit();">{{'setDistanceLimit' | translate}}</ion-button>
   <ion-button expand="block" (click)="setSpeedLimit();">{{'setSpeedLimit' | translate}}</ion-button>
-  <ion-button expand="block" (click)="this.tracker.listSOSNumbers();">{{'listSOSNumbers' | translate}}</ion-button>
+  <ion-button expand="block" (click)="this.tracker.listSOSNumbers();">{{'listSosNumbers' | translate}}</ion-button>
 
   <ion-button expand="block" color="danger" (click)="delete();">{{'delete' | translate}}</ion-button>
 </ion-content>

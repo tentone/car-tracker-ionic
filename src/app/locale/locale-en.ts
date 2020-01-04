@@ -13,6 +13,14 @@ export const LocaleEN = {
 	delete: 'Delete',
 	version: 'Version',
 	update: 'Update',
+	maxDistance: 'Max Distance (m)',
+	maxSpeed: 'Max Speed (mp/h)',
+	adminNumber: 'Admin Number',
+	sosNumber: 'SOS Number',
+	updateLocation: 'Update location',
+	setSpeedLimit: 'Set speed limit',
+	setDistanceLimit: 'Set distance limit',
+	listSosNumbers: 'List SOS Numbers',
 
 	// Attributes
 	uuid: 'UUID',
@@ -21,9 +29,7 @@ export const LocaleEN = {
 	pin: 'PIN',
 	color: 'Color',
 	active: 'Active',
-	adminNumber: 'Admin Number',
-	sosNumber: 'SOS Number',
-	updateLocation: 'Update location',
+
 
 	// Maps
 	mapStyle: 'Map Style',

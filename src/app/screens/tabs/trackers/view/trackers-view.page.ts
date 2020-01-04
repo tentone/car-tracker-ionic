@@ -3,6 +3,7 @@ import {Tracker} from '../../../../data/tracker';
 import {App} from '../../../../app';
 import {ScreenComponent} from '../../../screen';
 import {TrackersLayout} from '../trackers-layout';
+import {Locale} from '../../../../locale/locale';
 
 @Component({
   selector: 'app-trackers-view',
@@ -17,12 +18,12 @@ export class TrackersViewPage extends ScreenComponent {
   public tracker: Tracker = null;
 
   public setMoveLimit() {
-    let distance = prompt('Distance (m)');
+    let distance = prompt(Locale.get('maxDistance'));
     this.tracker.setMoveLimit(Number(distance));
   }
 
   public setSpeedLimit() {
-    let speed = prompt('Speed (mp/h)');
+    let speed = prompt(Locale.get('maxSpeed'));
     this.tracker.setSpeedLimit(Number(speed));
   }
 
