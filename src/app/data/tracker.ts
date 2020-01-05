@@ -74,16 +74,21 @@ export class Tracker {
     public phoneNumber: string = '';
 
     /**
+     * Admin number of the tracker.
+     */
+    public adminNumber: string = '';
+
+    /**
+     * SOS numbers associated with the tracker (up to 3 SOS numbers).
+     */
+    public sosNumbers: string[];
+
+    /**
      * PIN number of the tracker used for authentication.
      *
      * Usually it is a 4 digit numeric pin.
      */
     public pin: string = '';
-
-    /**
-     * Battery level, 5 is 100%, 1 is 20%; the battery is from 1 to 5.
-     */
-    public battery: number = null;
 
     /**
      * Limit speed in miles per hour, defined on the tracker.

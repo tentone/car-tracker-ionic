@@ -35,14 +35,14 @@ npm run start
 | admin[pw] [phone]    | Set the admin phone number                                   | admin ok    |
 | apn[pw] [value]      | Set the APN value for the SIM card carrier                   | apn ok      |
 | password[pw] [newpw] | Change the password of the device, by default the password is 123456. | password ok |
-| zone[pw] [zone]      | Set the time zone of the SMS tracker.                        |             |
-| speed[pw] [speed]    | Set the speed alarm value to reset the value set the speed to 0. |             |
-| move[pw] [distance]  | Set the movement alarm distance value (in meters).           |             |
-| nomove[pw]           | Disable the movement alarm.                                  |             |
-| g1234                | Get the location of the tracker, car velocity, date and ACC status | <           |
+| zone[pw] [zone]      | Set the time zone of the SMS tracker.                        | -           |
+| speed[pw] [speed]    | Set the speed alarm value to reset the value set the speed to 0. | -           |
+| move[pw] [distance]  | Set the movement alarm distance value (in meters).           | -           |
+| nomove[pw]           | Disable the movement alarm.                                  | -           |
+| g1234                | Get the location of the tracker, car velocity, date and ACC status | -           |
 | 10[n]#[phone]#       | Set SOS phone number slot n. Slots from 1 to 3 available.    | ok          |
-| D10[n]#[phone]#      | Delete SOS phone number on slot n.                           |             |
-| C10#                 | List the SOS phone numbers registered in the device.         |             |
+| D10[n]#[phone]#      | Delete SOS phone number on slot n.                           | -           |
+| C10#                 | List the SOS phone numbers registered in the device.         | -           |
 
 
 

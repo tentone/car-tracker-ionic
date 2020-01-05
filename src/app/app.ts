@@ -99,23 +99,32 @@ export class App {
         let msg = new TrackerMessage(MessageDirection.RECEIVED);
         msg.date = new Date(data.date_sent);
 
-        // Location message
-        let fields = data.body.split('\n');
-        if (fields.length === 6) {
-            try {
-                let url = fields[0];
-                msg.data = {
-                    coords: null,
-                    // tslint:disable-next-line:radix
-                    id: Number.parseInt(fields[1].split(':')[1]),
-                    acc: fields[2].split(':')[1] !== 'OFF',
-                    gps: fields[3].split(':')[1] === 'A',
-                    speed: Number.parseFloat(fields[4].split(':')[1]),
-                    date: fields[5]
-                };
-                return msg;
-            } catch (e) {}
+        if (data.body === 'admin ok') {
+            // TODO <CONFIRM ADMIN NUMBER>
+        } else if (data.body === 'apn ok') {
+            // TODO <CONFIRM APN SETTINGS>
+        } else if (data.body === 'password ok') {
+            // TODO <CONFIRM NEW PASSWORD>
+        } else {
+            // Location message
+            let fields = data.body.split('\n');
+            if (fields.length === 6) {
+                try {
+                    let url = fields[0];
+                    msg.data = {
+                        coords: null,
+                        // tslint:disable-next-line:radix
+                        id: Number.parseInt(fields[1].split(':')[1]),
+                        acc: fields[2].split(':')[1] !== 'OFF',
+                        gps: fields[3].split(':')[1] === 'A',
+                        speed: Number.parseFloat(fields[4].split(':')[1]),
+                        date: fields[5]
+                    };
+                    return msg;
+                } catch (e) {}
+            }
         }
+
 
         msg.data = data.body;
         msg.type = MessageType.UNKNOWN;
