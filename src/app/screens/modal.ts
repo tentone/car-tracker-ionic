@@ -8,7 +8,7 @@ import {Locale} from '../locale/locale';
  */
 export class Modal {
 	/**
-	 * Show alert box, with a title and message.
+	 * Show alert box, with a title and data.
 	 */
 	public static async alert(title: string, message: string) {
 		const controller = new AlertController();
@@ -22,7 +22,7 @@ export class Modal {
 	}
 
 	/**
-	 * Show confirmation box, with a title and message.
+	 * Show confirmation box, with a title and data.
 	 *
 	 * The user has to answer (yes or no), the response is received as boolean on the confirm callback.
 	 */
@@ -41,9 +41,9 @@ export class Modal {
 	}
 
 	/**
-	 * Show confirmation box, with a title and message.
+	 * Show confirmation box, with a title and data.
 	 *
-	 * The use can cancel the callback receives two values a confirm boolean value and a data with the message inserted into the box.
+	 * The use can cancel the callback receives two values a confirm boolean value and a data with the data inserted into the box.
 	 */
 	public static async prompt(title: string, inputs: any[], onConfirm: Function) {
 		const controller = new AlertController();
@@ -60,7 +60,7 @@ export class Modal {
 	}
 
 	/**
-	 * Show toast message.
+	 * Show toast data.
 	 */
 	public static async toast(message: string, duration: number = 3000) {
 		const controller = new ToastController();

@@ -2,22 +2,46 @@ import {UUIDUtils} from '../utils/uuid-utils';
 import {App} from '../app';
 import {Locale} from '../locale/locale';
 
+/**
+ * Direction of the message.
+ */
 export const MessageDirection = {
     SENT: 1,
     RECEIVED: 2
 };
 
+/**
+ * Type of messages to be received.
+ */
+export const MessageType = {
+    COMMAND: 0,
+    LOCATION: 1,
+    UNKNOWN: -1
+};
+
+/**
+ * Class to represent a message received from a tracker.
+ */
 export class TrackerMessage {
     /**
-     * Direction of the message exchanged.
+     * Direction of the data exchanged.
      */
     public direction: number;
 
     /**
-     * Content of the message.
+     * Content of the message, can be a string or a object.
      */
-    public message: string;
+    public data: any;
+
+    /**
+     * Date of the data.
+     */
     public date: Date;
+
+    /**
+     * Type of the data.
+     */
+    public type: number;
 
     constructor(direction: number) {
         this.direction = direction;
@@ -86,13 +110,14 @@ export class Tracker {
     }
 
     /**
-     * Request a message with the location of the device, status and speed of the tracker.
+     * Request a data with the location of the device, status and speed of the tracker.
      */
     public getLocation() {
         let msg = new TrackerMessage(MessageDirection.SENT);
-        msg.message = 'g1234';
+        msg.type = MessageType.COMMAND;
+        msg.data = 'g1234';
 
-        App.sendSMS(this.phoneNumber, msg.message);
+        App.sendSMS(this.phoneNumber, msg.data);
     }
 
     /**
@@ -102,11 +127,12 @@ export class Tracker {
      */
     public setSpeedLimit(speed: number) {
         let msg = new TrackerMessage(MessageDirection.SENT);
-        msg.message = 'speed' + this.pin + ' ' + speed;
+        msg.type = MessageType.COMMAND;
+        msg.data = 'speed' + this.pin + ' ' + speed;
 
         this.speedLimit = speed;
 
-        App.sendSMS(this.phoneNumber, msg.message);
+        App.sendSMS(this.phoneNumber, msg.data);
     }
 
     /**
@@ -116,11 +142,12 @@ export class Tracker {
      */
     public setMoveLimit(distance: number) {
         let msg = new TrackerMessage(MessageDirection.SENT);
-        msg.message = 'move' + this.pin + ' ' + distance;
+        msg.type = MessageType.COMMAND;
+        msg.data = 'move' + this.pin + ' ' + distance;
 
         this.distanceLimit = distance;
 
-        App.sendSMS(this.phoneNumber, msg.message);
+        App.sendSMS(this.phoneNumber, msg.data);
     }
 
     /**
@@ -128,11 +155,12 @@ export class Tracker {
      */
     public noMove() {
         let msg = new TrackerMessage(MessageDirection.SENT);
-        msg.message = 'nomove' + this.pin;
+        msg.type = MessageType.COMMAND;
+        msg.data = 'nomove' + this.pin;
 
         this.distanceLimit = null;
 
-        App.sendSMS(this.phoneNumber, msg.message);
+        App.sendSMS(this.phoneNumber, msg.data);
     }
 
     /**
@@ -142,11 +170,12 @@ export class Tracker {
      */
     public changePIN(newPin: string) {
         let msg = new TrackerMessage(MessageDirection.SENT);
-        msg.message = 'password' + this.pin + ' ' + newPin;
+        msg.type = MessageType.COMMAND;
+        msg.data = 'password' + this.pin + ' ' + newPin;
 
         this.pin = newPin;
 
-        App.sendSMS(this.phoneNumber, msg.message);
+        App.sendSMS(this.phoneNumber, msg.data);
     }
 
     /**
@@ -156,9 +185,10 @@ export class Tracker {
      */
     public setAdminNumber(phoneNumber: string) {
         let msg = new TrackerMessage(MessageDirection.SENT);
-        msg.message = 'admin' + this.pin + ' ' + phoneNumber;
+        msg.type = MessageType.COMMAND;
+        msg.data = 'admin' + this.pin + ' ' + phoneNumber;
 
-        App.sendSMS(this.phoneNumber, msg.message);
+        App.sendSMS(this.phoneNumber, msg.data);
     }
 
     /**
@@ -173,9 +203,10 @@ export class Tracker {
         }
 
         let msg = new TrackerMessage(MessageDirection.SENT);
-        msg.message = '10' + slot + '#' + phoneNumber + '#';
+        msg.type = MessageType.COMMAND;
+        msg.data = '10' + slot + '#' + phoneNumber + '#';
 
-        App.sendSMS(this.phoneNumber, msg.message);
+        App.sendSMS(this.phoneNumber, msg.data);
     }
 
     /**
@@ -183,8 +214,9 @@ export class Tracker {
      */
     public listSOSNumbers() {
         let msg = new TrackerMessage(MessageDirection.SENT);
-        msg.message = 'C10#';
+        msg.type = MessageType.COMMAND;
+        msg.data = 'C10#';
 
-        App.sendSMS(this.phoneNumber, msg.message);
+        App.sendSMS(this.phoneNumber, msg.data);
     }
 }

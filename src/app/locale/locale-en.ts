@@ -21,6 +21,7 @@ export const LocaleEN = {
 	setSpeedLimit: 'Set speed limit',
 	setDistanceLimit: 'Set distance limit',
 	listSosNumbers: 'List SOS Numbers',
+	disableDistanceLimit: 'Disable distance limit',
 
 	// Attributes
 	uuid: 'UUID',
