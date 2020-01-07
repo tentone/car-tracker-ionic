@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{'trackers' | translate}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ng-container *ngFor="let message of this.tracker.messages">
+      <ion-item>
+        <ion-label>{{message.type}}</ion-label>
+        <ion-label>{{message.direction}}</ion-label>
+        <ion-label>{{message.data}}</ion-label>
+        <ion-label>{{message.date}}</ion-label>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>

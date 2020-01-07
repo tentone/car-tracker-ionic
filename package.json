@@ -5,6 +5,7 @@
   "description": "Car GPS tracking application using the ionic framework.",
   "homepage": "https://github.com/tentone",
   "scripts": {
+    "ng": "ng serve",
     "start": "ionic cordova run android --debug",
     "dev": "ionic cordova run android --debug --livereload --consolelogs",
     "build": "ionic cordova build android --prod"

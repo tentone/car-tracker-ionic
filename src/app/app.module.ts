@@ -19,14 +19,18 @@ import {SettingsPage} from './screens/tabs/settings/settings.page';
 import {FormObjectComponent} from './components/form-object/form-object.component';
 import {TrackersViewPage} from './screens/tabs/trackers/view/trackers-view.page';
 import {Contacts} from '@ionic-native/contacts/ngx';
+import {WizardPage} from './screens/wizard/wizard.page';
+import {TrackersHistoryPage} from './screens/tabs/trackers/history/trackers-history.page';
 
 @NgModule({
   declarations: [
     AppComponent,
+    WizardPage,
     TabsPage,
     TrackersPage,
     TrackersAddPage,
     TrackersViewPage,
+    TrackersHistoryPage,
     MapPage,
     SettingsPage,
     FormObjectComponent

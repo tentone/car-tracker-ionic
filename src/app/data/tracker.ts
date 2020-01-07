@@ -64,6 +64,11 @@ export class Tracker {
     public name: string = '';
 
     /**
+     * Model of the tracker.
+     */
+    public model: string = '';
+
+    /**
      * Color to represent the tracker on the map.
      */
     public color: string = null;
@@ -126,44 +131,12 @@ export class Tracker {
     }
 
     /**
-     * Set the speed limit of the GPS tracker before an alarm is triggered.
-     *
-     * @param speed Speed limit in MPH zero means no speed limit.
+     * Request a data with the location of the device, status and speed of the tracker.
      */
-    public setSpeedLimit(speed: number) {
+    public getTrackerInfo() {
         let msg = new TrackerMessage(MessageDirection.SENT);
         msg.type = MessageType.COMMAND;
-        msg.data = 'speed' + this.pin + ' ' + speed;
-
-        this.speedLimit = speed;
-
-        App.sendSMS(this.phoneNumber, msg.data);
-    }
-
-    /**
-     * Set the movement limit of the GPS tracker before an alarm is triggered.
-     *
-     * @param distance Distance limit in meters.
-     */
-    public setMoveLimit(distance: number) {
-        let msg = new TrackerMessage(MessageDirection.SENT);
-        msg.type = MessageType.COMMAND;
-        msg.data = 'move' + this.pin + ' ' + distance;
-
-        this.distanceLimit = distance;
-
-        App.sendSMS(this.phoneNumber, msg.data);
-    }
-
-    /**
-     * Disable the movement alarm.
-     */
-    public noMove() {
-        let msg = new TrackerMessage(MessageDirection.SENT);
-        msg.type = MessageType.COMMAND;
-        msg.data = 'nomove' + this.pin;
-
-        this.distanceLimit = null;
+        msg.data = 'CXZT';
 
         App.sendSMS(this.phoneNumber, msg.data);
     }
@@ -214,6 +187,23 @@ export class Tracker {
         App.sendSMS(this.phoneNumber, msg.data);
     }
 
+
+    /**
+     * Delete SOS number used for the GPS to return requested information, alarm messages etc.
+     *
+     * @param slot Slot being set can be 1, 2 or 3.
+     */
+    public deleteSOSNumber(slot: number) {
+        if (slot < 1 || slot > 3) {
+            throw new Error(Locale.get('errorInvalidSlot'));
+        }
+
+        let msg = new TrackerMessage(MessageDirection.SENT);
+        msg.type = MessageType.COMMAND;
+        msg.data = 'D10' + slot + '#';
+        App.sendSMS(this.phoneNumber, msg.data);
+    }
+
     /**
      * Request a list of the SOS numbers registered on the device.
      */
@@ -224,4 +214,49 @@ export class Tracker {
 
         App.sendSMS(this.phoneNumber, msg.data);
     }
+
+
+    /**
+     * Set the speed limit of the GPS tracker before an alarm is triggered.
+     *
+     * @param speed Speed limit in MPH zero means no speed limit.
+     */
+    public setSpeedLimit(speed: number) {
+        let msg = new TrackerMessage(MessageDirection.SENT);
+        msg.type = MessageType.COMMAND;
+        msg.data = 'speed' + this.pin + ' ' + speed;
+
+        this.speedLimit = speed;
+
+        App.sendSMS(this.phoneNumber, msg.data);
+    }
+
+    /**
+     * Set the movement limit of the GPS tracker before an alarm is triggered.
+     *
+     * @param distance Distance limit in meters.
+     */
+    public setMoveLimit(distance: number) {
+        let msg = new TrackerMessage(MessageDirection.SENT);
+        msg.type = MessageType.COMMAND;
+        msg.data = 'move' + this.pin + ' ' + distance;
+
+        this.distanceLimit = distance;
+
+        App.sendSMS(this.phoneNumber, msg.data);
+    }
+
+    /**
+     * Disable the movement alarm.
+     */
+    public noMove() {
+        let msg = new TrackerMessage(MessageDirection.SENT);
+        msg.type = MessageType.COMMAND;
+        msg.data = 'nomove' + this.pin;
+
+        this.distanceLimit = null;
+
+        App.sendSMS(this.phoneNumber, msg.data);
+    }
+
 }

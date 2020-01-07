@@ -9,6 +9,8 @@
 <ion-content>
   <form-object [object]="this.tracker" [layout]="this.layout"></form-object>
 
+  <ion-button expand="block" (click)="app.navigator.navigate('tabs/trackers/history', this.tracker);">{{'history' | translate}}</ion-button>
+
   <ion-button expand="block" (click)="this.tracker.setAdminNumber(app.settings.adminNumber);">{{'adminNumber' | translate}}</ion-button>
   <ion-button expand="block" (click)="this.tracker.setSOSNumber(app.settings.adminNumber, 1);">{{'sosNumber' | translate}}</ion-button>
   <ion-button expand="block" (click)="this.tracker.getLocation();">{{'updateLocation' | translate}}</ion-button>

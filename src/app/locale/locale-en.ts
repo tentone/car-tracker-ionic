@@ -22,6 +22,9 @@ export const LocaleEN = {
 	setDistanceLimit: 'Set distance limit',
 	listSosNumbers: 'List SOS Numbers',
 	disableDistanceLimit: 'Disable distance limit',
+	history: 'History',
+	sent: 'Sent',
+	received: 'Received',
 
 	// Attributes
 	uuid: 'UUID',
@@ -30,7 +33,6 @@ export const LocaleEN = {
 	pin: 'PIN',
 	color: 'Color',
 	active: 'Active',
-
 
 	// Maps
 	mapStyle: 'Map Style',
