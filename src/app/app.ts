@@ -60,34 +60,32 @@ export class App {
         this.contacts = contacts;
 
         this.load();
-        
-        setTimeout(() => {
+
+        // @ts-ignore
+        if (window.SMSReceive !== undefined) {
             // @ts-ignore
-            if (window.SMSReceive !== undefined) {
-                // @ts-ignore
-                window.SMSReceive.startWatch(() => {
-                    console.log('CarTracker: SMS Receiver watching started.');
-                }, () => {
-                    alert('CarTracker: Failed to start SMS watching.');
-                });
-            } else {
-                alert('CarTracker: SMSReceive undefined.');
+            window.SMSReceive.startWatch(() => {
+                console.log('CarTracker: SMS Receiver watching started.');
+            }, () => {
+                alert('Failed to start watching for SMS.');
+            });
+        } else {
+            alert('SMSReceive plugin undefined.');
+        }
+
+        // SMS Received event
+        document.addEventListener('onSMSArrive', function(e: any) {
+            console.log('CarTracker: SMS data received.', e, e.data);
+
+            for (let i = 0; i < App.trackers.length; i++) {
+                if (App.trackers[i].phoneNumber === e.data.address) {
+                    console.log('CarTracker: Added data to tracker.', App.trackers[i]);
+                    App.trackers[i].messages.push(App.parseMessage(e.data));
+                }
             }
 
-            // SMS Received event
-            document.addEventListener('onSMSArrive', function(e: any) {
-                console.log('CarTracker: SMS data received.', e, e.data);
-
-                for (let i = 0; i < App.trackers.length; i++) {
-                    if (App.trackers[i].phoneNumber === e.data.address) {
-                        console.log('CarTracker: Added data to tracker.', App.trackers[i]);
-                        App.trackers[i].messages.push(App.parseMessage(e.data));
-                    }
-                }
-
-            });
-        }, 1000);
-
+            App.store();
+        });
     }
 
     /**

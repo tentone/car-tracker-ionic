@@ -1,10 +1,4 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      {{'trackers' | translate}}
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header [title]="'trackers'"></app-header>
 
 <!-- Search bar -->
 <ion-searchbar [debounce]="100" (ionChange)="onSearch($event)"></ion-searchbar>

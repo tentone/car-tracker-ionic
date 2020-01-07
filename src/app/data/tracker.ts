@@ -119,6 +119,12 @@ export class Tracker {
         this.uuid = UUIDUtils.generate();
     }
 
+    public sendSMS(msg: TrackerMessage) {
+        this.messages.push(msg);
+        this.sendSMS(msg.data);
+        App.store();
+    }
+
     /**
      * Request a data with the location of the device, status and speed of the tracker.
      */
@@ -127,7 +133,20 @@ export class Tracker {
         msg.type = MessageType.COMMAND;
         msg.data = 'g1234';
 
-        App.sendSMS(this.phoneNumber, msg.data);
+        this.sendSMS(msg.data);
+    }
+
+    /**
+     * Change the timezone of tracker.
+     *
+     * @param timezone Timezone to be used by the tracker.
+     */
+    public setTimezone(timezone: string) {
+        let msg = new TrackerMessage(MessageDirection.SENT);
+        msg.type = MessageType.COMMAND;
+        msg.data = 'zone' + this.pin + ' ' + timezone;
+
+        this.sendSMS(msg.data);
     }
 
     /**
@@ -138,7 +157,7 @@ export class Tracker {
         msg.type = MessageType.COMMAND;
         msg.data = 'CXZT';
 
-        App.sendSMS(this.phoneNumber, msg.data);
+        this.sendSMS(msg.data);
     }
 
     /**
@@ -152,8 +171,9 @@ export class Tracker {
         msg.data = 'password' + this.pin + ' ' + newPin;
 
         this.pin = newPin;
+        App.store();
 
-        App.sendSMS(this.phoneNumber, msg.data);
+        this.sendSMS(msg.data);
     }
 
     /**
@@ -166,7 +186,7 @@ export class Tracker {
         msg.type = MessageType.COMMAND;
         msg.data = 'admin' + this.pin + ' ' + phoneNumber;
 
-        App.sendSMS(this.phoneNumber, msg.data);
+        this.sendSMS(msg.data);
     }
 
     /**
@@ -184,7 +204,7 @@ export class Tracker {
         msg.type = MessageType.COMMAND;
         msg.data = '10' + slot + '#' + phoneNumber + '#';
 
-        App.sendSMS(this.phoneNumber, msg.data);
+        this.sendSMS(msg.data);
     }
 
 
@@ -201,7 +221,7 @@ export class Tracker {
         let msg = new TrackerMessage(MessageDirection.SENT);
         msg.type = MessageType.COMMAND;
         msg.data = 'D10' + slot + '#';
-        App.sendSMS(this.phoneNumber, msg.data);
+        this.sendSMS(msg.data);
     }
 
     /**
@@ -212,7 +232,7 @@ export class Tracker {
         msg.type = MessageType.COMMAND;
         msg.data = 'C10#';
 
-        App.sendSMS(this.phoneNumber, msg.data);
+        this.sendSMS(msg.data);
     }
 
 
@@ -228,7 +248,7 @@ export class Tracker {
 
         this.speedLimit = speed;
 
-        App.sendSMS(this.phoneNumber, msg.data);
+        this.sendSMS(msg.data);
     }
 
     /**
@@ -243,7 +263,7 @@ export class Tracker {
 
         this.distanceLimit = distance;
 
-        App.sendSMS(this.phoneNumber, msg.data);
+        this.sendSMS(msg.data);
     }
 
     /**
@@ -256,7 +276,7 @@ export class Tracker {
 
         this.distanceLimit = null;
 
-        App.sendSMS(this.phoneNumber, msg.data);
+        this.sendSMS(msg.data);
     }
 
 }

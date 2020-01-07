@@ -21,9 +21,11 @@ import {TrackersViewPage} from './screens/tabs/trackers/view/trackers-view.page'
 import {Contacts} from '@ionic-native/contacts/ngx';
 import {WizardPage} from './screens/wizard/wizard.page';
 import {TrackersHistoryPage} from './screens/tabs/trackers/history/trackers-history.page';
+import {AppHeaderComponent} from './components/app-header/app-header.component';
 
 @NgModule({
   declarations: [
+    // Pages
     AppComponent,
     WizardPage,
     TabsPage,
@@ -33,6 +35,8 @@ import {TrackersHistoryPage} from './screens/tabs/trackers/history/trackers-hist
     TrackersHistoryPage,
     MapPage,
     SettingsPage,
+    // Components
+    AppHeaderComponent,
     FormObjectComponent
   ],
   imports: [

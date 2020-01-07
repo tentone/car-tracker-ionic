@@ -27,6 +27,16 @@ export class TrackersViewPage extends ScreenComponent {
     this.tracker.setSpeedLimit(Number(speed));
   }
 
+  public setTimezone() {
+    let timezone = prompt(Locale.get('timezone'));
+    this.tracker.setTimezone(timezone);
+  }
+
+  public changePin() {
+    let pin = prompt(Locale.get('changePin'));
+    this.tracker.changePIN(pin);
+  }
+
   public onDisplay() {
     this.tracker = App.navigator.getData();
     if (this.tracker === null) {

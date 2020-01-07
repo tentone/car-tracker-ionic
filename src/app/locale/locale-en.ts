@@ -19,12 +19,16 @@ export const LocaleEN = {
 	sosNumber: 'SOS Number',
 	updateLocation: 'Update location',
 	setSpeedLimit: 'Set speed limit',
+	setTimezone: 'Set timezone',
 	setDistanceLimit: 'Set distance limit',
 	listSosNumbers: 'List SOS Numbers',
 	disableDistanceLimit: 'Disable distance limit',
 	history: 'History',
 	sent: 'Sent',
 	received: 'Received',
+	back: 'Back',
+	changePin: 'Change PIN',
+	getTrackerInfo: 'Get Tracker Info',
 
 	// Attributes
 	uuid: 'UUID',
@@ -33,6 +37,7 @@ export const LocaleEN = {
 	pin: 'PIN',
 	color: 'Color',
 	active: 'Active',
+	timezone: 'TimeZone',
 
 	// Maps
 	mapStyle: 'Map Style',
