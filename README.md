@@ -43,8 +43,8 @@ npm run start
 | format                   | Format the GPS tracker back to its factory values            | 恢复出厂值成功，请从新绑定车主号码!                          | OK     |
 | speed[pw] [speed]        | Set the speed alarm value to reset the value set the speed to 0. Speed should be represented with 3 integer digits. | speed ok                                                     | OK     |
 |                          |                                                              |                                                              |        |
+| sleep[pw] [sleep]        | Configure sleep mode/time of the tracker. (Cannot figure out the right way to use it). | -                                                            | NOK    |
 | zone[pw] [zone]          | Set the time zone of the SMS tracker.                        | -                                                            | NOK    |
-| sleep[pw] [sleep]        | Configure sleep mode/time of the tracker                     | -                                                            | NOK    |
 |                          |                                                              |                                                              |        |
 | imei[pw]                 | Check the imei of the device.                                | -                                                            | NOK    |
 | move[pw] [distance]      | Set the movement alarm distance value (in meters).           | -                                                            | NOK    |
