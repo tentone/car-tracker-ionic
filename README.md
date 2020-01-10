@@ -3,6 +3,8 @@
  - Works with Android due to native plugins compatibility.
  - May be compatible with other SMS based trackers, but it was only tested with this one.
 
+![front](.\readme\front.jpg)
+
 
 
 ### Setup
@@ -43,7 +45,7 @@ npm run start
 | speed[pw] [speed]      | Set the speed alarm value to reset the value set the speed to 0. Speed should be represented with 3 integer digits. | speed ok                                                     |
 | 109#                   | Toggle the language between chinese and english.             | l                                                            |
 | sleep,[pw],[sleep]     | Configure sleep mode/time of the tracker. (Cannot figure out the right way to use it). | ok                                                           |
-| zone[pw] [zone]        | Set the time zone of the SMS tracker. (E02, E08, etc)        | ok                                                           |
+| zone[pw] [zone]        | Set the time zone of the SMS tracker. (E02 means, E08, etc)  | ok                                                           |
 | accclock,[pw],[0 or 1] | Enable/disable ignition auto security, used for thet tracker to send and SMS everytime the inginition is switched. | -                                                            |
 | pwrsms[pw],[0 or 1]    | Enable/disable power SMS alarm sent if the alarm is disconnected from power. | -                                                            |
 | pwrcall[pw],[0 or 1]   | Enable/disable power call made by the tracker warning that it was disconnected from power. | -                                                            |
