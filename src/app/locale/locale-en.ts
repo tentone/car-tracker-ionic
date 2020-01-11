@@ -29,6 +29,7 @@ export const LocaleEN = {
 	back: 'Back',
 	changePin: 'Change PIN',
 	getTrackerInfo: 'Get Tracker Info',
+	sleepTime: 'Sleep Time',
 
 	// Attributes
 	uuid: 'UUID',
