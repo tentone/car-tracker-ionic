@@ -23,7 +23,7 @@ npm run start
 
  - Manage multiple GPS car trackers.
  - Store and list messages exchanged with the car tracker.
- - Export stored data as file.
+ - Export stored data as file for backup
 
 
 

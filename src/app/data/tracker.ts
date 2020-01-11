@@ -101,9 +101,9 @@ export class Tracker {
     public speedLimit: number = null;
 
     /**
-     * Distance limit in meters before an alarm is triggered.
+     * Time limit before the tracker enters into sleep mode.
      */
-    public distanceLimit: number = null;
+    public sleepLimit: number = null;
 
     /**
      * Indicates if the tracker is active and should be displayed on the map.
@@ -114,6 +114,16 @@ export class Tracker {
      * Messages exchanged with the tracker device.
      */
     public messages: TrackerMessage[] = [];
+
+	/**
+	 * Indicates if the alarm sends an SMS to the admin it power was unplugged.
+	 */
+	public powerAlarmSMS: boolean = false;
+
+	/**
+	 * Indicates if the alarm calls the admin it power was unplugged.
+	 */
+	public powerAlarmCall: boolean = false;
 
     constructor() {
         this.uuid = UUIDUtils.generate();
@@ -235,6 +245,46 @@ export class Tracker {
         this.sendSMS(msg.data);
     }
 
+	/**
+	 * Enable/disable ignition auto security, used for the tracker to send and SMS every time the car ignition is switched.
+	 *
+	 * @param enabled State of the power alarm.
+	 */
+	public setIgnitionAlarm(enabled: boolean) {
+        let msg = new TrackerMessage(MessageDirection.SENT);
+        msg.type = MessageType.COMMAND;
+        msg.data = 'accclock,' + this.pin + ',' + (enabled ? '1' : '0');
+
+        this.sendSMS(msg.data);
+	}
+
+	/**
+	 * Configure the tracker to call the admin phone if the power is disconnected from the device.
+	 *
+	 * @param enabled State of the power alarm.
+	 */
+	public setPowerAlarmCall(enabled: boolean) {
+        let msg = new TrackerMessage(MessageDirection.SENT);
+        msg.type = MessageType.COMMAND;
+        msg.data = 'pwrcall,' + this.pin + ',' + (enabled ? '1' : '0');
+
+        this.powerAlarmCall = enabled;
+        this.sendSMS(msg.data);
+	}
+
+	/**
+	 * Configure the tracker to send a SMS alarm if the power is disconnected from the device.
+	 *
+	 * @param enabled State of the power alarm.
+	 */
+	public setPowerAlarmSMS(enabled: boolean) {
+        let msg = new TrackerMessage(MessageDirection.SENT);
+        msg.type = MessageType.COMMAND;
+        msg.data = 'pwrsms,' + this.pin + ',' + (enabled ? '1' : '0');
+		
+        this.powerAlarmSMS = enabled;
+        this.sendSMS(msg.data);
+	}
 
     /**
      * Set the speed limit of the GPS tracker before an alarm is triggered.
@@ -247,36 +297,20 @@ export class Tracker {
         msg.data = 'speed' + this.pin + ' ' + speed;
 
         this.speedLimit = speed;
-
         this.sendSMS(msg.data);
     }
 
     /**
-     * Set the movement limit of the GPS tracker before an alarm is triggered.
+     * Set the time of the GPS before it enters sleep mode after being used (wakes up by movement or sms).
      *
-     * @param distance Distance limit in meters.
+     * @param time Time limit in minutes, if set to zero it will disable sleep.
      */
-    public setMoveLimit(distance: number) {
+    public setSleepTime(time: number) {
         let msg = new TrackerMessage(MessageDirection.SENT);
         msg.type = MessageType.COMMAND;
-        msg.data = 'move' + this.pin + ' ' + distance;
+        msg.data = 'sleep,' + this.pin + ',' + time;
 
-        this.distanceLimit = distance;
-
+        this.sleepLimit = time;
         this.sendSMS(msg.data);
     }
-
-    /**
-     * Disable the movement alarm.
-     */
-    public noMove() {
-        let msg = new TrackerMessage(MessageDirection.SENT);
-        msg.type = MessageType.COMMAND;
-        msg.data = 'nomove' + this.pin;
-
-        this.distanceLimit = null;
-
-        this.sendSMS(msg.data);
-    }
-
 }

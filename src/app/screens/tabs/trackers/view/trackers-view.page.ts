@@ -19,7 +19,7 @@ export class TrackersViewPage extends ScreenComponent {
 
   public setMoveLimit() {
     let distance = prompt(Locale.get('maxDistance'));
-    this.tracker.setMoveLimit(Number(distance));
+    this.tracker.setSleepTime(Number(distance));
   }
 
   public setSpeedLimit() {
