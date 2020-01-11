@@ -1,9 +1,9 @@
 # CarTracker
  - Mobile application to track car GPS position for SMS based Chinese tracker marketed under the model number A11, ST-901, GT01 and GT09.
- - Works with Android due to native plugins compatibility.
+ - Works with Android due to ionic native plugins compatibility.
  - May be compatible with other SMS based trackers, but it was only tested with this one.
 
-![front](.\readme\front.jpg)
+![front](.\readme\front.jpg)![back](.\readme\back.jpg)
 
 
 
@@ -43,7 +43,7 @@ npm run start
 | CXZT                   | Get the tracker firmware version, identifier, battery level, APN configuration GPS status etc. | XM_GT09_SW_33.0 2019/08/08<br/>ID:9171072755<br/>IP:27.aika168.com 8185<br/>BAT:5<br/>APN:internet<br/>GPS:V-13-9<br/>GSM:22<br/>ICCID:89351060000852459823 |
 | format                 | Format the GPS tracker back to its factory values            | 恢复出厂值成功，请从新绑定车主号码!                          |
 | speed[pw] [speed]      | Set the speed alarm value to reset the value set the speed to 0. Speed should be represented with 3 integer digits. | speed ok                                                     |
-| 109#                   | Toggle the language between chinese and english.             | l                                                            |
+| 109#                   | Toggle the language between chinese and english.             | ok                                                           |
 | sleep,[pw],[sleep]     | Configure sleep mode/time of the tracker. (Cannot figure out the right way to use it). | ok                                                           |
 | zone[pw] [zone]        | Set the time zone of the SMS tracker. (E02 means, E08, etc)  | ok                                                           |
 | accclock,[pw],[0 or 1] | Enable/disable ignition auto security, used for thet tracker to send and SMS everytime the inginition is switched. | -                                                            |
