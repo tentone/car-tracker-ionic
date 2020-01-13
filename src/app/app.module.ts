@@ -22,23 +22,25 @@ import {Contacts} from '@ionic-native/contacts/ngx';
 import {WizardPage} from './screens/wizard/wizard.page';
 import {TrackersHistoryPage} from './screens/tabs/trackers/history/trackers-history.page';
 import {AppHeaderComponent} from './components/app-header/app-header.component';
+import {FormatDatePipe} from './screens/screen';
 
 @NgModule({
-  declarations: [
-    // Pages
-    AppComponent,
-    WizardPage,
-    TabsPage,
-    TrackersPage,
-    TrackersAddPage,
-    TrackersViewPage,
-    TrackersHistoryPage,
-    MapPage,
-    SettingsPage,
-    // Components
-    AppHeaderComponent,
-    FormObjectComponent
-  ],
+    declarations: [
+        // Pages
+        AppComponent,
+        WizardPage,
+        TabsPage,
+        TrackersPage,
+        TrackersAddPage,
+        TrackersViewPage,
+        TrackersHistoryPage,
+        MapPage,
+        SettingsPage,
+        // Components
+        AppHeaderComponent,
+        FormObjectComponent,
+        FormatDatePipe
+    ],
   imports: [
     BrowserModule,
     TranslateModule.forRoot(),

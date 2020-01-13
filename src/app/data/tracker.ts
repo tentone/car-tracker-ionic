@@ -11,14 +11,28 @@ export const MessageDirection = {
 };
 
 /**
- * Type of messages to be received.
+ * Type of messages exchanged between the tracker and the phone.
+ *
+ * Applies to booth sent and received messages.
  */
 export const MessageType = {
     COMMAND: 0,
     LOCATION: 1,
     ACKNOWLEDGE: 2,
+    INFORMATION: 3,
     UNKNOWN: -1
 };
+
+/**
+ * Label of the messages type available.
+ */
+export const MessageTypeLabel: Map<number, string> = new Map([
+    [MessageType.COMMAND, 'command'],
+    [MessageType.LOCATION, 'location'],
+    [MessageType.ACKNOWLEDGE, 'acknowledge'],
+    [MessageType.INFORMATION, 'information'],
+    [MessageType.UNKNOWN, 'unknown']
+]);
 
 /**
  * Class to represent a message received from a tracker.

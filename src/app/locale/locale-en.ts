@@ -34,6 +34,7 @@ export const LocaleEN = {
 	deleteSosNumber: 'Delete SOS Number',
 	addSosNumber: 'Add SOS Number',
 	deleteTracker: 'Delete Tracker',
+	invalidDate: 'Invalid Date',
 
 	// Attributes
 	uuid: 'UUID',
@@ -43,6 +44,13 @@ export const LocaleEN = {
 	color: 'Color',
 	active: 'Active',
 	timezone: 'TimeZone',
+
+	// Mesage types
+	command: 'Command',
+	location: 'Location',
+	information: 'Information',
+	acknowledge: 'Acknowledge',
+	unknown: 'Unknown',
 
 	// Map Styles
 	mapStyle: 'Map Style',

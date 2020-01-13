@@ -150,7 +150,7 @@ export class App {
                 return msg;
             } catch (e) {}
         }
-        
+
         msg.data = data.body;
         msg.type = MessageType.UNKNOWN;
         return msg;

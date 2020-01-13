@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Tracker} from '../../../../data/tracker';
+import {MessageTypeLabel, Tracker} from '../../../../data/tracker';
 import {App} from '../../../../app';
 import {ScreenComponent} from '../../../screen';
 
@@ -9,6 +9,7 @@ import {ScreenComponent} from '../../../screen';
 })
 export class TrackersHistoryPage extends ScreenComponent {
   get app() { return App; }
+  get messageTypeLabel() { return MessageTypeLabel; }
 
   /**
    * Tracker being visualized on this page.

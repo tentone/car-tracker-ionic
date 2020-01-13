@@ -2,13 +2,12 @@
 
 <ion-content>
   <ion-list>
-    <ng-container *ngFor="let message of this.tracker.messages">
-      <ion-item>
-        <ion-label>{{message.type}}</ion-label>
-        <ion-label>{{message.direction}}</ion-label>
-        <ion-label>{{message.data}}</ion-label>
-        <ion-label>{{message.date}}</ion-label>
+      <ion-item *ngFor="let message of this.tracker.messages">
+        <ion-label>
+          <h4>{{(message.direction === 1 ? 'sent' : 'received') | translate}} - {{message.date | formatDate}}</h4>
+          <h3>{{messageTypeLabel.get(message.type) | translate}}</h3>
+          <h3>{{message.data}}</h3>
+        </ion-label>
       </ion-item>
-    </ng-container>
   </ion-list>
 </ion-content>
