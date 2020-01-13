@@ -26,6 +26,11 @@ export class FormObjectComponent implements OnChanges {
 	@Input() object: any = null;
 
 	/**
+	 * Callback method called when the object changes, receives the (object, attribute, newValue, oldValue) parameters.
+	 */
+	@Input() onChange: Function = null;
+
+	/**
 	 * Indicates if the form fields are editable or view only.
 	 */
 	@Input() editable: boolean = true;
@@ -105,7 +110,7 @@ export class FormObjectComponent implements OnChanges {
 	 * Check if all required fields are filled, does not check if the field data is valid.
 	 */
 	public requiredFilled(): boolean {
-		for (var i = 0; i < this.layout.length; i++) {
+		for (let i = 0; i < this.layout.length; i++) {
 
 			// Ignore inactive layout rows
 			if (this.layout[i].isActive !== undefined && !this.layout[i].isActive(this.object, this.layout[i])) {
@@ -139,6 +144,10 @@ export class FormObjectComponent implements OnChanges {
 
 			for (i = 0; i < attrs.length - 1; i++) {
 				sub = sub[attrs[i]];
+			}
+
+			if (this.onChange !== null) {
+				this.onChange(object, attribute, sub[attrs[i]], value);
 			}
 
 			sub[attrs[i]] = value;

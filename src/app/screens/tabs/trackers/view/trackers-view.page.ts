@@ -48,11 +48,13 @@ export class TrackersViewPage extends ScreenComponent {
    * Delete tracker from the list.
    */
   public delete() {
-    let index = App.trackers.indexOf(this.tracker);
-    if (index !== -1) {
-      App.trackers.splice(index, 1);
-      App.store();
-      App.navigator.pop();
+    if (confirm(Locale.get('deleteTrackerConfirm'))) {
+      let index = App.trackers.indexOf(this.tracker);
+      if (index !== -1) {
+        App.trackers.splice(index, 1);
+        App.store();
+        App.navigator.pop();
+      }
     }
   }
 }

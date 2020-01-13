@@ -177,6 +177,10 @@ export class App {
      */
     public static load() {
         this.settings = LocalStorage.get('settings');
+        this.trackers = LocalStorage.get('trackers');
+
+        console.log('CarTracker: Loaded data from storage.', this.trackers, this.settings);
+
         if (this.settings === null) {
             this.settings = new Settings();
         } else {
@@ -188,7 +192,6 @@ export class App {
           }
         }
 
-        this.trackers = LocalStorage.get('trackers');
         if (this.trackers === null) {
             this.trackers = [];
         } else {
@@ -201,7 +204,7 @@ export class App {
             }
         }
 
-        console.log('CarTracker: Loaded data from storage.', this.trackers, this.settings);
+
     }
 
     /**

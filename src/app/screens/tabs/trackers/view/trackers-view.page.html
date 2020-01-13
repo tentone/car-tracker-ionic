@@ -8,6 +8,11 @@
   <ion-button expand="block" (click)="this.tracker.getLocation();">{{'updateLocation' | translate}}</ion-button>
   <ion-button expand="block" (click)="this.tracker.setAdminNumber(app.settings.adminNumber);">{{'adminNumber' | translate}}</ion-button>
 
+
+
+
+  <ion-button expand="block" (click)="this.setSpeedLimit();">{{'setSpeedLimit' | translate}}</ion-button>
+  <ion-button expand="block" (click)="this.setSleepTime();">{{'setSleepTime' | translate}}</ion-button>
   <ion-button expand="block" (click)="this.tracker.getTrackerInfo();">{{'getTrackerInfo' | translate}}</ion-button>
   <ion-button expand="block" (click)="this.changePin();">{{'changePin' | translate}}</ion-button>
   <ion-button expand="block" (click)="this.setTimezone();">{{'setTimezone' | translate}}</ion-button>

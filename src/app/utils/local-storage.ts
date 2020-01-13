@@ -25,6 +25,10 @@ export class LocalStorage {
     static get(key) {
         let value = window.localStorage.getItem(key);
 
+        if (value === 'null' || value === 'undefined' || value === undefined) {
+            return null;
+        }
+
         try {
             return JSON.parse(value);
         } catch (e) {

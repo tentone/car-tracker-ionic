@@ -19,6 +19,7 @@ export const LocaleEN = {
 	sosNumber: 'SOS Number',
 	updateLocation: 'Update location',
 	setSpeedLimit: 'Set speed limit',
+	setSleepTime: 'Set sleep time',
 	setTimezone: 'Set timezone',
 	setDistanceLimit: 'Set distance limit',
 	listSosNumbers: 'List SOS Numbers',
@@ -30,6 +31,7 @@ export const LocaleEN = {
 	changePin: 'Change PIN',
 	getTrackerInfo: 'Get Tracker Info',
 	sleepTime: 'Sleep Time',
+	deleteTrackerConfirm: 'Do you want to delete the tracker? Action can not be undone.',
 
 	// Attributes
 	uuid: 'UUID',

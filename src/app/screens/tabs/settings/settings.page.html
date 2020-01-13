@@ -1,23 +1,8 @@
 <app-header [title]="'settings'"></app-header>
 
 <ion-content>
-  <!-- Map style -->
-  <ion-item>
-    <ion-label>{{'mapStyle' | translate}}</ion-label>
-    <ion-select interface="alert" [ngModelOptions]="{standalone: true}" [(ngModel)]="app.settings.mapStyle">
-      <ion-select-option [value]="mapStyles.VECTOR">{{'vector' | translate}}</ion-select-option>
-      <ion-select-option [value]="mapStyles.SATELLITE">{{'satellite' | translate}}</ion-select-option>
-      <ion-select-option [value]="mapStyles.MIXED">{{'mixed' | translate}}</ion-select-option>
-      <ion-select-option [value]="mapStyles.LIGHT">{{'light' | translate}}</ion-select-option>
-      <ion-select-option [value]="mapStyles.DARK">{{'dark' | translate}}</ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <!-- Admin Number -->
-  <ion-item>
-    <ion-label>{{'adminNumber' | translate}}</ion-label>
-    <ion-input [ngModelOptions]="{standalone: true}" [(ngModel)]="app.settings.adminNumber"></ion-input>
-  </ion-item>
+  <!-- Settings -->
+  <form-object [layout]="this.layout" [object]="app.settings" [onChange]="this.onChange"></form-object>
 
   <!-- Version -->
   <ion-item>
