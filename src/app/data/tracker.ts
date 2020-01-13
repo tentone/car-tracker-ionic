@@ -16,6 +16,7 @@ export const MessageDirection = {
 export const MessageType = {
     COMMAND: 0,
     LOCATION: 1,
+    ACKNOWLEDGE: 2,
     UNKNOWN: -1
 };
 
@@ -23,6 +24,11 @@ export const MessageType = {
  * Class to represent a message received from a tracker.
  */
 export class TrackerMessage {
+    /**
+     * Type of the message exchanged.
+     */
+    public type: number;
+
     /**
      * Direction of the data exchanged.
      */
@@ -34,18 +40,14 @@ export class TrackerMessage {
     public data: any;
 
     /**
-     * Date of the data.
+     * Date of the message.
      */
     public date: Date;
-
-    /**
-     * Type of the data.
-     */
-    public type: number;
 
     constructor(direction: number) {
         this.direction = direction;
         this.date = new Date();
+        this.type = MessageType.UNKNOWN;
     }
 }
 
@@ -111,6 +113,13 @@ export class Tracker {
     public active: boolean = true;
 
     /**
+     * If enabled the ignition alarm is fired every time the ACC signal changes.
+     *
+     * If the signal is not connected to the car it will not fire.
+     */
+    public ignitionAlarm: boolean = false;
+
+    /**
      * Messages exchanged with the tracker device.
      */
     public messages: TrackerMessage[] = [];
@@ -125,13 +134,32 @@ export class Tracker {
 	 */
 	public powerAlarmCall: boolean = false;
 
+    /**
+     * Level of battery of the tracker, has to be read manually using the info command.
+     *
+     * Value from 1 to 5, 5 meaning fully charged.
+     */
+    public battery: number = 0;
+
     constructor() {
         this.uuid = UUIDUtils.generate();
     }
 
+    /**
+     * Get last known location of the tracker.
+     */
+    public getLastLocation(): any {
+
+    }
+
+    /**
+     * Send a message to this tracker, store it in the messages list.
+     *
+     * @param msg Message to be sent to the tracker.
+     */
     public sendSMS(msg: TrackerMessage) {
         this.messages.push(msg);
-        this.sendSMS(msg.data);
+        App.sendSMS(this.phoneNumber, msg.data);
         App.store();
     }
 
@@ -143,7 +171,7 @@ export class Tracker {
         msg.type = MessageType.COMMAND;
         msg.data = 'g1234';
 
-        this.sendSMS(msg.data);
+        this.sendSMS(msg);
     }
 
     /**
@@ -156,7 +184,7 @@ export class Tracker {
         msg.type = MessageType.COMMAND;
         msg.data = 'zone' + this.pin + ' ' + timezone;
 
-        this.sendSMS(msg.data);
+        this.sendSMS(msg);
     }
 
     /**
@@ -167,7 +195,7 @@ export class Tracker {
         msg.type = MessageType.COMMAND;
         msg.data = 'CXZT';
 
-        this.sendSMS(msg.data);
+        this.sendSMS(msg);
     }
 
     /**
@@ -183,7 +211,7 @@ export class Tracker {
         this.pin = newPin;
         App.store();
 
-        this.sendSMS(msg.data);
+        this.sendSMS(msg);
     }
 
     /**
@@ -196,7 +224,8 @@ export class Tracker {
         msg.type = MessageType.COMMAND;
         msg.data = 'admin' + this.pin + ' ' + phoneNumber;
 
-        this.sendSMS(msg.data);
+        this.adminNumber = phoneNumber;
+        this.sendSMS(msg);
     }
 
     /**
@@ -214,7 +243,8 @@ export class Tracker {
         msg.type = MessageType.COMMAND;
         msg.data = '10' + slot + '#' + phoneNumber + '#';
 
-        this.sendSMS(msg.data);
+        this.sosNumbers[slot - 1] = phoneNumber;
+        this.sendSMS(msg);
     }
 
 
@@ -231,7 +261,9 @@ export class Tracker {
         let msg = new TrackerMessage(MessageDirection.SENT);
         msg.type = MessageType.COMMAND;
         msg.data = 'D10' + slot + '#';
-        this.sendSMS(msg.data);
+
+        this.sosNumbers[slot - 1] = '';
+        this.sendSMS(msg);
     }
 
     /**
@@ -242,7 +274,7 @@ export class Tracker {
         msg.type = MessageType.COMMAND;
         msg.data = 'C10#';
 
-        this.sendSMS(msg.data);
+        this.sendSMS(msg);
     }
 
 	/**
@@ -255,7 +287,8 @@ export class Tracker {
         msg.type = MessageType.COMMAND;
         msg.data = 'accclock,' + this.pin + ',' + (enabled ? '1' : '0');
 
-        this.sendSMS(msg.data);
+        this.ignitionAlarm = enabled;
+        this.sendSMS(msg);
 	}
 
 	/**
@@ -269,7 +302,7 @@ export class Tracker {
         msg.data = 'pwrcall,' + this.pin + ',' + (enabled ? '1' : '0');
 
         this.powerAlarmCall = enabled;
-        this.sendSMS(msg.data);
+        this.sendSMS(msg);
 	}
 
 	/**
@@ -283,7 +316,7 @@ export class Tracker {
         msg.data = 'pwrsms,' + this.pin + ',' + (enabled ? '1' : '0');
 		
         this.powerAlarmSMS = enabled;
-        this.sendSMS(msg.data);
+        this.sendSMS(msg);
 	}
 
     /**
@@ -297,7 +330,7 @@ export class Tracker {
         msg.data = 'speed' + this.pin + ' ' + speed;
 
         this.speedLimit = speed;
-        this.sendSMS(msg.data);
+        this.sendSMS(msg);
     }
 
     /**
@@ -311,6 +344,6 @@ export class Tracker {
         msg.data = 'sleep,' + this.pin + ',' + time;
 
         this.sleepLimit = time;
-        this.sendSMS(msg.data);
+        this.sendSMS(msg);
     }
 }

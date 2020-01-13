@@ -1,13 +1,12 @@
 export const LocaleEN = {
 	en: 'English',
 
-	// Menu
 	trackers: 'Trackers',
 	map: 'Map',
 	settings: 'Settings',
 	test: 'Test',
-
-	// Misc
+	slot: 'Slot',
+	options: 'Options',
 	add: 'Add',
 	cancel: 'Cancel',
 	delete: 'Delete',
@@ -32,6 +31,9 @@ export const LocaleEN = {
 	getTrackerInfo: 'Get Tracker Info',
 	sleepTime: 'Sleep Time',
 	deleteTrackerConfirm: 'Do you want to delete the tracker? Action can not be undone.',
+	deleteSosNumber: 'Delete SOS Number',
+	addSosNumber: 'Add SOS Number',
+	deleteTracker: 'Delete Tracker',
 
 	// Attributes
 	uuid: 'UUID',
@@ -42,7 +44,7 @@ export const LocaleEN = {
 	active: 'Active',
 	timezone: 'TimeZone',
 
-	// Maps
+	// Map Styles
 	mapStyle: 'Map Style',
 	vector: 'Vector',
 	satellite: 'Satellite',

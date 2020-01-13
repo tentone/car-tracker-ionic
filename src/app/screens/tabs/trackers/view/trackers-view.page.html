@@ -1,24 +1,7 @@
-<app-header [title]="'trackers'"></app-header>
+<app-header [title]="'trackers'" [onAction]="this.openActionSheet"></app-header>
 
 <ion-content>
   <form-object [object]="this.tracker" [layout]="this.layout"></form-object>
-
   <ion-button expand="block" (click)="app.navigator.navigate('tabs/trackers/history', this.tracker);">{{'history' | translate}}</ion-button>
-
   <ion-button expand="block" (click)="this.tracker.getLocation();">{{'updateLocation' | translate}}</ion-button>
-  <ion-button expand="block" (click)="this.tracker.setAdminNumber(app.settings.adminNumber);">{{'adminNumber' | translate}}</ion-button>
-
-
-
-
-  <ion-button expand="block" (click)="this.setSpeedLimit();">{{'setSpeedLimit' | translate}}</ion-button>
-  <ion-button expand="block" (click)="this.setSleepTime();">{{'setSleepTime' | translate}}</ion-button>
-  <ion-button expand="block" (click)="this.tracker.getTrackerInfo();">{{'getTrackerInfo' | translate}}</ion-button>
-  <ion-button expand="block" (click)="this.changePin();">{{'changePin' | translate}}</ion-button>
-  <ion-button expand="block" (click)="this.setTimezone();">{{'setTimezone' | translate}}</ion-button>
-  <ion-button expand="block" (click)="this.tracker.listSOSNumbers();">{{'listSosNumbers' | translate}}</ion-button>
-  <ion-button expand="block" (click)="this.tracker.setSOSNumber(app.settings.adminNumber, 1);">{{'sosNumber' | translate}}</ion-button>
-  <ion-button expand="block" (click)="this.tracker.deleteSOSNumber(1);">{{'sosNumber' | translate}}</ion-button>
-
-  <ion-button expand="block" color="danger" (click)="delete();">{{'delete' | translate}}</ion-button>
 </ion-content>

@@ -80,7 +80,7 @@ export class App {
             for (let i = 0; i < App.trackers.length; i++) {
                 if (App.trackers[i].phoneNumber === e.data.address) {
                     console.log('CarTracker: Added data to tracker.', App.trackers[i]);
-                    App.trackers[i].messages.push(App.parseMessage(e.data));
+                    App.trackers[i].messages.push(App.parseMessage(e.data, App.trackers[i]));
                 }
             }
 
@@ -92,21 +92,33 @@ export class App {
      * Parse a message received from SMS.
      *
      * @param data Event data received with the message.
+     * @param tracker Tracker that sent this message.
      */
-    public static parseMessage(data: any): TrackerMessage {
+    public static parseMessage(data: any, tracker: Tracker): TrackerMessage {
         let msg = new TrackerMessage(MessageDirection.RECEIVED);
         msg.date = new Date(data.date_sent);
 
-        if (data.body === 'admin ok') {
-            // TODO <CONFIRM ADMIN NUMBER>
-        } else if (data.body === 'apn ok') {
-            // TODO <CONFIRM APN SETTINGS>
-        } else if (data.body === 'password ok') {
-            // TODO <CONFIRM NEW PASSWORD>
+        // Acknowledge message
+        if (data.body === 'admin ok' || data.body === 'apn ok' || data.body === 'password ok' || data.body === 'speed ok' || data.body === 'ok') {
+            msg.data = data.body;
+            msg.type = MessageType.ACKNOWLEDGE;
+            return msg;
         }
 
-        // Location message
+        // List of SOS numbers
+        if (data.body.startsWith('101#')) {
+            console.log('CarTracker: Received list of SOS numbers.', data);
+
+            let numbers = data.body.split(' ');
+            for (let i = 0; i < numbers.length;  i++) {
+                tracker.sosNumbers[i] = numbers[i].substr(4);
+            }
+        }
+
+        // Multiline messages
         let fields = data.body.split('\n');
+
+        // Location message
         if (fields.length === 6) {
             try {
                 let url = fields[0];
@@ -122,7 +134,23 @@ export class App {
                 return msg;
             } catch (e) {}
         }
-
+        // Information message
+        if (fields.length === 8) {
+            try {
+                msg.data = {
+                    model: fields[0],
+                    id: fields[1].split(':')[1],
+                    ip: fields[2].split(':')[1],
+                    battery: Number.parseInt(fields[3].split(':')[1], 10),
+                    apn: fields[4].split(':')[1],
+                    gps: fields[5].split(':')[1],
+                    gsm: fields[6].split(':')[1],
+                    iccid: fields[7].split(':')[1],
+                };
+                return msg;
+            } catch (e) {}
+        }
+        
         msg.data = data.body;
         msg.type = MessageType.UNKNOWN;
         return msg;

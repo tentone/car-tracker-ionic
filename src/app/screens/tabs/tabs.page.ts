@@ -18,12 +18,12 @@ export class TabsPage {
         icon: 'locate',
         label: 'trackers',
     },
-    /*{
+    {
         route: 'tabs/trackers',
         tab: 'map',
         icon: 'map',
         label: 'map',
-    },*/
+    },
     {
         route: 'tabs/settings',
         tab: 'settings',

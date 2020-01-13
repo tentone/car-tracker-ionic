@@ -3,8 +3,8 @@
 <!-- Search bar -->
 <ion-searchbar [debounce]="100" (ionChange)="onSearch($event)"></ion-searchbar>
 
-<!-- List of trackers -->
 <ion-content>
+  <!-- List of trackers -->
   <ion-list>
     <ng-container *ngFor="let tracker of app.trackers">
       <ion-item *ngIf="stringUtils.searchObject(search, tracker, ['name'])" button (click)="app.navigator.navigate('/tabs/trackers/view', tracker)">

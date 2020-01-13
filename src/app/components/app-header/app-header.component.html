@@ -8,8 +8,8 @@
 			<ion-title>{{this.title | translate}}</ion-title>
 		</ion-buttons>
 
-		<ion-buttons slot="primary">
-			<ion-button>
+		<ion-buttons *ngIf="this.onAction !== null" slot="primary">
+			<ion-button (click)="this.onAction();">
 				<ion-icon slot="icon-only" name="menu"></ion-icon>
 			</ion-button>
 		</ion-buttons>

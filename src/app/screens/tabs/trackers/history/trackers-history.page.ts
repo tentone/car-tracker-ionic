@@ -18,5 +18,7 @@ export class TrackersHistoryPage extends ScreenComponent {
   public onDisplay() {
     this.tracker = App.navigator.getData();
 
+    console.log('CarTracker: Tracker messages.', this.tracker);
+
   }
 }
