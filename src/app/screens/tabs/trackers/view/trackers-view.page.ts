@@ -1,4 +1,4 @@
-import {Component, ElementRef} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {Tracker} from '../../../../data/tracker';
 import {App} from '../../../../app';
 import {ScreenComponent} from '../../../screen';
@@ -26,6 +26,7 @@ export class TrackersViewPage extends ScreenComponent {
 
   public onDisplay() {
     this.tracker = App.navigator.getData();
+
     if (this.tracker === null) {
       App.navigator.pop();
     }

@@ -23,6 +23,7 @@ import {WizardPage} from './screens/wizard/wizard.page';
 import {TrackersHistoryPage} from './screens/tabs/trackers/history/trackers-history.page';
 import {AppHeaderComponent} from './components/app-header/app-header.component';
 import {FormatDatePipe} from './screens/screen';
+import {GpsMapComponent} from './components/gps-map/gps-map.component';
 
 @NgModule({
     declarations: [
@@ -39,7 +40,8 @@ import {FormatDatePipe} from './screens/screen';
         // Components
         AppHeaderComponent,
         FormObjectComponent,
-        FormatDatePipe
+        FormatDatePipe,
+        GpsMapComponent
     ],
   imports: [
     BrowserModule,

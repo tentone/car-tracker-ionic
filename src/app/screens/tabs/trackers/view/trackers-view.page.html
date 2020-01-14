@@ -2,6 +2,7 @@
 
 <ion-content>
   <form-object [object]="this.tracker" [layout]="this.layout"></form-object>
+  <gps-map></gps-map>
   <ion-button expand="block" (click)="app.navigator.navigate('tabs/trackers/history', this.tracker);">{{'history' | translate}}</ion-button>
   <ion-button expand="block" (click)="this.tracker.getLocation();">{{'updateLocation' | translate}}</ion-button>
 </ion-content>
