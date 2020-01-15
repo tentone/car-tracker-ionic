@@ -1,4 +1,4 @@
-<app-header [title]="'trackers'"></app-header>
+<app-header [title]="'trackers'" [onAction]="this.openActionSheet"></app-header>
 
 <!-- Search bar -->
 <ion-searchbar [debounce]="100" (ionChange)="onSearch($event)"></ion-searchbar>

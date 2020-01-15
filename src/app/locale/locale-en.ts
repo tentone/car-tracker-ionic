@@ -35,6 +35,8 @@ export const LocaleEN = {
 	addSosNumber: 'Add SOS Number',
 	deleteTracker: 'Delete Tracker',
 	invalidDate: 'Invalid Date',
+	export: 'Export',
+	import: 'Import',
 
 	// Attributes
 	uuid: 'UUID',
@@ -63,5 +65,6 @@ export const LocaleEN = {
 	// Error
 	requiredField: 'Required Field',
 	errorLocation: 'Error getting location.',
-	errorInvalidSlot: 'Invalid control number slot.'
+	errorInvalidSlot: 'Invalid control number slot.',
+	errorImport: 'Error importing data from file.'
 };

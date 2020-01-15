@@ -6,6 +6,7 @@ import {TrackersLayout} from '../trackers-layout';
 import {Locale} from '../../../../locale/locale';
 import {ActivatedRoute} from '@angular/router';
 import {ActionSheetController} from '@ionic/angular';
+import {FileUtils} from '../../../../utils/file-utils';
 
 @Component({
   selector: 'app-trackers-view',
@@ -24,18 +25,10 @@ export class TrackersViewPage extends ScreenComponent {
    */
   public tracker: Tracker = null;
 
-  public onDisplay() {
-    this.tracker = App.navigator.getData();
-
-    if (this.tracker === null) {
-      App.navigator.pop();
-    }
-  }
-
   /**
    * Open action sheet with options to edit the tracker.
    */
-  public openActionSheet() {
+  public openActionSheet: Function = () => {
     let controller = new ActionSheetController();
     controller.create({
       header: Locale.get('options'),
@@ -111,6 +104,14 @@ export class TrackersViewPage extends ScreenComponent {
           }
         },
         {
+          text: Locale.get('export'),
+          icon: 'save',
+          handler: () => {
+            let data = JSON.stringify(this.tracker, null, '\t');
+            FileUtils.writeFile('tracker.json', data);
+          }
+        },
+        {
           text: Locale.get('deleteTracker'),
           icon: 'trash',
           handler: () => {
@@ -124,8 +125,16 @@ export class TrackersViewPage extends ScreenComponent {
             }
           }
         }
-    ]}).then((actionSheet) => {
-        actionSheet.present();
+      ]}).then((actionSheet) => {
+      actionSheet.present();
     });
+  };
+
+  public onDisplay() {
+    this.tracker = App.navigator.getData();
+
+    if (this.tracker === null) {
+      App.navigator.pop();
+    }
   }
 }
