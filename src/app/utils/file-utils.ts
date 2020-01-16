@@ -53,44 +53,27 @@ export class FileUtils {
 	 * @param data Data to be written into the file.
 	 */
 	static writeFile(fname, data) {
-		if (typeof data === 'object') {
-			data = JSON.stringify(data, null, '\t');
+		if (window.cordova !== undefined) {
+
+		} else {
+			if (typeof data === 'object') {
+				data = JSON.stringify(data, null, '\t');
+			}
+
+			const blob = new Blob([data], {type: 'octet/stream'});
+
+			const download = document.createElement('a');
+			download.download = fname;
+			download.href = window.URL.createObjectURL(blob);
+			download.style.display = 'none';
+			download.onclick = function () {
+				// @ts-ignore
+				document.body.removeChild(this);
+			};
+			document.body.appendChild(download);
+
+			download.click();
 		}
-
-		const blob = new Blob([data], {type: 'octet/stream'});
-
-		const download = document.createElement('a');
-		download.download = fname;
-		download.href = window.URL.createObjectURL(blob);
-		download.style.display = 'none';
-		download.onclick = function () {
-			// @ts-ignore
-			document.body.removeChild(this);
-		};
-		document.body.appendChild(download);
-
-		download.click();
-	}
-
-	/**
-	 * Write binary file using array buffer data.
-	 *
-	 * @param fname File name
-	 * @param data Data to be written
-	 */
-	static writeFileArrayBuffer(fname, data) {
-		const blob = new Blob([data]);
-
-		const download = document.createElement('a');
-		download.download = fname;
-		download.href = window.URL.createObjectURL(blob);
-		download.style.display = 'none';
-		download.onclick = function () {
-			// @ts-ignore
-			document.body.removeChild(this);
-		};
-		document.body.appendChild(download);
-		download.click();
 	}
 
 	/**
@@ -102,7 +85,6 @@ export class FileUtils {
 	 *
 	 * @param onLoad onLoad callback that receives array of files choosen as parameter.
 	 * @param filter File type filter.
-	 * @param saveas File format or name to be used, optinonally it can be a boolean value indicating savemode.
 	 * @param multiFile If true the chooser will accept multiple files.
 	 */
 	static chooseFile(onLoad: Function, filter?: string, multiFile?: boolean) {

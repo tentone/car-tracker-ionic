@@ -22,7 +22,7 @@
     "@ionic-native/android-permissions": "^5.19.0",
     "@ionic-native/contacts": "^5.19.0",
     "@ionic-native/core": "^5.19.0",
-    "@ionic-native/file": "^4.20.0",
+    "@ionic-native/file": "^5.19.1",
     "@ionic-native/geolocation": "^5.19.0",
     "@ionic-native/sms": "^5.19.0",
     "@ionic-native/splash-screen": "^5.19.0",

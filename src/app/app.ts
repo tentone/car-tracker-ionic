@@ -9,6 +9,7 @@ import {Environment} from '../environments/environment';
 import {SMS, SmsOptions} from '@ionic-native/sms/ngx';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 import {Contacts} from '@ionic-native/contacts/ngx';
+import {File} from '@ionic-native/file/ngx';
 
 /**
  * The app class is used to access and store all persistent data used in the application.
@@ -29,7 +30,7 @@ export class App {
     public static androidPermissions: AndroidPermissions;
     public static sms: SMS;
     public static contacts: Contacts;
-
+    public static file: File;
     /**
      * Application general settings.
      */
@@ -49,7 +50,7 @@ export class App {
      * @param sms
      * @param contacts
      */
-    public static initialize(platform: Platform, router: Router, androidPermissions: AndroidPermissions, sms: SMS, contacts: Contacts) {
+    public static initialize(platform: Platform, router: Router, androidPermissions: AndroidPermissions, sms: SMS, contacts: Contacts, file: File) {
         // @ts-ignore
         mapboxgl.accessToken = Environment.mapbox;
 
@@ -58,7 +59,8 @@ export class App {
         this.androidPermissions = androidPermissions;
         this.sms = sms;
         this.contacts = contacts;
-
+        this.file = file;
+    
         this.load();
 
         // @ts-ignore
