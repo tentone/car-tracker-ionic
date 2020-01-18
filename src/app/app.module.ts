@@ -24,6 +24,7 @@ import {TrackersHistoryPage} from './screens/tabs/trackers/history/trackers-hist
 import {AppHeaderComponent} from './components/app-header/app-header.component';
 import {FormatDatePipe} from './screens/screen';
 import {GpsMapComponent} from './components/gps-map/gps-map.component';
+import {File} from '@ionic-native/file/ngx';
 
 @NgModule({
     declarations: [
@@ -67,6 +68,7 @@ import {GpsMapComponent} from './components/gps-map/gps-map.component';
     Geolocation,
     AndroidPermissions,
     SplashScreen,
+    File,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
