@@ -31,7 +31,7 @@ export class TrackersPage {
           text: Locale.get('import'),
           icon: 'download',
           handler: () => {
-            FileUtils.chooseFile((files) => {
+            FileUtils.readFileUser((files) => {
               if (files.length > 0) {
                 let reader = new FileReader();
                 reader.readAsText(files[0]);

@@ -52,9 +52,9 @@ export class FileUtils {
 	 * @param fname File name.
 	 * @param data Data to be written into the file.
 	 */
-	static writeFile(fname, data) {
+	static writeFileUser(fname, data) {
 		if (window.cordova !== undefined) {
-
+			// TODO <ADD CODE HERE>
 		} else {
 			if (typeof data === 'object') {
 				data = JSON.stringify(data, null, '\t');
@@ -87,7 +87,7 @@ export class FileUtils {
 	 * @param filter File type filter.
 	 * @param multiFile If true the chooser will accept multiple files.
 	 */
-	static chooseFile(onLoad: Function, filter?: string, multiFile?: boolean) {
+	static readFileUser(onLoad: Function, filter?: string, multiFile?: boolean) {
 		const chooser = document.createElement('input');
 		chooser.type = 'file';
 		chooser.style.display = 'none';
