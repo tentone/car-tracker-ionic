@@ -31,22 +31,16 @@ export class TrackersPage {
           text: Locale.get('import'),
           icon: 'download',
           handler: () => {
-            FileUtils.readFileUser((files) => {
-              if (files.length > 0) {
-                let reader = new FileReader();
-                reader.readAsText(files[0]);
-                reader.onload = () => {
-                  try {
-                    // @ts-ignore
-                    let tracker = JSON.parse(reader.result);
-                    App.trackers.push(tracker);
-                    App.store();
-                  } catch (e) {
-                    Modal.alert(Locale.get('error'),  Locale.get('errorImport'));
-                  }
-                };
+            FileUtils.readFileUser((result) => {
+              try {
+                // @ts-ignore
+                let tracker = JSON.parse(result);
+                App.trackers.push(tracker);
+                App.store();
+              } catch (e) {
+                Modal.alert(Locale.get('error'),  Locale.get('errorImport'));
               }
-            }, '.json', false);
+            }, '.json');
 
           }
         }

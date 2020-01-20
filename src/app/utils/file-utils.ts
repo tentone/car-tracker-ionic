@@ -1,5 +1,9 @@
 'use strict';
 
+import {App} from '../app';
+import {Modal} from '../screens/modal';
+import {Locale} from '../locale/locale';
+
 /**
  * File utils contains file manipulation utils.
  */
@@ -85,31 +89,35 @@ export class FileUtils {
 	 *
 	 * @param onLoad onLoad callback that receives array of files choosen as parameter.
 	 * @param filter File type filter.
-	 * @param multiFile If true the chooser will accept multiple files.
 	 */
-	static readFileUser(onLoad: Function, filter?: string, multiFile?: boolean) {
-		const chooser = document.createElement('input');
-		chooser.type = 'file';
-		chooser.style.display = 'none';
-		document.body.appendChild(chooser);
+	static readFileUser(onLoad: Function, filter?: string) {
+		if (window.cordova !== undefined) {
+			// TODO <ADD CODE HERE>
+		} else {
+			const chooser = document.createElement('input');
+			chooser.type = 'file';
+			chooser.style.display = 'none';
+			document.body.appendChild(chooser);
 
-		if (filter !== undefined) {
-			chooser.accept = filter;
-		}
-
-		if (multiFile === true) {
-			chooser.multiple = true;
-		}
-
-		chooser.onchange = function (event) {
-			if (onLoad !== undefined) {
-				onLoad(chooser.files);
+			if (filter !== undefined) {
+				chooser.accept = filter;
 			}
 
-			document.body.removeChild(chooser);
-		};
+			chooser.onchange = function (event) {
+				if (chooser.files.length > 0) {
+					let reader = new FileReader();
+					reader.readAsText(chooser.files[0]);
+					reader.onload = () => {
+						if (onLoad !== undefined) {
+							onLoad(reader.result);
+						}
+					};
+				}
+				document.body.removeChild(chooser);
+			};
 
-		chooser.click();
+			chooser.click();
+		}
 	}
 
 	/**
