@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "^8.2.9",
     "@angular/router": "^8.2.9",
     "@ionic-native/android-permissions": "^5.19.0",
+    "@ionic-native/chooser": "^5.19.1",
     "@ionic-native/contacts": "^5.19.0",
     "@ionic-native/core": "^5.19.0",
     "@ionic-native/file": "^5.19.1",
@@ -31,6 +32,7 @@
     "@types/mapbox-gl": "^0.54.5",
     "cordova-android": "^8.1.0",
     "cordova-plugin-android-permissions": "^1.0.2",
+    "cordova-plugin-chooser": "^1.2.5",
     "cordova-plugin-contacts": "^3.0.1",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-file": "^6.0.2",
@@ -96,7 +98,8 @@
       "cordova-plugin-geolocation": {},
       "cordova-plugin-contacts": {},
       "cordova-plugin-sms-receive": {},
-      "cordova-plugin-file": {}
+      "cordova-plugin-file": {},
+      "cordova-plugin-chooser": {}
     },
     "platforms": [
       "android"

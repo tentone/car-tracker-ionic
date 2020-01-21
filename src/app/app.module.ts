@@ -25,6 +25,7 @@ import {AppHeaderComponent} from './components/app-header/app-header.component';
 import {FormatDatePipe} from './screens/screen';
 import {GpsMapComponent} from './components/gps-map/gps-map.component';
 import {File} from '@ionic-native/file/ngx';
+import {Chooser} from '@ionic-native/chooser/ngx';
 
 @NgModule({
     declarations: [
@@ -64,6 +65,7 @@ import {File} from '@ionic-native/file/ngx';
   ],
   providers: [
     SMS,
+    Chooser,
     Contacts,
     Geolocation,
     AndroidPermissions,

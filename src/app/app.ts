@@ -10,6 +10,7 @@ import {SMS, SmsOptions} from '@ionic-native/sms/ngx';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 import {Contacts} from '@ionic-native/contacts/ngx';
 import {File} from '@ionic-native/file/ngx';
+import {Chooser} from '@ionic-native/chooser/ngx';
 
 /**
  * The app class is used to access and store all persistent data used in the application.
@@ -31,6 +32,8 @@ export class App {
     public static sms: SMS;
     public static contacts: Contacts;
     public static file: File;
+    public static chooser: Chooser;
+
     /**
      * Application general settings.
      */
@@ -49,8 +52,10 @@ export class App {
      * @param androidPermissions
      * @param sms
      * @param contacts
+     * @param file
+     * @param chooser
      */
-    public static initialize(platform: Platform, router: Router, androidPermissions: AndroidPermissions, sms: SMS, contacts: Contacts, file: File) {
+    public static initialize(platform: Platform, router: Router, androidPermissions: AndroidPermissions, sms: SMS, contacts: Contacts, file: File,  chooser: Chooser) {
         // @ts-ignore
         mapboxgl.accessToken = Environment.mapbox;
 
@@ -60,7 +65,8 @@ export class App {
         this.sms = sms;
         this.contacts = contacts;
         this.file = file;
-    
+        this.chooser = chooser;
+
         this.load();
 
         // @ts-ignore

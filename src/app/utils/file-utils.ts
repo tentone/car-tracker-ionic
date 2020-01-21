@@ -92,7 +92,9 @@ export class FileUtils {
 	 */
 	static readFileUser(onLoad: Function, filter?: string) {
 		if (window.cordova !== undefined) {
-			// TODO <ADD CODE HERE>
+			this.chooser.getFile()
+				.then(file => console.log(file ? file.name : 'canceled'))
+				.catch((error: any) => console.error(error));
 		} else {
 			const chooser = document.createElement('input');
 			chooser.type = 'file';
