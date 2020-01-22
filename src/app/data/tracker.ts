@@ -339,9 +339,22 @@ export class Tracker {
      * @param speed Speed limit in MPH zero means no speed limit.
      */
     public setSpeedLimit(speed: number) {
+        if (speed > 999) {
+            speed = 999;
+        }
+
+        // Round speed value
+        speed = Math.round(speed);
+
+        // Covert into 3 digit string
+        let strSpeed = speed.toString();
+        while (strSpeed.length < 3) {
+            strSpeed = '0' + strSpeed;
+        }
+
         let msg = new TrackerMessage(MessageDirection.SENT);
         msg.type = MessageType.COMMAND;
-        msg.data = 'speed' + this.pin + ' ' + speed;
+        msg.data = 'speed' + this.pin + ' ' + strSpeed;
 
         this.speedLimit = speed;
         this.sendSMS(msg);

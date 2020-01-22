@@ -1,8 +1,6 @@
 'use strict';
 
 import {App} from '../app';
-import {Modal} from '../screens/modal';
-import {Locale} from '../locale/locale';
 
 /**
  * File utils contains file manipulation utils.
@@ -58,7 +56,15 @@ export class FileUtils {
 	 */
 	static writeFileUser(fname, data) {
 		if (window.cordova !== undefined) {
-			// TODO <ADD CODE HERE>
+			App.chooser.getFile().then((file) => {
+				if (file === undefined || file.name === 'canceled') {
+					return;
+				}
+
+				console.log('Cartracker: Write file.', file);
+
+				App.file.writeFile(file.uri, fname, data);
+			});
 		} else {
 			if (typeof data === 'object') {
 				data = JSON.stringify(data, null, '\t');
@@ -97,8 +103,12 @@ export class FileUtils {
 					return;
 				}
 
+				console.log('Cartracker: Read file.', file);
+
 				let data = new TextDecoder('utf-8').decode(file.data);
-				console.log(file, data);
+				if (onLoad !== undefined) {
+					onLoad(data);
+				}
 			});
 		} else {
 			const chooser = document.createElement('input');
