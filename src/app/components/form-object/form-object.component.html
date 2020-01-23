@@ -9,14 +9,14 @@
             <div slot="end">
                 <!-- Text -->
                 <ng-template [ngIf]="row.type === types.TEXT">
-                    <ion-input style="text-align: end;" type="text"[disabled]="!this.editable"
+                    <ion-input style="text-align: end;" type="text" [disabled]="!(this.editable && row.editable)"
                         [ngModelOptions]="{standalone: true}"
                         (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);"
                         [ngModel]="this.getAttribute(this.object, row.attribute)"></ion-input>
                 </ng-template>
                 <!-- Phone Number -->
                 <ng-template [ngIf]="row.type === types.PHONE">
-                    <ion-input style="text-align: end;" type="tel" inputmode="tel" [disabled]="!this.editable"
+                    <ion-input style="text-align: end;" type="tel" inputmode="tel" [disabled]="!(this.editable && row.editable)"
                                [ngModelOptions]="{standalone: true}"
                                (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);"
                                [ngModel]="this.getAttribute(this.object, row.attribute)">
@@ -24,38 +24,37 @@
                             <ion-icon name="contact"></ion-icon>
                         </ion-button>
                     </ion-input>
-
                 </ng-template>
                 <!-- Number -->
                 <ng-template [ngIf]="row.type === types.NUMBER">
-                    <ion-input style="text-align: end;" type="number" [disabled]="!this.editable"
+                    <ion-input style="text-align: end;" type="number" [disabled]="!(this.editable && row.editable)"
                         [ngModelOptions]="{standalone: true}"
                         (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);"
                         [ngModel]="this.getAttribute(this.object, row.attribute)"></ion-input>
                 </ng-template>
                 <!-- Password -->
                 <ng-template [ngIf]="row.type === types.PASSWORD">
-                    <ion-input style="text-align: end;" type="password" [disabled]="!this.editable"
+                    <ion-input style="text-align: end;" type="password" [disabled]="!(this.editable && row.editable)"
                         [ngModelOptions]="{standalone: true}"
                         (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);"
                         [ngModel]="this.getAttribute(this.object, row.attribute)"></ion-input>
                 </ng-template>
                 <!-- Text multiline -->
                 <ng-template [ngIf]="row.type === types.TEXT_MULTILINE">
-                    <ion-textarea  style="text-align: end;" autoGrow [disabled]="!this.editable"
+                    <ion-textarea  style="text-align: end;" autoGrow [disabled]="!(this.editable && row.editable)"
                         [ngModelOptions]="{standalone: true}"
                         (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);"
                         [ngModel]="this.getAttribute(this.object, row.attribute)"></ion-textarea>
                 </ng-template>
                 <!-- Checkbox -->
                 <ng-template [ngIf]="row.type === types.CHECKBOX">
-                    <ion-checkbox [disabled]="!this.editable" [ngModelOptions]="{standalone: true}"
+                    <ion-checkbox [disabled]="!(this.editable && row.editable)" [ngModelOptions]="{standalone: true}"
                         (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);"
                         [ngModel]="this.getAttribute(this.object, row.attribute)"></ion-checkbox>
                 </ng-template>
                 <!-- Options -->
                 <ng-template [ngIf]="row.type === types.OPTIONS">
-                    <ion-select [disabled]="!this.editable" interface="alert" [ngModelOptions]="{standalone: true}"
+                    <ion-select [disabled]="!(this.editable && row.editable)" interface="alert" [ngModelOptions]="{standalone: true}"
                                 (ngModelChange)="this.setAttribute(this.object, row.attribute, $event);"
                                 [ngModel]="this.getAttribute(this.object, row.attribute)">
                         <ion-select-option *ngFor="let option of row.options" [value]=option.value>{{option.label | translate}}</ion-select-option>

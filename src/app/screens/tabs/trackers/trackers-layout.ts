@@ -21,7 +21,36 @@ export class TrackersLayout {
     {
       attribute: 'active',
       type: FormObjectType.CHECKBOX,
-      required: false
     },
+    {
+      attribute: 'speedLimit',
+      type: FormObjectType.TEXT,
+      editable: false
+    },
+    {
+      attribute: 'sleepLimit',
+      type: FormObjectType.TEXT,
+      editable: false
+    },
+    {
+      attribute: 'ignitionAlarm',
+      type: FormObjectType.TEXT,
+      editable: false
+    },
+    {
+      attribute: 'powerAlarmSMS',
+      type: FormObjectType.TEXT,
+      editable: false
+    },
+    {
+      attribute: 'powerAlarmCall',
+      type: FormObjectType.TEXT,
+      editable: false
+    },
+    {
+      attribute: 'battery',
+      type: FormObjectType.TEXT,
+      editable: false
+    }
   ];
 }

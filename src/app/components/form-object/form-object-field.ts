@@ -19,12 +19,17 @@ export class FormObjectField {
 	/**
 	 * Required should be indicated if the field if obligatory.
 	 */
-	public required: boolean = false;
+	public required?: boolean = false;
 
 	/**
 	 * Label to be presented, if none present the attribute is used as label.
 	 */
 	public label?: string;
+
+	/**
+	 * If the fields is not editable its value will only be displayed.
+	 */
+	public editable?: boolean = true;
 
 	/**
 	 * List of options required for some type of fields.
