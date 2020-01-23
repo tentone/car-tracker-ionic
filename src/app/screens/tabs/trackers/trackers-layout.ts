@@ -6,50 +6,54 @@ export class TrackersLayout {
     {
       attribute: 'name',
       type: FormObjectType.TEXT,
+      editable: true,
       required: true
     },
     {
       attribute: 'phoneNumber',
       type: FormObjectType.PHONE,
+      editable: true,
       required: true
     },
     {
       attribute: 'pin',
       type: FormObjectType.PASSWORD,
+      editable: true,
       required: true
     },
     {
       attribute: 'active',
       type: FormObjectType.CHECKBOX,
+      editable: true,
     },
     {
       attribute: 'speedLimit',
-      type: FormObjectType.TEXT,
+      type: FormObjectType.NUMBER,
       editable: false
     },
     {
       attribute: 'sleepLimit',
-      type: FormObjectType.TEXT,
+      type: FormObjectType.NUMBER,
       editable: false
     },
     {
       attribute: 'ignitionAlarm',
-      type: FormObjectType.TEXT,
+      type: FormObjectType.CHECKBOX,
       editable: false
     },
     {
       attribute: 'powerAlarmSMS',
-      type: FormObjectType.TEXT,
+      type: FormObjectType.CHECKBOX,
       editable: false
     },
     {
       attribute: 'powerAlarmCall',
-      type: FormObjectType.TEXT,
+      type: FormObjectType.CHECKBOX,
       editable: false
     },
     {
       attribute: 'battery',
-      type: FormObjectType.TEXT,
+      type: FormObjectType.NUMBER,
       editable: false
     }
   ];
