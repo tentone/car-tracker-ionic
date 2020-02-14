@@ -294,7 +294,7 @@ export class Tracker {
 	/**
 	 * Enable/disable ignition auto security, used for the tracker to send and SMS every time the car ignition is switched.
 	 *
-	 * @param enabled State of the power alarm.
+	 * @param enabled State of the ignition alarm.
 	 */
 	public setIgnitionAlarm(enabled: boolean) {
         let msg = new TrackerMessage(MessageDirection.SENT);
