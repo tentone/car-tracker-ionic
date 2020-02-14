@@ -46,8 +46,14 @@ export const LocaleEN = {
 	color: 'Color',
 	active: 'Active',
 	timezone: 'TimeZone',
+	speedLimit: 'Speed Limit',
+	sleepLimit: 'Sleep Limit',
+	powerAlarmSMS: 'Power Alarm SMS',
+	powerAlarmCall: 'Power Alarm Call',
+	battery: 'Battery',
+	ignitionAlarm: 'Ignition Alarm',
 
-	// Mesage types
+	// Message types
 	command: 'Command',
 	location: 'Location',
 	information: 'Information',

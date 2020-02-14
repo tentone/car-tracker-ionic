@@ -19,6 +19,6 @@ export class Settings {
     /**
      * Admin number to be set for GPS tracker to report data to.
      */
-    public adminNumber: string = '+351915939715';
+    public adminNumber: string = '';
 }
 
