@@ -1,5 +1,5 @@
-var lut = [];
-for (var i = 0; i < 256; i ++) {
+const lut = [];
+for (let i = 0; i < 256; i ++) {
     lut[i] = (i < 16 ? '0' : '') + (i).toString(16);
 }
 

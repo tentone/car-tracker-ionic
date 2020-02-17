@@ -6,7 +6,7 @@ import {TrackersLayout} from '../trackers-layout';
 import {Locale} from '../../../../locale/locale';
 import {ActivatedRoute} from '@angular/router';
 import {ActionSheetController} from '@ionic/angular';
-import {FileUtils} from '../../../../utils/file-utils';
+import {FileIo} from '../../../../io/file-io';
 
 @Component({
   selector: 'app-trackers-view',
@@ -108,7 +108,7 @@ export class TrackersViewPage extends ScreenComponent {
           icon: 'save',
           handler: () => {
             let data = JSON.stringify(this.tracker, null, '\t');
-            FileUtils.writeFileUser('tracker.json', data);
+            FileIo.writeFileUser('tracker.json', data);
           }
         },
         {

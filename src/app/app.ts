@@ -73,12 +73,12 @@ export class App {
         if (window.SMSReceive !== undefined) {
             // @ts-ignore
             window.SMSReceive.startWatch(() => {
-                console.log('CarTracker: SMS Receiver watching started.');
+                console.log('CarTracker: SMS Receiver watcher started.');
             }, () => {
-                alert('Failed to start watching for SMS.');
+                console.warn('CarTracker: Failed to start watching for SMS.');
             });
         } else {
-            alert('SMSReceive plugin undefined.');
+            console.warn('CarTracker: SMSReceive plugin undefined.');
         }
 
         // SMS Received event
@@ -87,7 +87,7 @@ export class App {
 
             for (let i = 0; i < App.trackers.length; i++) {
                 if (App.trackers[i].phoneNumber === e.data.address) {
-                    console.log('CarTracker: Added data to tracker.', App.trackers[i]);
+                    console.log('CarTracker: Received data for tracker.', App.trackers[i]);
                     App.trackers[i].messages.push(App.parseMessage(e.data, App.trackers[i]));
                 }
             }
@@ -97,7 +97,52 @@ export class App {
     }
 
     /**
-     * Parse a message received from SMS.
+     * Stop the SMS receiver watcher, should be stopped when exiting the application to prevent leaks.
+     */
+    public static stopSMSReceiver() {
+        // @ts-ignore
+        if (window.SMSReceive !== undefined) {
+            // @ts-ignore
+            window.SMSReceive.stopWatch(() => {
+                console.log('CarTracker: SMS Receiver watching stopped.');
+            });
+        }
+    }
+
+    /**
+     * Send SMS to phone number.
+     *
+     * @param phoneNumber Destination phone number.
+     * @param message Message content
+     * @param onSuccess OnSuccess optional callback function.
+     * @param onError OnError optional callback function.
+     */
+    public static sendSMS(phoneNumber: string, message: string, onSuccess?: Function, onError?: Function) {
+        this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.SEND_SMS).then(() => {
+            let options: SmsOptions = {
+                replaceLineBreaks: false,
+                android: {
+                    intent: ''
+                }
+            };
+
+            if (this.sms.hasPermission()) {
+                this.sms.send(phoneNumber, message, options).then(() => {
+                    if (onSuccess !== undefined) {
+                        onSuccess();
+                    }
+                }).catch(() => {
+                    if (onError !== undefined) {
+                        onError();
+                    }
+                });
+            }
+        });
+    }
+
+
+    /**
+     * Parse a message received from SMS and store its result on a tracker message.
      *
      * @param data Event data received with the message.
      * @param tracker Tracker that sent this message.
@@ -116,7 +161,6 @@ export class App {
         // List of SOS numbers
         if (data.body.startsWith('101#')) {
             console.log('CarTracker: Received list of SOS numbers.', data);
-
             let numbers = data.body.split(' ');
             for (let i = 0; i < numbers.length;  i++) {
                 tracker.sosNumbers[i] = numbers[i].substr(4);
@@ -162,50 +206,6 @@ export class App {
         msg.data = data.body;
         msg.type = MessageType.UNKNOWN;
         return msg;
-    }
-    
-    /**
-     * Stop the SMS receiver watcher.
-     */
-    public static stopSMSReceiver() {
-        // @ts-ignore
-        if (window.SMSReceive !== undefined) {
-            // @ts-ignore
-            window.SMSReceive.stopWatch(() => {
-                console.log('CarTracker: SMS Receiver watching stopped.');
-            });
-        }
-    }
-
-    /**
-     * Send SMS to phone number.
-     *
-     * @param phoneNumber Destination phone number.
-     * @param message Message content
-     * @param onSuccess OnSuccess optional callback function.
-     * @param onError OnError optional callback function.
-     */
-    public static sendSMS(phoneNumber: string, message: string, onSuccess?: Function, onError?: Function) {
-        this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.SEND_SMS).then(() => {
-            let options: SmsOptions = {
-                replaceLineBreaks: false,
-                android: {
-                    intent: ''
-                }
-            };
-
-            if (this.sms.hasPermission()) {
-                this.sms.send(phoneNumber, message, options).then(() => {
-                    if (onSuccess !== undefined) {
-                        onSuccess();
-                    }
-                }).catch(() => {
-                    if (onError !== undefined) {
-                        onError();
-                    }
-                });
-            }
-        });
     }
 
     /**

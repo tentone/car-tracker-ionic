@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {App} from '../../../app';
 import {StringUtils} from '../../../utils/string-utils';
 import {Locale} from '../../../locale/locale';
-import {FileUtils} from '../../../utils/file-utils';
+import {FileIo} from '../../../io/file-io';
 import {ActionSheetController} from '@ionic/angular';
 import {Modal} from '../../modal';
 
@@ -31,7 +31,7 @@ export class TrackersPage {
           text: Locale.get('import'),
           icon: 'download',
           handler: () => {
-            FileUtils.readFileUser((result) => {
+            FileIo.readFileUser((result) => {
               try {
                 // @ts-ignore
                 let tracker = JSON.parse(result);

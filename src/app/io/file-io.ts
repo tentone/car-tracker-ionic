@@ -5,7 +5,7 @@ import {App} from '../app';
 /**
  * File utils contains file manipulation utils.
  */
-export class FileUtils {
+export class FileIo {
 	/**
 	 * Read file data from URL, using XHR.
 	 *

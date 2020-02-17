@@ -12,7 +12,7 @@ export class URLUtils {
 		const parameters = {};
 
 		// tslint:disable-next-line:prefer-for-of
-		for (var i = 0; i < values.length; i++) {
+		for (let i = 0; i < values.length; i++) {
 
 			const pair = values[i].split('=');
 			if (pair.length > 1) {
@@ -32,9 +32,9 @@ export class URLUtils {
 	 * @return Form like data to be sent to the server.
 	 */
 	static encodeFormURL(json): string {
-		var data = [];
+		let data = [];
 
-		for (var i in json) {
+		for (let i in json) {
 			data.push(encodeURIComponent(i) + '=' + encodeURIComponent(json[i]));
 		}
 
