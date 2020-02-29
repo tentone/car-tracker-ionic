@@ -7,54 +7,12 @@ import {App} from '../app';
  */
 export class FileIo {
 	/**
-	 * Read file data from URL, using XHR.
-	 *
-	 * @param fname File URL.
-	 * @param sync If set to true or undefined the file is read syncronosly.
-	 * @param responseType Type of response to be used for the XHR.
-	 * @param onLoad On load callback.
-	 * @param onProgress On progress callback.
-	 * @param onError On error callback.
-	 * @return Data read if in sync mode.
-	 */
-	static readFile(fname, sync, responseType?, onLoad?, onProgress?, onError?) {
-		if (sync === undefined) {
-			sync = true;
-		}
-
-		const file = new XMLHttpRequest();
-		file.overrideMimeType('text/plain');
-		file.open('GET', fname, !sync);
-
-		if (responseType !== undefined) {
-			file.responseType = responseType;
-		}
-
-		if (onLoad !== undefined) {
-			file.onload = function () {
-				onLoad(file.response);
-			};
-		}
-
-		if (onProgress !== undefined) {
-			file.onprogress = onProgress;
-		}
-		if (onError !== undefined) {
-			file.onerror = onError;
-		}
-
-		file.send(null);
-
-		return sync === true ? file.response : null;
-	}
-
-	/**
 	 * Write a file to a blob and download it to the client.
 	 *
 	 * @param fname File name.
 	 * @param data Data to be written into the file.
 	 */
-	static writeFileUser(fname, data) {
+	static write(fname, data) {
 		if (window.cordova !== undefined) {
 			App.chooser.getFile().then((file) => {
 				if (file === undefined || file.name === 'canceled') {
@@ -96,7 +54,7 @@ export class FileIo {
 	 * @param onLoad onLoad callback that receives array of files choosen as parameter.
 	 * @param filter File type filter.
 	 */
-	static readFileUser(onLoad: Function, filter?: string) {
+	static read(onLoad: Function, filter?: string) {
 		if (window.cordova !== undefined) {
 			App.chooser.getFile().then((file) => {
 				if (file === undefined || file.name === 'canceled') {
@@ -135,6 +93,48 @@ export class FileIo {
 
 			chooser.click();
 		}
+	}
+
+	/**
+	 * Read file data from URL, using XHR.
+	 *
+	 * @param fname File URL.
+	 * @param sync If set to true or undefined the file is read syncronosly.
+	 * @param responseType Type of response to be used for the XHR.
+	 * @param onLoad On load callback.
+	 * @param onProgress On progress callback.
+	 * @param onError On error callback.
+	 * @return Data read if in sync mode.
+	 */
+	static readPath(fname, sync, responseType?, onLoad?, onProgress?, onError?) {
+		if (sync === undefined) {
+			sync = true;
+		}
+
+		const file = new XMLHttpRequest();
+		file.overrideMimeType('text/plain');
+		file.open('GET', fname, !sync);
+
+		if (responseType !== undefined) {
+			file.responseType = responseType;
+		}
+
+		if (onLoad !== undefined) {
+			file.onload = function () {
+				onLoad(file.response);
+			};
+		}
+
+		if (onProgress !== undefined) {
+			file.onprogress = onProgress;
+		}
+		if (onError !== undefined) {
+			file.onerror = onError;
+		}
+
+		file.send(null);
+
+		return sync === true ? file.response : null;
 	}
 
 	/**

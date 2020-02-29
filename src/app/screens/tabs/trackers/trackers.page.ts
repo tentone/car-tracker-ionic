@@ -31,7 +31,7 @@ export class TrackersPage {
           text: Locale.get('import'),
           icon: 'download',
           handler: () => {
-            FileIo.readFileUser((result) => {
+            FileIo.read((result) => {
               try {
                 // @ts-ignore
                 let tracker = JSON.parse(result);

@@ -49,11 +49,11 @@ export class App {
      *
      * @param platform Platform object created from the app root.
      * @param router Router object created from the app root.
-     * @param androidPermissions
-     * @param sms
-     * @param contacts
-     * @param file
-     * @param chooser
+     * @param androidPermissions Android permissions
+     * @param sms SMS handler,
+     * @param contacts Contact access.
+     * @param file Mobile file access.
+     * @param chooser Mobile file chooser,
      */
     public static initialize(platform: Platform, router: Router, androidPermissions: AndroidPermissions, sms: SMS, contacts: Contacts, file: File,  chooser: Chooser) {
         // @ts-ignore
@@ -139,7 +139,6 @@ export class App {
             }
         });
     }
-
 
     /**
      * Parse a message received from SMS and store its result on a tracker message.
@@ -239,8 +238,6 @@ export class App {
                 this.trackers[j] = tracker;
             }
         }
-
-
     }
 
     /**

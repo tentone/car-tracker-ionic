@@ -108,7 +108,7 @@ export class TrackersViewPage extends ScreenComponent {
           icon: 'save',
           handler: () => {
             let data = JSON.stringify(this.tracker, null, '\t');
-            FileIo.writeFileUser('tracker.json', data);
+            FileIo.write('tracker.json', data);
           }
         },
         {
