@@ -11,6 +11,7 @@ import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 import {Contacts} from '@ionic-native/contacts/ngx';
 import {File} from '@ionic-native/file/ngx';
 import {Chooser} from '@ionic-native/chooser/ngx';
+import {SmsIo} from './io/sms-io';
 
 /**
  * The app class is used to access and store all persistent data used in the application.
@@ -69,22 +70,7 @@ export class App {
 
         this.load();
 
-        // @ts-ignore
-        if (window.SMSReceive !== undefined) {
-            // @ts-ignore
-            window.SMSReceive.startWatch(() => {
-                console.log('CarTracker: SMS Receiver watcher started.');
-            }, () => {
-                console.warn('CarTracker: Failed to start watching for SMS.');
-            });
-        } else {
-            console.warn('CarTracker: SMSReceive plugin undefined.');
-        }
-
-        // SMS Received event
-        document.addEventListener('onSMSArrive', function(e: any) {
-            console.log('CarTracker: SMS data received.', e, e.data);
-
+        SmsIo.startListener((e) => {
             for (let i = 0; i < App.trackers.length; i++) {
                 if (App.trackers[i].phoneNumber === e.data.address) {
                     console.log('CarTracker: Received data for tracker.', App.trackers[i]);
@@ -93,50 +79,6 @@ export class App {
             }
 
             App.store();
-        });
-    }
-
-    /**
-     * Stop the SMS receiver watcher, should be stopped when exiting the application to prevent leaks.
-     */
-    public static stopSMSReceiver() {
-        // @ts-ignore
-        if (window.SMSReceive !== undefined) {
-            // @ts-ignore
-            window.SMSReceive.stopWatch(() => {
-                console.log('CarTracker: SMS Receiver watching stopped.');
-            });
-        }
-    }
-
-    /**
-     * Send SMS to phone number.
-     *
-     * @param phoneNumber Destination phone number.
-     * @param message Message content
-     * @param onSuccess OnSuccess optional callback function.
-     * @param onError OnError optional callback function.
-     */
-    public static sendSMS(phoneNumber: string, message: string, onSuccess?: Function, onError?: Function) {
-        this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.SEND_SMS).then(() => {
-            let options: SmsOptions = {
-                replaceLineBreaks: false,
-                android: {
-                    intent: ''
-                }
-            };
-
-            if (this.sms.hasPermission()) {
-                this.sms.send(phoneNumber, message, options).then(() => {
-                    if (onSuccess !== undefined) {
-                        onSuccess();
-                    }
-                }).catch(() => {
-                    if (onError !== undefined) {
-                        onError();
-                    }
-                });
-            }
         });
     }
 
