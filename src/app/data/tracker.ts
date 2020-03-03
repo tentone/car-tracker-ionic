@@ -1,6 +1,7 @@
 import {UUIDUtils} from '../utils/uuid-utils';
 import {App} from '../app';
 import {Locale} from '../locale/locale';
+import {SmsIo} from '../io/sms-io';
 
 /**
  * Direction of the message.
@@ -173,7 +174,7 @@ export class Tracker {
      */
     public sendSMS(msg: TrackerMessage) {
         this.messages.push(msg);
-        App.sendSMS(this.phoneNumber, msg.data);
+        SmsIo.sendSMS(this.phoneNumber, msg.data);
         App.store();
     }
 
