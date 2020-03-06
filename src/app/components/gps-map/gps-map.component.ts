@@ -54,20 +54,23 @@ export class GpsMapComponent implements OnInit, AfterContentChecked {
 		this.controls = new mapboxgl.NavigationControl();
 		this.map.addControl(this.controls);
 
-		this.marker = new mapboxgl.Marker();
-		this.marker.setLngLat([0, 0]);
-		this.marker.addTo(this.map);
-
 		this.map.setStyle(App.settings.mapStyle);
+
 		setTimeout(() => {
 			this.map.resize();
 		}, 100);
 	}
 
 	/**
-	 * Update map position.
+	 * Update map position from the position attribute.
 	 */
 	public updatePosition() {
+		if(this.marker === null) {
+			this.marker = new mapboxgl.Marker();
+			this.marker.setLngLat([this.position.longitude, this.position.latitude]);
+			this.marker.addTo(this.map);
+		}
+
 		this.map.flyTo({center: [this.position.longitude, this.position.latitude]});
 		this.marker.setLngLat([this.position.longitude, this.position.latitude]);
 	}

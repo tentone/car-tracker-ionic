@@ -9,7 +9,7 @@ export class GpsIo {
     /**
      * Get position from GPS or browser location API.
      */
-    public getPosition(onSuccess: Function, onError?: Function) {
+    public static getPosition(onSuccess: Function, onError?: Function) {
         if (window.cordova) {
             App.androidPermissions.requestPermission(App.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(() => {
                 // Get the current position
@@ -27,7 +27,7 @@ export class GpsIo {
         }
     }
 
-    public setWatcher(onChange: Function) {
+    public static setWatcher(onChange: Function) {
         // Watch for changes in the GPS position
         let watch = App.geolocation.watchPosition();
         watch.subscribe((data) => {

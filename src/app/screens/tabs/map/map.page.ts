@@ -1,12 +1,9 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
-import {Geolocation} from '@ionic-native/geolocation/ngx';
-import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 import {App} from '../../../app';
 import {ActivatedRoute} from '@angular/router';
 import {ScreenComponent} from '../../screen';
-import {Locale} from '../../../locale/locale';
-import {Modal} from '../../modal';
+import {GpsIo} from '../../../io/gps-io';
 
 @Component({
   selector: 'app-map',
@@ -50,16 +47,14 @@ export class MapPage extends ScreenComponent {
 
       this.controls = new mapboxgl.NavigationControl();
       this.map.addControl(this.controls);
-
-      this.marker = new mapboxgl.Marker();
-      this.marker.setLngLat([0, 0]);
-      this.marker.addTo(this.map);
-
       this.enable3DBuildings();
     }
 
     this.map.setStyle(App.settings.mapStyle);
-    this.getCurrentPosition();
+
+    GpsIo.getPosition((longitude, latitude) => {
+      this.setMarker(longitude, latitude);
+    });
 
     setTimeout(() => {
       this.map.resize();
@@ -70,6 +65,12 @@ export class MapPage extends ScreenComponent {
    * Update main marker position and center the map on it.
    */
   public setMarker(longitude: number, latitude: number, flyTo: boolean = true) {
+    if(this.marker === null) {
+      this.marker = new mapboxgl.Marker();
+      this.marker.setLngLat([longitude, latitude]);
+      this.marker.addTo(this.map);
+    }
+
     this.marker.setLngLat([longitude, latitude]);
 
     if (flyTo) {

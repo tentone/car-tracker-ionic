@@ -35,7 +35,7 @@ export class TrackersViewPage extends ScreenComponent {
       buttons: [
         {
           text: Locale.get('history'),
-          icon: 'reorder-four-outline',
+          icon: 'reorder-four',
           handler: () => {
             App.navigator.navigate('tabs/trackers/history', this.tracker);
           }
