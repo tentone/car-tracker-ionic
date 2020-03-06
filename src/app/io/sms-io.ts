@@ -7,14 +7,6 @@ import {App} from '../app';
  * Also handles mock data environment for browser testing.
  */
 export class SmsIo {
-	public static MOCKCUP: number = 100;
-	public static MOBILE: number = 101;
-
-	/**
-	 * SMS mode, can be running with Ionic plugin or as mockup for web testing.
-	 */
-	public static mode: number;
-
 	/**
 	 * Method used to process SMS received, received the message text and the number of the sender.
 	 * 
@@ -38,15 +30,15 @@ export class SmsIo {
 			}, () => {
 				console.warn('CarTracker: Failed to start watching for SMS.');
 			});
+
+			// SMS Received event
+			document.addEventListener('onSMSArrive', (e: any) => {
+				console.log('CarTracker: SMS data received.', e, e.data);
+				this.onReceive(e);
+			});
 		} else {
 			console.warn('CarTracker: SMSReceive plugin undefined.');
 		}
-
-		// SMS Received event
-		document.addEventListener('onSMSArrive', (e: any) => {
-			console.log('CarTracker: SMS data received.', e, e.data);
-			this.onReceive(e);
-		});
 	}
 
 	/**

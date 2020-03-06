@@ -1,5 +1,4 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import {GPSPosition} from '../../../data/gps-position';
 import * as mapboxgl from 'mapbox-gl';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
@@ -36,7 +35,7 @@ export class MapPage extends ScreenComponent {
    */
   public trackers: mapboxgl.Marker[] = [];
 
-  constructor(public androidPermissions: AndroidPermissions, public geolocation: Geolocation, public route: ActivatedRoute, public elementRef: ElementRef) {
+  constructor(public route: ActivatedRoute, public elementRef: ElementRef) {
     super(route, elementRef);
   }
 
@@ -77,34 +76,6 @@ export class MapPage extends ScreenComponent {
       setTimeout(() => {
         this.map.flyTo({center: [longitude, latitude]});
       }, 100);
-    }
-  }
-
-  /**
-   * Get position from GPS or browser location API.
-   */
-  public getCurrentPosition() {
-    if (window.cordova) {
-      this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(() => {
-        // Get the current position
-        this.geolocation.getCurrentPosition().then((data) => {
-          this.setMarker(data.coords.longitude, data.coords.latitude);
-        }).catch((error) => {
-          Modal.alert(Locale.get('error'), Locale.get('errorLocation') + ' (' + error + ')');
-          console.warn('CarTracker: Error getting location.', error);
-        });
-
-        // Watch for changes in the GPS position
-        let watch = this.geolocation.watchPosition();
-        watch.subscribe((data) => {
-          this.setMarker(data.coords.longitude, data.coords.latitude, false);
-        });
-      });
-    } else if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position);
-        this.setMarker(position.coords.longitude, position.coords.latitude);
-      });
     }
   }
 

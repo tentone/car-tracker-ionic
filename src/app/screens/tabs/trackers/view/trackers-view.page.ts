@@ -34,6 +34,13 @@ export class TrackersViewPage extends ScreenComponent {
       header: Locale.get('options'),
       buttons: [
         {
+          text: Locale.get('history'),
+          icon: 'reorder-four-outline',
+          handler: () => {
+            App.navigator.navigate('tabs/trackers/history', this.tracker);
+          }
+        },
+        {
           text: Locale.get('adminNumber'),
           icon: 'person',
           handler: () => {
@@ -128,7 +135,7 @@ export class TrackersViewPage extends ScreenComponent {
       ]}).then((actionSheet) => {
       actionSheet.present();
     });
-  };
+  }
 
   public onDisplay() {
     this.tracker = App.navigator.getData();

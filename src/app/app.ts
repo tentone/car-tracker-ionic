@@ -12,6 +12,7 @@ import {Contacts} from '@ionic-native/contacts/ngx';
 import {File} from '@ionic-native/file/ngx';
 import {Chooser} from '@ionic-native/chooser/ngx';
 import {SmsIo} from './io/sms-io';
+import {Geolocation} from "@ionic-native/geolocation/ngx";
 
 /**
  * The app class is used to access and store all persistent data used in the application.
@@ -34,6 +35,7 @@ export class App {
     public static contacts: Contacts;
     public static file: File;
     public static chooser: Chooser;
+    public static geolocation: Geolocation;
 
     /**
      * Application general settings.
@@ -56,7 +58,7 @@ export class App {
      * @param file Mobile file access.
      * @param chooser Mobile file chooser,
      */
-    public static initialize(platform: Platform, router: Router, androidPermissions: AndroidPermissions, sms: SMS, contacts: Contacts, file: File,  chooser: Chooser) {
+    public static initialize(platform: Platform, router: Router, androidPermissions: AndroidPermissions, sms: SMS, contacts: Contacts, file: File, chooser: Chooser, geolocation: Geolocation) {
         // @ts-ignore
         mapboxgl.accessToken = Environment.mapbox;
 
@@ -67,6 +69,7 @@ export class App {
         this.contacts = contacts;
         this.file = file;
         this.chooser = chooser;
+        this.geolocation = geolocation;
 
         this.load();
 
@@ -190,5 +193,12 @@ export class App {
         LocalStorage.set('trackers', this.trackers);
 
         console.log('CarTracker: Saved data into storage.', this.trackers, this.settings);
+    }
+
+    /**
+     * Check if the application is running on a mobile device.
+     */
+    public static isMobile(): boolean {
+        return window.cordova !== undefined;
     }
 }

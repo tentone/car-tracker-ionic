@@ -12,7 +12,7 @@ export class FileIo {
 	 * @param fname File name.
 	 * @param data Data to be written into the file.
 	 */
-	static write(fname, data) {
+	static write(fname: string, data: any) {
 		if (window.cordova !== undefined) {
 			App.chooser.getFile().then((file) => {
 				if (file === undefined || file.name === 'canceled') {
@@ -96,7 +96,7 @@ export class FileIo {
 	}
 
 	/**
-	 * Read file data from URL, using XHR.
+	 * Read file data from URL, using XHR request.
 	 *
 	 * @param fname File URL.
 	 * @param sync If set to true or undefined the file is read syncronosly.
@@ -106,7 +106,7 @@ export class FileIo {
 	 * @param onError On error callback.
 	 * @return Data read if in sync mode.
 	 */
-	static readPath(fname, sync, responseType?, onLoad?, onProgress?, onError?) {
+	static readPath(fname: string, sync: boolean, responseType?, onLoad?: any, onProgress?: any, onError?: any) {
 		if (sync === undefined) {
 			sync = true;
 		}
@@ -145,7 +145,7 @@ export class FileIo {
 	 * @param file File path
 	 * @return File name without path and extension
 	 */
-	static getFileName(file) {
+	static getFileName(file: (File | string)) {
 		if (file !== undefined) {
 
 			if (file instanceof File) {
@@ -169,7 +169,7 @@ export class FileIo {
 	 * @param file File path
 	 * @return File extension
 	 */
-	static getFileExtension(file) {
+	static getFileExtension(file: (File | string)) {
 		if (file !== undefined) {
 
 			if (file instanceof File) {
