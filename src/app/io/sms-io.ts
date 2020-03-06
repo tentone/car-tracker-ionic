@@ -15,9 +15,7 @@ export class SmsIo {
 	public static mockup: Mockup = null;
 
 	/**
-	 * Method used to process SMS received, received the message text and the number of the sender.
-	 * 
-	 * Booth parameters are string.
+	 * Method used to process SMS received, receives the parameters (message, phoneNumber).
 	 */
 	public static onReceive: Function = null;
 
@@ -42,13 +40,14 @@ export class SmsIo {
 				// SMS Received event
 				document.addEventListener('onSMSArrive', (e: any) => {
 					console.log('CarTracker: SMS data received.', e, e.data);
-					this.onReceive(e);
+					this.onReceive(e.data.body, e.data.address);
 				});
 			} else {
 				console.warn('CarTracker: SMSReceive plugin undefined.');
 			}
 		} else {
 			this.mockup = new Gt901Mockup(this.onReceive);
+
 		}
 	}
 

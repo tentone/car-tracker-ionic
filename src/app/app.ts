@@ -73,11 +73,11 @@ export class App {
 
         this.load();
 
-        SmsIo.startListener((e) => {
+        SmsIo.startListener((message: string, phoneNumber: string) => {
             for (let i = 0; i < App.trackers.length; i++) {
-                if (App.trackers[i].phoneNumber === e.data.address) {
+                if (App.trackers[i].phoneNumber === phoneNumber) {
                     console.log('CarTracker: Received data for tracker.', App.trackers[i]);
-                    App.trackers[i].messages.push(App.parseMessage(e.data, App.trackers[i]));
+                    App.trackers[i].messages.push(App.parseMessage(message, App.trackers[i]));
                 }
             }
 
@@ -88,31 +88,31 @@ export class App {
     /**
      * Parse a message received from SMS and store its result on a tracker message.
      *
-     * @param data Event data received with the message.
+     * @param message Message received.
      * @param tracker Tracker that sent this message.
      */
-    public static parseMessage(data: any, tracker: Tracker): TrackerMessage {
+    public static parseMessage(message: string, tracker: Tracker): TrackerMessage {
         let msg = new TrackerMessage(MessageDirection.RECEIVED);
-        msg.date = new Date(data.date_sent);
+        msg.date = new Date();
 
         // Acknowledge message
-        if (data.body === 'admin ok' || data.body === 'apn ok' || data.body === 'password ok' || data.body === 'speed ok' || data.body === 'ok') {
-            msg.data = data.body;
+        if (message === 'admin ok' || message === 'apn ok' || message === 'password ok' || message === 'speed ok' || message === 'ok') {
+            msg.data = message;
             msg.type = MessageType.ACKNOWLEDGE;
             return msg;
         }
 
         // List of SOS numbers
-        if (data.body.startsWith('101#')) {
-            console.log('CarTracker: Received list of SOS numbers.', data);
-            let numbers = data.body.split(' ');
+        if (message.startsWith('101#')) {
+            console.log('CarTracker: Received list of SOS numbers.', message);
+            let numbers = message.split(' ');
             for (let i = 0; i < numbers.length;  i++) {
                 tracker.sosNumbers[i] = numbers[i].substr(4);
             }
         }
 
         // Multiline messages
-        let fields = data.body.split('\n');
+        let fields = message.split('\n');
 
         // Location message
         if (fields.length === 6) {
@@ -147,7 +147,7 @@ export class App {
             } catch (e) {}
         }
 
-        msg.data = data.body;
+        msg.data = message;
         msg.type = MessageType.UNKNOWN;
         return msg;
     }
