@@ -13,7 +13,7 @@ export class FileIo {
 	 * @param data Data to be written into the file.
 	 */
 	static write(fname: string, data: any) {
-		if (window.cordova !== undefined) {
+		if (App.isMobile()) {
 			App.chooser.getFile().then((file) => {
 				if (file === undefined || file.name === 'canceled') {
 					return;
@@ -55,7 +55,7 @@ export class FileIo {
 	 * @param filter File type filter.
 	 */
 	static read(onLoad: Function, filter?: string) {
-		if (window.cordova !== undefined) {
+		if (App.isMobile()) {
 			App.chooser.getFile().then((file) => {
 				if (file === undefined || file.name === 'canceled') {
 					return;
