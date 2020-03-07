@@ -93,6 +93,7 @@ export class App {
      */
     public static parseMessage(message: string, tracker: Tracker): TrackerMessage {
         let msg = new TrackerMessage(MessageDirection.RECEIVED);
+        msg.rawData = message;
         msg.date = new Date();
 
         // Acknowledge message
@@ -147,8 +148,9 @@ export class App {
             } catch (e) {}
         }
 
-        msg.data = message;
+        msg.data = null;
         msg.type = MessageType.UNKNOWN;
+
         return msg;
     }
 

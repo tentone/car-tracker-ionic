@@ -50,9 +50,14 @@ export class TrackerMessage {
     public direction: number;
 
     /**
-     * Content of the message, can be a string or a object.
+     * Decoded content of the message.
      */
     public data: any;
+
+    /**
+     * Original message content as received.
+     */
+    public rawData: string;
 
     /**
      * Date of the message.
