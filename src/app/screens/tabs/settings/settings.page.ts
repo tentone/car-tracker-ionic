@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Environment} from '../../../../environments/environment';
 import {Locale} from '../../../locale/locale';
 import {App} from '../../../app';
-import {Settings} from '../../../data/settings';
+import {MapStyles} from '../../../data/settings';
 import {FormObjectField} from '../../../components/form-object/form-object-field';
 import {FormObjectType} from '../../../components/form-object/form-object-type';
 
@@ -20,36 +20,66 @@ export class SettingsPage {
    */
   public layout: FormObjectField[] = [
     {
-      attribute: 'mapStyle',
+      attribute: 'locale',
       type: FormObjectType.OPTIONS,
+      required: false,
+      editable: true,
       options: [
         {
-          value: Settings.MAP_STYLES.VECTOR,
-          label: 'vector'
-        },
-        {
-          value: Settings.MAP_STYLES.SATELLITE,
-          label: 'satellite'
-        },
-        {
-          value: Settings.MAP_STYLES.MIXED,
-          label: 'mixed'
-        },
-        {
-          value: Settings.MAP_STYLES.LIGHT,
-          label: 'light'
-        },
-        {
-          value: Settings.MAP_STYLES.DARK,
-          label: 'dark'
+          label: 'en',
+          value: 'en'
         }
-      ],
-      required: false
+      ]
     },
     {
       attribute: 'adminNumber',
       type: FormObjectType.PHONE,
-      required: false
+      required: false,
+      editable: true
+    },
+    {
+      attribute: 'theme',
+      type: FormObjectType.OPTIONS,
+      required: false,
+      editable: true,
+      options: [
+        {
+          label: 'base',
+          value: ''
+        },
+        {
+          label: 'dark',
+          value: 'dark'
+        }
+      ]
+    },
+    {
+      attribute: 'mapStyle',
+      type: FormObjectType.OPTIONS,
+      options: [
+        {
+          value: MapStyles.VECTOR,
+          label: 'vector'
+        },
+        {
+          value: MapStyles.SATELLITE,
+          label: 'satellite'
+        },
+        {
+          value: MapStyles.MIXED,
+          label: 'mixed'
+        },
+        {
+          value: MapStyles.LIGHT,
+          label: 'light'
+        },
+        {
+          value: MapStyles.DARK,
+          label: 'dark'
+        }
+      ],
+      required: false,
+      editable: true
     }
   ];
 

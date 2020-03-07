@@ -7,8 +7,12 @@ export class URLUtils {
 	 *
 	 * @return Object with parameters read from the URL.
 	 */
-	static getQueryParameters(): any {
-		const values = location.search.substring(1).split('&');
+	static getQueryParameters(url?: string): any {
+		if (url === undefined) {
+			url = location.search.substring(1);
+		}
+
+		const values = url.split('&');
 		const parameters = {};
 
 		// tslint:disable-next-line:prefer-for-of

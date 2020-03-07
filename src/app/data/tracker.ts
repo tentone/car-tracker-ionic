@@ -2,74 +2,9 @@ import {UUIDUtils} from '../utils/uuid-utils';
 import {App} from '../app';
 import {Locale} from '../locale/locale';
 import {SmsIo} from '../io/sms-io';
-
-/**
- * Direction of the message.
- */
-export const MessageDirection = {
-    SENT: 1,
-    RECEIVED: 2
-};
-
-/**
- * Type of messages exchanged between the tracker and the phone.
- *
- * Applies to booth sent and received messages.
- */
-export const MessageType = {
-    COMMAND: 0,
-    LOCATION: 1,
-    ACKNOWLEDGE: 2,
-    INFORMATION: 3,
-    UNKNOWN: -1
-};
-
-/**
- * Label of the messages type available.
- */
-export const MessageTypeLabel: Map<number, string> = new Map([
-    [MessageType.COMMAND, 'command'],
-    [MessageType.LOCATION, 'location'],
-    [MessageType.ACKNOWLEDGE, 'acknowledge'],
-    [MessageType.INFORMATION, 'information'],
-    [MessageType.UNKNOWN, 'unknown']
-]);
-
-/**
- * Class to represent a message received from a tracker.
- */
-export class TrackerMessage {
-    /**
-     * Type of the message exchanged.
-     */
-    public type: number;
-
-    /**
-     * Direction of the data exchanged.
-     */
-    public direction: number;
-
-    /**
-     * Decoded content of the message.
-     */
-    public data: any;
-
-    /**
-     * Original message content as received.
-     */
-    public rawData: string;
-
-    /**
-     * Date of the message.
-     */
-    public date: Date;
-
-    constructor(direction: number) {
-        this.direction = direction;
-        this.date = new Date();
-        this.type = MessageType.UNKNOWN;
-    }
-}
+import {MessageDirection, MessageType, TrackerMessage} from './tracker-message';
+import {Modal} from '../screens/modal';
+import {URLUtils} from '../utils/url-utils';
 
 /**
  * Tracker represents a GPS tracker, contains all the metadata required to communicate with the tracker.
@@ -166,10 +101,80 @@ export class Tracker {
     }
 
     /**
-     * Get last known location of the tracker.
+     * Get last known location of the tracker from its message list.
      */
     public getLastLocation(): any {
+        for (let i = 0; i < this.messages.length; i++) {
+            if (this.messages[i].type === MessageType.LOCATION) {
+                return this.messages[i].data;
+            }
+        }
 
+        return null;
+    }
+
+    /**
+     * Process a message received from SMS and store its result on a tracker message.
+     *
+     * @param message Message received.
+     */
+    public receiveSMS(message: string) {
+        let msg = new TrackerMessage(MessageDirection.RECEIVED);
+        msg.rawData = message;
+
+        // Acknowledge message
+        if (message === 'admin ok' || message === 'apn ok' || message === 'password ok' || message === 'speed ok' || message === 'ok') {
+            msg.type = MessageType.ACKNOWLEDGE;
+        }
+
+        // List of SOS numbers
+        if (message.startsWith('101#')) {
+            msg.type = MessageType.SOS_NUMBERS;
+            // console.log('CarTracker: Received list of SOS numbers.', message);
+            let numbers = message.split(' ');
+            for (let i = 0; i < numbers.length;  i++) {
+                this.sosNumbers[i] = numbers[i].substr(4);
+            }
+        }
+
+        // Multiline messages
+        let fields = message.split('\n');
+
+        // Location message
+        if (fields.length === 6) {
+            let url = fields[0];
+            let params = URLUtils.getQueryParameters(url);
+
+            msg.type = MessageType.LOCATION;
+            msg.data = {
+                coords: null,
+                // tslint:disable-next-line:radix
+                id: Number.parseInt(fields[1].split(':')[1]),
+                acc: fields[2].split(':')[1] !== 'OFF',
+                gps: fields[3].split(':')[1] === 'A',
+                speed: Number.parseFloat(fields[4].split(':')[1]),
+                date: fields[5]
+            };
+        }
+
+        // Information message
+        if (fields.length === 8) {
+            msg.type = MessageType.INFORMATION;
+            msg.data = {
+                model: fields[0],
+                id: fields[1].split(':')[1],
+                ip: fields[2].split(':')[1],
+                battery: Number.parseInt(fields[3].split(':')[1], 10),
+                apn: fields[4].split(':')[1],
+                gps: fields[5].split(':')[1],
+                gsm: fields[6].split(':')[1],
+                iccid: fields[7].split(':')[1],
+            };
+        }
+
+        Modal.toast(Locale.get('trackerUpdated', {tracker: this.name}));
+        this.messages.push(msg);
+        App.store();
     }
 
     /**

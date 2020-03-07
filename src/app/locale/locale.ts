@@ -53,12 +53,21 @@ export class Locale {
 	}
 
 	/**
-	 * Get a translation entry from the service.
+	 * Get a translation entry from the service, can receive parameters swapped in the translation text.
+	 *
+	 * Parameters have to written as {parameter} in the middle of the translation text.
 	 *
 	 * @param key Name of the entry to be fetched.
+	 * @param parameters Object with parameters to replace value in the translation.
 	 */
-	public static get(key: string) {
-		return this.translations[this.code][key];
+	public static get(key: string, parameters?: any) {
+		let text = this.translations[this.code][key];
+		if (parameters !== undefined) {
+			for (let i in parameters) {
+				text = text.replace('{' + i + '}', parameters[i]);
+			}
+		}
+		return text;
 	}
 
 	/**

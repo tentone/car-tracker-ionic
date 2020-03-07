@@ -2,7 +2,7 @@ import {Platform} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {Navigation} from './navigation';
 import {Settings} from './data/settings';
-import {MessageDirection, MessageType, Tracker, TrackerMessage} from './data/tracker';
+import {Tracker} from './data/tracker';
 import {LocalStorage} from './utils/local-storage';
 import * as mapboxgl from 'mapbox-gl';
 import {Environment} from '../environments/environment';
@@ -77,81 +77,12 @@ export class App {
             for (let i = 0; i < App.trackers.length; i++) {
                 if (App.trackers[i].phoneNumber === phoneNumber) {
                     console.log('CarTracker: Received data for tracker.', App.trackers[i]);
-                    App.trackers[i].messages.push(App.parseMessage(message, App.trackers[i]));
+                    App.trackers[i].receiveSMS(message);
                 }
             }
 
             App.store();
         });
-    }
-
-    /**
-     * Parse a message received from SMS and store its result on a tracker message.
-     *
-     * @param message Message received.
-     * @param tracker Tracker that sent this message.
-     */
-    public static parseMessage(message: string, tracker: Tracker): TrackerMessage {
-        let msg = new TrackerMessage(MessageDirection.RECEIVED);
-        msg.rawData = message;
-        msg.date = new Date();
-
-        // Acknowledge message
-        if (message === 'admin ok' || message === 'apn ok' || message === 'password ok' || message === 'speed ok' || message === 'ok') {
-            msg.data = message;
-            msg.type = MessageType.ACKNOWLEDGE;
-            return msg;
-        }
-
-        // List of SOS numbers
-        if (message.startsWith('101#')) {
-            console.log('CarTracker: Received list of SOS numbers.', message);
-            let numbers = message.split(' ');
-            for (let i = 0; i < numbers.length;  i++) {
-                tracker.sosNumbers[i] = numbers[i].substr(4);
-            }
-        }
-
-        // Multiline messages
-        let fields = message.split('\n');
-
-        // Location message
-        if (fields.length === 6) {
-            try {
-                let url = fields[0];
-                msg.data = {
-                    coords: null,
-                    // tslint:disable-next-line:radix
-                    id: Number.parseInt(fields[1].split(':')[1]),
-                    acc: fields[2].split(':')[1] !== 'OFF',
-                    gps: fields[3].split(':')[1] === 'A',
-                    speed: Number.parseFloat(fields[4].split(':')[1]),
-                    date: fields[5]
-                };
-                return msg;
-            } catch (e) {}
-        }
-        // Information message
-        if (fields.length === 8) {
-            try {
-                msg.data = {
-                    model: fields[0],
-                    id: fields[1].split(':')[1],
-                    ip: fields[2].split(':')[1],
-                    battery: Number.parseInt(fields[3].split(':')[1], 10),
-                    apn: fields[4].split(':')[1],
-                    gps: fields[5].split(':')[1],
-                    gsm: fields[6].split(':')[1],
-                    iccid: fields[7].split(':')[1],
-                };
-                return msg;
-            } catch (e) {}
-        }
-
-        msg.data = null;
-        msg.type = MessageType.UNKNOWN;
-
-        return msg;
     }
 
     /**

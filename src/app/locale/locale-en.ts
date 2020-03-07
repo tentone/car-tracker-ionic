@@ -1,6 +1,9 @@
 export const LocaleEN = {
 	en: 'English',
 
+	theme: 'Theme',
+	base: 'Base',
+	locale: 'Locale',
 	trackers: 'Trackers',
 	map: 'Map',
 	settings: 'Settings',
@@ -33,6 +36,7 @@ export const LocaleEN = {
 	deleteTrackerConfirm: 'Do you want to delete the tracker? Action can not be undone.',
 	deleteSosNumber: 'Delete SOS Number',
 	addSosNumber: 'Add SOS Number',
+	sosNumbers: 'SOS Numbers',
 	deleteTracker: 'Delete Tracker',
 	invalidDate: 'Invalid Date',
 	export: 'Export',
@@ -67,6 +71,9 @@ export const LocaleEN = {
 	mixed: 'Mixed',
 	light: 'Light',
 	dark: 'Dark',
+
+	// Alerts
+	trackerUpdated: 'Tracker {tracker} updated.',
 
 	// Error
 	requiredField: 'Required Field',

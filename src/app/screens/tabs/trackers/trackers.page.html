@@ -9,7 +9,7 @@
     <ng-container *ngFor="let tracker of app.trackers">
       <ion-item *ngIf="stringUtils.searchObject(search, tracker, ['name'])" button (click)="app.navigator.navigate('/tabs/trackers/view', tracker)">
         <ion-label>{{tracker.name | translate }}</ion-label>
-        <ion-icon slot="end" name="arrow-dropright"></ion-icon>
+        <ion-icon name="arrow-forward-outline"></ion-icon>
       </ion-item>
     </ng-container>
   </ion-list>
