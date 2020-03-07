@@ -13,6 +13,8 @@ import {File} from '@ionic-native/file/ngx';
 import {Chooser} from '@ionic-native/chooser/ngx';
 import {SmsIo} from './io/sms-io';
 import {Geolocation} from "@ionic-native/geolocation/ngx";
+import {Themes} from './theme';
+import set = Reflect.set;
 
 /**
  * The app class is used to access and store all persistent data used in the application.
@@ -56,7 +58,8 @@ export class App {
      * @param sms SMS handler,
      * @param contacts Contact access.
      * @param file Mobile file access.
-     * @param chooser Mobile file chooser,
+     * @param chooser Mobile file chooser.
+     * @param geolocation Geolocation module.
      */
     public static initialize(platform: Platform, router: Router, androidPermissions: AndroidPermissions, sms: SMS, contacts: Contacts, file: File, chooser: Chooser, geolocation: Geolocation) {
         // @ts-ignore
@@ -92,7 +95,7 @@ export class App {
         this.settings = LocalStorage.get('settings');
         this.trackers = LocalStorage.get('trackers');
 
-        console.log('CarTracker: Loaded data from storage.', this.trackers, this.settings);
+        // console.log('CarTracker: Loaded data from storage.', this.trackers, this.settings);
 
         if (this.settings === null) {
             this.settings = new Settings();
@@ -104,6 +107,8 @@ export class App {
               }
           }
         }
+
+        Themes.setTheme(this.settings.theme);
 
         if (this.trackers === null) {
             this.trackers = [];

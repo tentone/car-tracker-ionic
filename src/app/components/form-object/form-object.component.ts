@@ -26,7 +26,7 @@ export class FormObjectComponent implements OnChanges {
 	@Input() object: any = null;
 
 	/**
-	 * Callback method called when the object changes, receives the (object, attribute, newValue, oldValue) parameters.
+	 * Callback method called when the object changes, receives the (object, attribute, oldValue, newValue) parameters.
 	 */
 	@Input() onChange: Function = null;
 
@@ -133,12 +133,12 @@ export class FormObjectComponent implements OnChanges {
 	 * Attribute names can indicate nested objects (e.g. a:{b:{c:2}} the c value can be accessed as "a.b.c").
 	 *
 	 * @param object Object being edited.
-	 * @param attribute Name of the attribute in the object.
+	 * @param row Row of the layout.
 	 * @param value New value to be set.
 	 */
-	public setAttribute(object: any, attribute: string, value: any) {
+	public setAttribute(object: any, row: any, value: any) {
 		try  {
-			let attrs = attribute.split('.');
+			let attrs = row.attribute.split('.');
 			let sub = object;
 			let i;
 
@@ -147,13 +147,17 @@ export class FormObjectComponent implements OnChanges {
 			}
 
 			if (this.onChange !== null) {
-				this.onChange(object, attribute, sub[attrs[i]], value);
+				this.onChange(object, row.attribute, sub[attrs[i]], value);
+			}
+
+			if (row.onChange !== null) {
+				row.onChange(object, row.attribute, sub[attrs[i]], value);
 			}
 
 			sub[attrs[i]] = value;
 		} catch (e) {
 			if (!Environment.production) {
-				console.warn('CarTracker: Error assigning form attribute.', object, attribute);
+				console.warn('CarTracker: Error assigning form attribute.', object, row);
 			}
 		}
 	}
@@ -162,11 +166,11 @@ export class FormObjectComponent implements OnChanges {
 	 * Get attribute of an object to display in the form.
 	 *
 	 * @param object Object being edited.
-	 * @param attribute Name of the attribute in the object.
+	 * @param row Row of the layout.
 	 */
-	public getAttribute(object: any, attribute: string): any {
+	public getAttribute(object: any, row: any): any {
 		try  {
-			const attrs = attribute.split('.');
+			const attrs = row.attribute.split('.');
 			let value = object;
 
 			for (let i = 0; i < attrs.length; i++) {
@@ -176,7 +180,7 @@ export class FormObjectComponent implements OnChanges {
 			return value;
 		} catch (e) {
 			if (!Environment.production) {
-				console.warn('CarTracker: Error getting form attribute.', object, attribute);
+				console.warn('CarTracker: Error getting form attribute.', object, row);
 			}
 		}
 

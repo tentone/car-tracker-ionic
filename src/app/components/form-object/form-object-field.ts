@@ -35,4 +35,9 @@ export class FormObjectField {
 	 * List of options required for some type of fields.
 	 */
 	public options?: any[];
+
+	/**
+	 * Method called when an attribute is changed, receives (object, attribute, oldValue, newValue) parameters.
+	 */
+	public onChange?: Function;
 }
