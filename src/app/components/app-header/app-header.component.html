@@ -2,7 +2,7 @@
 	<ion-toolbar>
 		<ion-buttons>
 			<ion-button *ngIf="app.navigator.route.length > 1" color="primary" fill="clear" slot="start" size="small" (click)="this.app.navigator.pop();">
-				<ion-icon name="arrow-dropleft"></ion-icon>
+				<ion-icon name="arrow-back-outline"></ion-icon>
 				<ion-text>{{'back' | translate}}</ion-text>
 			</ion-button>
 			<ion-title>{{this.title | translate}}</ion-title>
