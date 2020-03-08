@@ -7,6 +7,7 @@ import {Locale} from '../../../../locale/locale';
 import {ActivatedRoute} from '@angular/router';
 import {ActionSheetController} from '@ionic/angular';
 import {FileIo} from '../../../../io/file-io';
+import {Modal} from '../../../modal';
 
 @Component({
   selector: 'app-trackers-view',
@@ -58,8 +59,12 @@ export class TrackersViewPage extends ScreenComponent {
           text: Locale.get('setSleepTime'),
           icon: 'bed',
           handler: () => {
-            let time = prompt(Locale.get('sleepTime'));
-            this.tracker.setSleepTime(Number(time));
+            Modal.prompt(Locale.get('sleepTime'), [{name: 'sleepTime', placeholder: Locale.get('sleepTime'), type: 'number'}], (confirm, data) => {
+              if (confirm) {
+                const sleepTime = Number.parseInt(data.sleepTime, 10);
+                this.tracker.setSleepTime(sleepTime);
+              }
+            });
           }
         },
         {

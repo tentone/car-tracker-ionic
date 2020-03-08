@@ -5,6 +5,7 @@ import {SmsIo} from '../io/sms-io';
 import {MessageDirection, MessageType, TrackerMessage} from './tracker-message';
 import {Modal} from '../screens/modal';
 import {URLUtils} from '../utils/url-utils';
+import {GPSPosition} from './gps-position';
 
 /**
  * Tracker represents a GPS tracker, contains all the metadata required to communicate with the tracker.
@@ -96,6 +97,21 @@ export class Tracker {
      */
     public battery: number = 0;
 
+    /**
+     * Access Point Name (APN) configured on the tracker for GPRS data access.
+     */
+    public apn: string;
+
+    /**
+     * Integrated Circuit Card Identifier (ICCID) of the SIM card inserted in the tracker.
+     */
+    public iccid: string;
+
+    /**
+     * ID of the tracker device.
+     */
+    public id: string;
+
     constructor() {
         this.uuid = UUIDUtils.generate();
     }
@@ -125,56 +141,69 @@ export class Tracker {
         // Acknowledge message
         if (message === 'admin ok' || message === 'apn ok' || message === 'password ok' || message === 'speed ok' || message === 'ok') {
             msg.type = MessageType.ACKNOWLEDGE;
+            Modal.toast(Locale.get('trackerAcknowledge', {name: this.name}));
         }
-
         // List of SOS numbers
-        if (message.startsWith('101#')) {
+        else if (message.startsWith('101#')) {
             msg.type = MessageType.SOS_NUMBERS;
             // console.log('CarTracker: Received list of SOS numbers.', message);
             let numbers = message.split(' ');
             for (let i = 0; i < numbers.length;  i++) {
                 this.sosNumbers[i] = numbers[i].substr(4);
             }
+            Modal.toast(Locale.get('trackerAcknowledge', {name: this.name}));
+        } else {
+            // Multiline messages
+            let fields = message.split('\n');
+
+            // Location message
+            if (fields.length === 6) {
+                let values = URLUtils.getQueryParameters(fields[0]);
+                values = values.q.split(',');
+
+                const coords = new GPSPosition(
+                    Number.parseFloat(values[0].substr(1)),
+                    Number.parseFloat(values[1].substr(1))
+                );
+
+                msg.type = MessageType.LOCATION;
+                msg.data = {
+                    position: coords,
+                    // tslint:disable-next-line:radix
+                    id: Number.parseInt(fields[1].split(':')[1]),
+                    acc: fields[2].split(':')[1] !== 'OFF',
+                    gps: fields[3].split(':')[1] === 'A',
+                    speed: Number.parseFloat(fields[4].split(':')[1]),
+                    date: fields[5]
+                };
+
+                Modal.toast(Locale.get('trackerLocation', {name: this.name}));
+            }
+
+            // Information message
+            if (fields.length === 8) {
+                msg.type = MessageType.INFORMATION;
+                msg.data = {
+                    model: fields[0],
+                    id: fields[1].split(':')[1],
+                    ip: fields[2].split(':')[1],
+                    battery: Number.parseInt(fields[3].split(':')[1], 10),
+                    apn: fields[4].split(':')[1],
+                    gps: fields[5].split(':')[1],
+                    gsm: fields[6].split(':')[1],
+                    iccid: fields[7].split(':')[1],
+                };
+
+                this.battery = msg.data.battery;
+                this.model = msg.data.model;
+                this.apn = msg.data.apn;
+                this.iccid = msg.data.iccid;
+                this.id = msg.data.id;
+
+                Modal.toast(Locale.get('trackerUpdated', {name: this.name}));
+            }
         }
 
-        // Multiline messages
-        let fields = message.split('\n');
-
-        // Location message
-        if (fields.length === 6) {
-            let url = fields[0];
-            let params = URLUtils.getQueryParameters(url);
-
-            // console.log('CarTracker: Location received.', params);
-
-            msg.type = MessageType.LOCATION;
-            msg.data = {
-                coords: null,
-                // tslint:disable-next-line:radix
-                id: Number.parseInt(fields[1].split(':')[1]),
-                acc: fields[2].split(':')[1] !== 'OFF',
-                gps: fields[3].split(':')[1] === 'A',
-                speed: Number.parseFloat(fields[4].split(':')[1]),
-                date: fields[5]
-            };
-        }
-
-        // Information message
-        if (fields.length === 8) {
-            msg.type = MessageType.INFORMATION;
-            msg.data = {
-                model: fields[0],
-                id: fields[1].split(':')[1],
-                ip: fields[2].split(':')[1],
-                battery: Number.parseInt(fields[3].split(':')[1], 10),
-                apn: fields[4].split(':')[1],
-                gps: fields[5].split(':')[1],
-                gsm: fields[6].split(':')[1],
-                iccid: fields[7].split(':')[1],
-            };
-        }
-
-        Modal.toast(Locale.get('trackerUpdated', {tracker: this.name}));
         this.messages.push(msg);
         App.store();
     }

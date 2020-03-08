@@ -73,7 +73,9 @@ export const LocaleEN = {
 	dark: 'Dark',
 
 	// Alerts
-	trackerUpdated: 'Tracker {tracker} updated.',
+	trackerUpdated: 'Tracker {name} information updated.',
+	trackerLocation: 'Tracker {name} location received.',
+	trackerAcknowledge: 'Tracker {name} updated.',
 
 	// Error
 	requiredField: 'Required Field',
