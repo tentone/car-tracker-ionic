@@ -191,11 +191,11 @@ export class FormObjectComponent implements OnChanges {
 	 * Check if a specific field of an object is empty.
 	 *
 	 * @param object Object being edited.
-	 * @param row Name of the attribute in the object.
+	 * @param row Row of the layout for the attribute.
 	 * @return True if the field is empty false otherwise.
 	 */
 	public fieldEmpty(object: any, row: any) {
-		let value = this.getAttribute(object, row.attribute);
+		let value = this.getAttribute(object, row);
 
 		if (row.isEmpty !== undefined) {
 			return row.isEmpty(object, row);
@@ -214,15 +214,13 @@ export class FormObjectComponent implements OnChanges {
 	 * Select a contact from the system contact manager.
 	 *
 	 * @param object Object to store the result into.
-	 * @param attribute Attribute of the result.
+	 * @param row Row of the layout for the attribute.
 	 */
-	public selectContact(object: any, attribute: any) {
+	public selectContact(object: any, row: any) {
 		App.contacts.pickContact().then((data) => {
 			if (data.phoneNumbers.length > 0) {
-				this.setAttribute(object, attribute, data.phoneNumbers[0].value);
+				this.setAttribute(object, row, data.phoneNumbers[0].value);
 			}
-
-			console.log(data);
 		});
 	}
 }

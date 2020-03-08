@@ -9,7 +9,14 @@ export class URLUtils {
 	 */
 	static getQueryParameters(url?: string): any {
 		if (url === undefined) {
-			url = location.search.substring(1);
+			// Get URL from window location
+			url = window.location.search.substring(1);
+		} else {
+			// Split URL and arguments
+			const urls = url.split('?');
+			if (urls.length > 1) {
+				url = urls[1];
+			}
 		}
 
 		const values = url.split('&');

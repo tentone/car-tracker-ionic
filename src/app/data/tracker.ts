@@ -145,6 +145,8 @@ export class Tracker {
             let url = fields[0];
             let params = URLUtils.getQueryParameters(url);
 
+            // console.log('CarTracker: Location received.', params);
+
             msg.type = MessageType.LOCATION;
             msg.data = {
                 coords: null,
