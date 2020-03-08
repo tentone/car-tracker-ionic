@@ -75,7 +75,7 @@ export class Gt901Mockup implements Mockup{
             // TODO <Set pwrcall>
         } else if (message === 'g1234') {
             const speed = (Math.random() * 120).toFixed(2);
-            const n = (Math.random() * 180).toFixed(5);
+            const n = (Math.random() * 90).toFixed(5);
             const w = (Math.random() * 180).toFixed(5);
             const acc = 'OFF';
             const date = new Date();

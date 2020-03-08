@@ -146,18 +146,19 @@ export class FormObjectComponent implements OnChanges {
 				sub = sub[attrs[i]];
 			}
 
-			if (this.onChange !== null) {
-				this.onChange(object, row.attribute, sub[attrs[i]], value);
-			}
-
-			if (row.onChange !== null) {
-				row.onChange(object, row.attribute, sub[attrs[i]], value);
-			}
-
+			const oldValue = sub[attrs[i]];
 			sub[attrs[i]] = value;
+
+			if (this.onChange instanceof Function) {
+				this.onChange(object, row.attribute, oldValue, value);
+			}
+
+			if (row.onChange instanceof Function) {
+				row.onChange(object, row.attribute, oldValue, value);
+			}
 		} catch (e) {
 			if (!Environment.production) {
-				console.warn('CarTracker: Error assigning form attribute.', object, row);
+				console.warn('CarTracker: Error assigning form attribute.', e, object, row);
 			}
 		}
 	}

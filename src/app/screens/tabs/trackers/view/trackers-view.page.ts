@@ -16,6 +16,13 @@ import {Modal} from '../../../modal';
 export class TrackersViewPage extends ScreenComponent {
   get layout() { return TrackersLayout.layout; }
   get app() { return App; }
+  get trackerLocation() {
+    if (this.tracker === null) {
+      return null;
+    }
+
+    return this.tracker.getLastPosition();
+  }
 
   constructor(public route: ActivatedRoute, public elementRef: ElementRef) {
     super(route, elementRef);
@@ -25,6 +32,14 @@ export class TrackersViewPage extends ScreenComponent {
    * Tracker being edited on this page.
    */
   public tracker: Tracker = null;
+
+  public onDisplay() {
+    this.tracker = App.navigator.getData();
+
+    if (this.tracker === null) {
+      App.navigator.pop();
+    }
+  }
 
   /**
    * Open action sheet with options to edit the tracker.
@@ -71,24 +86,34 @@ export class TrackersViewPage extends ScreenComponent {
           text: Locale.get('setTimezone'),
           icon: 'time',
           handler: () => {
-            let timezone = prompt(Locale.get('timezone'));
-            this.tracker.setTimezone(timezone);
+            Modal.prompt(Locale.get('timezone'), [{name: 'timezone', placeholder: Locale.get('timezone')}], (confirm, data) => {
+              if (confirm) {
+                this.tracker.setTimezone(data.timezone);
+              }
+            });
           }
         },
         {
           text: Locale.get('setSpeedLimit'),
           icon: 'speedometer',
           handler: () => {
-            let speed = prompt(Locale.get('maxSpeed'));
-            this.tracker.setSpeedLimit(Number(speed));
+            Modal.prompt(Locale.get('maxSpeed'), [{name: 'maxSpeed', placeholder: Locale.get('maxSpeed'), type: 'number'}], (confirm, data) => {
+              if (confirm) {
+                const maxSpeed = Number.parseInt(data.maxSpeed, 10);
+                this.tracker.setSpeedLimit(maxSpeed);
+              }
+            });
           }
         },
         {
           text: Locale.get('changePin'),
           icon: 'key',
           handler: () => {
-            let pin = prompt(Locale.get('changePin'));
-            this.tracker.changePIN(pin);
+            Modal.prompt(Locale.get('changePin'), [{name: 'pin', placeholder: Locale.get('changePin')}], (confirm, data) => {
+              if (confirm) {
+                this.tracker.changePIN(data.pin);
+              }
+            });
           }
         },
         {
@@ -102,17 +127,25 @@ export class TrackersViewPage extends ScreenComponent {
           text: Locale.get('addSosNumber'),
           icon: 'person-add',
           handler: () => {
-            let phoneNumber = prompt(Locale.get('phoneNumber'));
-            let slot = Number.parseInt(prompt(Locale.get('slot')), 10);
-            this.tracker.setSOSNumber(phoneNumber, slot);
+            Modal.prompt(Locale.get('slot'), [{name: 'slot', placeholder: Locale.get('slot'), type: 'number'}, {name: 'phoneNumber', placeholder: Locale.get('phoneNumber')}], (confirm, data) => {
+              if (confirm) {
+                let phoneNumber = data.phoneNumber;
+                let slot = Number.parseInt(data.slot, 10);
+                this.tracker.setSOSNumber(phoneNumber, slot);
+              }
+            });
           }
         },
         {
           text: Locale.get('deleteSosNumber'),
           icon: 'trash',
           handler: () => {
-            let slot = Number.parseInt(prompt(Locale.get('slot')), 10);
-            this.tracker.deleteSOSNumber(slot);
+            Modal.prompt(Locale.get('slot'), [{name: 'slot', placeholder: Locale.get('slot'), type: 'number'}], (confirm, data) => {
+              if (confirm) {
+                let slot = Number.parseInt(data.slot, 10);
+                this.tracker.deleteSOSNumber(slot);
+              }
+            });
           }
         },
         {
@@ -140,13 +173,5 @@ export class TrackersViewPage extends ScreenComponent {
       ]}).then((actionSheet) => {
       actionSheet.present();
     });
-  }
-
-  public onDisplay() {
-    this.tracker = App.navigator.getData();
-
-    if (this.tracker === null) {
-      App.navigator.pop();
-    }
   }
 }

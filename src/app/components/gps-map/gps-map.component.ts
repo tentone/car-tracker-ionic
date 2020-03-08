@@ -1,4 +1,4 @@
-import {AfterContentChecked, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterContentChecked, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {App} from '../../app';
 import * as mapboxgl from 'mapbox-gl';
 import {GPSPosition} from '../../data/gps-position';
@@ -7,10 +7,10 @@ import {GPSPosition} from '../../data/gps-position';
 	selector: 'gps-map',
 	templateUrl: './gps-map.component.html'
 })
-export class GpsMapComponent implements OnInit, AfterContentChecked {
+export class GpsMapComponent implements OnInit, AfterContentChecked, OnChanges {
 	@ViewChild('mapContainer', {static: true}) mapContainer: ElementRef;
 
-	@Input() position: GPSPosition = new GPSPosition();
+	@Input() position: GPSPosition = null;
 
 	/**
 	 * Mapboxgl instance to display and control the map view.
@@ -61,10 +61,20 @@ export class GpsMapComponent implements OnInit, AfterContentChecked {
 		}, 100);
 	}
 
+	public ngOnChanges(changes: SimpleChanges): void {
+		this.updatePosition();
+	}
+
 	/**
 	 * Update map position from the position attribute.
 	 */
 	public updatePosition() {
+		// console.log('CarTracker: GPS updatePosition()', this.position);
+
+		if (this.position === null) {
+			return;
+		}
+
 		if(this.marker === null) {
 			this.marker = new mapboxgl.Marker();
 			this.marker.setLngLat([this.position.longitude, this.position.latitude]);

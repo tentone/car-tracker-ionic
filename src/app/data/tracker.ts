@@ -119,10 +119,10 @@ export class Tracker {
     /**
      * Get last known location of the tracker from its message list.
      */
-    public getLastLocation(): any {
+    public getLastPosition(): GPSPosition {
         for (let i = 0; i < this.messages.length; i++) {
             if (this.messages[i].type === MessageType.LOCATION) {
-                return this.messages[i].data;
+                return this.messages[i].data.position;
             }
         }
 

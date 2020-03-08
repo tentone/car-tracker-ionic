@@ -10,6 +10,7 @@ export const LocaleEN = {
 	test: 'Test',
 	slot: 'Slot',
 	options: 'Options',
+	ok: 'Ok',
 	add: 'Add',
 	cancel: 'Cancel',
 	delete: 'Delete',
