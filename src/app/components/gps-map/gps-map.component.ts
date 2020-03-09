@@ -59,6 +59,10 @@ export class GpsMapComponent implements OnInit, AfterContentChecked, OnChanges {
 		setTimeout(() => {
 			this.map.resize();
 		}, 100);
+
+		if(this.position !== null) {
+			this.updatePosition();
+		}
 	}
 
 	public ngOnChanges(changes: SimpleChanges): void {
@@ -71,7 +75,7 @@ export class GpsMapComponent implements OnInit, AfterContentChecked, OnChanges {
 	public updatePosition() {
 		// console.log('CarTracker: GPS updatePosition()', this.position);
 
-		if (this.position === null) {
+		if (this.map === null || this.position === null) {
 			return;
 		}
 
