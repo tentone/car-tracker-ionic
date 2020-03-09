@@ -36,7 +36,7 @@ npm run start
 | admin[pw] [phone]      | Set the admin phone number used for the GPS to return information. | admin ok                                                     |
 | apn[pw] [value]        | Set the APN value for the SIM card carrier                   | apn ok                                                       |
 | password[pw] [newpw]   | Change the password of the device, by default the password is 123456. | password ok                                                  |
-| g1234                  | Get the location of the tracker, car velocity, date and ACC status | http://maps.google.cn/maps?q=N40.93956%2cW008.53900<br/>ID:9171072755<br/>ACC:OFF<br/>GPS:A<br/>Speed:38.00KM/H<br/>19-12-30 03:20:08 |
+| g1234                  | Get the location of the tracker, car velocity, date and ACC status | http://maps.google.cn/maps?q=N40.93956,W008.53900<br/>ID:9171072755<br/>ACC:OFF<br/>GPS:A<br/>Speed:38.00KM/H<br/>19-12-30 03:20:08 |
 | 10[n]#[phone]#         | Set SOS phone number slot n. Slots from 1 to 3 available.    | ok                                                           |
 | D10[n]#                | Delete SOS phone number on slot n.                           | ok                                                           |
 | C10#                   | List the SOS phone numbers registered in the device.         | 101#[Phone1] 102#[Phone2] 103#[Phone3]                       |
