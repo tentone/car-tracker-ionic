@@ -158,13 +158,16 @@ export class Tracker {
 
             // Location message
             if (fields.length === 6) {
-                let values = URLUtils.getQueryParameters(fields[0]);
-                values = values.q.split(',');
+                let coords = null;
+                let values = fields[0].split('=');
 
-                const coords = new GPSPosition(
-                    Number.parseFloat(values[0].substr(1)),
-                    Number.parseFloat(values[1].substr(1))
-                );
+                if(values.length > 1) {
+                    values = values[1].split(',');
+                    coords = new GPSPosition(
+                        Number.parseFloat(values[0].substr(1)),
+                        Number.parseFloat(values[1].substr(1))
+                    );
+                }
 
                 msg.type = MessageType.LOCATION;
                 msg.data = {

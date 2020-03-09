@@ -80,7 +80,7 @@ export class Gt901Mockup implements Mockup{
             const acc = 'OFF';
             const date = new Date();
             const time = date.getUTCDay() + '-' + date.getUTCMonth() + '-' + date.getUTCFullYear() + ' ' + date.getUTCHours() + ':' + date.getUTCMinutes() + ':' + date.getUTCSeconds();
-            this.respondSMS('http://maps.google.cn/maps?q=N' + n + '%2cW' + w + '\nID:' + this.id + '\nACC:' + acc + '\nGPS:A\nSpeed:' + speed + 'KM/H\n' + time, phoneNumber);
+            this.respondSMS('http://maps.google.cn/maps?q=N' + n + ',W' + w + '\nID:' + this.id + '\nACC:' + acc + '\nGPS:A\nSpeed:' + speed + 'KM/H\n' + time, phoneNumber);
         } else if (message === 'CXZT') {
             this.respondSMS('XM_GT09_SW_33.0 2019/08/08\nID:' + this.id + '\nIP:27.aika168.com 8185\nBAT:' + this.battery + '\nAPN:' + this.apn + '\nGPS:V-13-9\nGSM:22\nICCID:' + this.iccid, phoneNumber);
         } else if (message === '109#') {
