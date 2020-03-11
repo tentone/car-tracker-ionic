@@ -50,28 +50,28 @@ export class Gt901Mockup implements Mockup{
     public sendSMS(message: string, phoneNumber: string) {
         console.log('CarTracker: GT-901 mockup received SMS.', message, phoneNumber);
 
-        if(message.search(new RegExp('admin' + this.password + ' ([0-9a-zA-Z])+')) > 0) {
+        if(message.search(new RegExp('admin' + this.password + ' ([0-9a-zA-Z])+')) > -1) {
             this.respondSMS('admin ok', phoneNumber);
-        } else if(message.search(new RegExp('apn' + this.password + ' ([0-9a-zA-Z])+')) > 0) {
+        } else if(message.search(new RegExp('apn' + this.password + ' ([0-9a-zA-Z])+')) > -1) {
             // TODO <Set apn>
             this.respondSMS('apn ok', phoneNumber);
-        } else if (message.search(new RegExp('password' + this.password + ' ([0-9a-zA-Z])+')) > 0) {
+        } else if (message.search(new RegExp('password' + this.password + ' ([0-9a-zA-Z])+')) > -1) {
             // TODO <Set password>
             this.respondSMS('password ok', phoneNumber);
-        } else if (message.search(new RegExp('speed' + this.password + ' ([0-9])+')) > 0) {
+        } else if (message.search(new RegExp('speed' + this.password + ' ([0-9])+')) > -1) {
             // TODO <Set speed>
             this.respondSMS('speed ok', phoneNumber);
-        } else if (message.search(new RegExp('zone' + this.password + ' ([A-Z]+[0-9])+')) > 0) {
+        } else if (message.search(new RegExp('zone' + this.password + ' ([A-Z]+[0-9])+')) > -1) {
             // TODO <Set zone>
             this.respondSMS('ok', phoneNumber);
-        } else if (message.search(new RegExp('sleep,' + this.password + ',([0-9])+')) > 0) {
+        } else if (message.search(new RegExp('sleep,' + this.password + ',([0-9])+')) > -1) {
             // TODO <Set sleep>
             this.respondSMS('ok', phoneNumber);
-        } else if (message.search(new RegExp('accclock,' + this.password + ',(0|1)')) > 0) {
+        } else if (message.search(new RegExp('accclock,' + this.password + ',(0|1)')) > -1) {
             // TODO <Set accclock>
-        } else if (message.search(new RegExp('pwrsms' + this.password + ',(0|1)')) > 0) {
+        } else if (message.search(new RegExp('pwrsms' + this.password + ',(0|1)')) > -1) {
             // TODO <Set pwrsms>
-        } else if (message.search(new RegExp('pwrcall' + this.password + ',(0|1)')) > 0) {
+        } else if (message.search(new RegExp('pwrcall' + this.password + ',(0|1)')) > -1) {
             // TODO <Set pwrcall>
         } else if (message === 'g1234') {
             const speed = (Math.random() * 120).toFixed(2);

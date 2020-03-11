@@ -77,6 +77,7 @@ export const LocaleEN = {
 	trackerUpdated: 'Tracker {name} information updated.',
 	trackerLocation: 'Tracker {name} location received.',
 	trackerAcknowledge: 'Tracker {name} updated.',
+	receivedUnknown: 'Tracker {name} responded with an Unknown command.',
 
 	// Error
 	requiredField: 'Required Field',

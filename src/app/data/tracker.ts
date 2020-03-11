@@ -4,7 +4,6 @@ import {Locale} from '../locale/locale';
 import {SmsIo} from '../io/sms-io';
 import {MessageDirection, MessageType, TrackerMessage} from './tracker-message';
 import {Modal} from '../screens/modal';
-import {URLUtils} from '../utils/url-utils';
 import {GPSPosition} from './gps-position';
 
 /**
@@ -205,6 +204,10 @@ export class Tracker {
 
                 Modal.toast(Locale.get('trackerUpdated', {name: this.name}));
             }
+        }
+
+        if (msg.type === MessageType.UNKNOWN) {
+            Modal.toast(Locale.get('receivedUnknown', {name: this.name}));
         }
 
         this.messages.push(msg);
