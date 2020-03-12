@@ -23,6 +23,7 @@ export class Gt901Mockup implements Mockup{
     public speed: string = '';
     public sleep: string = '';
     public zone: string = '';
+    public accClock: boolean = false;
     private battery: string = '5';
 
     /**
@@ -50,30 +51,65 @@ export class Gt901Mockup implements Mockup{
     public sendSMS(message: string, phoneNumber: string) {
         console.log('CarTracker: GT-901 mockup received SMS.', message, phoneNumber);
 
-        if(message.search(new RegExp('admin' + this.password + ' ([0-9a-zA-Z])+')) > -1) {
+        const adminRegex = new RegExp('admin' + this.password + ' ([0-9a-zA-Z]+)');
+        if(message.search(adminRegex) > -1) {
+            this.admin = message.match(adminRegex)[1];
             this.respondSMS('admin ok', phoneNumber);
-        } else if(message.search(new RegExp('apn' + this.password + ' ([0-9a-zA-Z])+')) > -1) {
-            // TODO <Set apn>
+            return;
+        }
+
+        const apnRegex = new RegExp('apn' + this.password + ' ([0-9a-zA-Z]+)');
+        if(message.search(apnRegex) > -1) {
+            this.apn = message.match(apnRegex)[1];
             this.respondSMS('apn ok', phoneNumber);
-        } else if (message.search(new RegExp('password' + this.password + ' ([0-9a-zA-Z])+')) > -1) {
-            // TODO <Set password>
+            return;
+        }
+
+        const passwordRegex = new RegExp('password' + this.password + ' ([0-9a-zA-Z]+)');
+        if (message.search(passwordRegex) > -1) {
+            this.password = message.match(passwordRegex)[1];
             this.respondSMS('password ok', phoneNumber);
-        } else if (message.search(new RegExp('speed' + this.password + ' ([0-9])+')) > -1) {
-            // TODO <Set speed>
+            return;
+        }
+
+        const speedRegex = new RegExp('speed' + this.password + ' ([0-9]+)');
+        if (message.search(speedRegex) > -1) {
+            this.speed = message.match(speedRegex)[1];
             this.respondSMS('speed ok', phoneNumber);
-        } else if (message.search(new RegExp('zone' + this.password + ' ([A-Z]+[0-9])+')) > -1) {
-            // TODO <Set zone>
+            return;
+        }
+
+        const zoneRegex = new RegExp('zone' + this.password + ' ([A-Z]+[0-9]+)');
+        if (message.search(zoneRegex) > -1) {
+            this.speed = message.match(zoneRegex)[1];
             this.respondSMS('ok', phoneNumber);
-        } else if (message.search(new RegExp('sleep,' + this.password + ',([0-9])+')) > -1) {
-            // TODO <Set sleep>
+            return;
+        }
+
+        const sleepRegex = new RegExp('sleep,' + this.password + ',([0-9]+)');
+        if (message.search(sleepRegex) > -1) {
+            this.sleep = message.match(sleepRegex)[1];
             this.respondSMS('ok', phoneNumber);
-        } else if (message.search(new RegExp('accclock,' + this.password + ',(0|1)')) > -1) {
-            // TODO <Set accclock>
-        } else if (message.search(new RegExp('pwrsms' + this.password + ',(0|1)')) > -1) {
+            return;
+        }
+
+        const accRegex = new RegExp('accclock,' + this.password + ',(0|1)');
+        if (message.search(accRegex) > -1) {
+            this.accClock = message.match(accRegex)[1] === '1';
+            return;
+        }
+
+        if (message.search(new RegExp('pwrsms' + this.password + ',(0|1)')) > -1) {
             // TODO <Set pwrsms>
-        } else if (message.search(new RegExp('pwrcall' + this.password + ',(0|1)')) > -1) {
+            return;
+        }
+
+        if (message.search(new RegExp('pwrcall' + this.password + ',(0|1)')) > -1) {
             // TODO <Set pwrcall>
-        } else if (message === 'g1234') {
+            return;
+        }
+
+        if (message === 'g1234') {
             const speed = (Math.random() * 120).toFixed(2);
             const n = (Math.random() * 90).toFixed(5);
             const w = (Math.random() * 180).toFixed(5);
@@ -81,15 +117,25 @@ export class Gt901Mockup implements Mockup{
             const date = new Date();
             const time = date.getUTCDay() + '-' + date.getUTCMonth() + '-' + date.getUTCFullYear() + ' ' + date.getUTCHours() + ':' + date.getUTCMinutes() + ':' + date.getUTCSeconds();
             this.respondSMS('http://maps.google.cn/maps?q=N' + n + ',W' + w + '\nID:' + this.id + '\nACC:' + acc + '\nGPS:A\nSpeed:' + speed + 'KM/H\n' + time, phoneNumber);
-        } else if (message === 'CXZT') {
+            return;
+        }
+
+        if (message === 'CXZT') {
             this.respondSMS('XM_GT09_SW_33.0 2019/08/08\nID:' + this.id + '\nIP:27.aika168.com 8185\nBAT:' + this.battery + '\nAPN:' + this.apn + '\nGPS:V-13-9\nGSM:22\nICCID:' + this.iccid, phoneNumber);
-        } else if (message === '109#') {
+            return;
+        }
+
+        if (message === '109#') {
             // TODO <Set language>
             this.respondSMS('ok', phoneNumber);
-        } else if (message === 'format') {
-            this.respondSMS('恢复出厂值成功，请从新绑定车主号码!', phoneNumber)
-        } else {
-            this.respondSMS('指令格式错误', phoneNumber);
+            return;
         }
+
+        if (message === 'format') {
+            this.respondSMS('恢复出厂值成功，请从新绑定车主号码!', phoneNumber);
+            return;
+        }
+
+        this.respondSMS('指令格式错误', phoneNumber);
     }
 }
