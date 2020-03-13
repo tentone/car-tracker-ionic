@@ -46,7 +46,7 @@ npm run start
 | 109#                   | Toggle the language between chinese and english.             | ok                                                           |
 | sleep,[pw],[sleep]     | Configure sleep mode/time of the tracker. (Cannot figure out the right way to use it). | ok                                                           |
 | zone[pw] [zone]        | Set the time zone of the SMS tracker. (E02 means, E08, etc)  | ok                                                           |
-| accclock,[pw],[0 or 1] | Enable/disable ignition auto security, used for thet tracker to send and SMS everytime the inginition is switched. | -                                                            |
+| accclock,[pw],[0 or 1] | Enable/disable ignition auto security, used for the tracker to send an SMS every time the ignition is switched. | -                                                            |
 | pwrsms[pw],[0 or 1]    | Enable/disable power SMS alarm sent if the alarm is disconnected from power. | -                                                            |
 | pwrcall[pw],[0 or 1]   | Enable/disable power call made by the tracker warning that it was disconnected from power. | -                                                            |
 | 12[n]#                 | Enable/disable shake call alarm (2 to enable, and 1 to disable). | -                                                            |
