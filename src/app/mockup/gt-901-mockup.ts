@@ -177,8 +177,29 @@ export class Gt901Mockup implements Mockup{
         // Set SOS number
         const sosNumberRegex = new RegExp('10(1|2|3)#([0-9a-zA-Z]+)#');
         if (message.search(sosNumberRegex) > -1) {
-            // TODO <SET SOS Number>
+            let matches = message.match(sosNumberRegex)
+            let idx = Number.parseInt(matches[1], 10) - 1;
+            this.sosNumbers[idx] = matches[2];
             this.respondSMS('ok', phoneNumber);
+            return;
+        }
+
+        // Delete SOS number
+        const deleteSosNumberRegex = new RegExp('D10(1|2|3)#');
+        if (message.search(deleteSosNumberRegex) > -1) {
+            let idx = Number.parseInt(message.match(deleteSosNumberRegex)[1], 10) - 1;
+            this.sosNumbers[idx] = '';
+            this.respondSMS('ok', phoneNumber);
+            return;
+        }
+
+        // List SOS numbers
+        if (message === 'C10#') {
+            let msg = '';
+            for (let i = 0; i < this.sosNumbers.length; i++) {
+                msg += '10' + (i + 1) + '#' + this.sosNumbers[i];
+            }
+            this.respondSMS(msg, phoneNumber);
             return;
         }
 
