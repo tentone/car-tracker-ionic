@@ -22,8 +22,9 @@ npm run start
 ### Features
 
  - Manage multiple GPS car trackers.
- - Store and list messages exchanged with the car tracker.
- - Export stored data as file for backup
+ - Set multiple parameter of the tracker (speed limit, sleep time, password, distance alarm, etc)
+ - Manage and list messages exchanged with the car tracker and keep track of SMS cost.
+ - Export stored data as file for backup as JSON.
 
 
 
@@ -62,7 +63,7 @@ npm run start
 | ------------------------------------------------------------ | ------------------------------------------------- |
 | 您的设备掉主电报警，请关注!                                  | Device was powered off (disconnected from power). |
 | 指令格式错误                                                 | Unknown instruction                               |
-| http://maps.google.cn/maps> ID:9171072755 ACC:OFF GPS:V Speed:0 KM/H 19-12-29 23:22:22 | M                                                 |
+| http://maps.google.cn/maps ID:9171072755 ACC:OFF GPS:V Speed:0 KM/H 19-12-29 23:22:22 | M                                                 |
 
 
 

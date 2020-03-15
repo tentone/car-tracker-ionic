@@ -6,4 +6,5 @@
     <gps-map [position]="this.trackerLocation"></gps-map>
   </div>
   <ion-button expand="block" (click)="this.tracker.getLocation();">{{'updateLocation' | translate}}</ion-button>
+  <ion-button expand="block" (click)="this.tracker.navigateGPS();">{{'navigate' | translate}}</ion-button>
 </ion-content>

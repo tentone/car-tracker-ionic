@@ -2,7 +2,7 @@ import {UUIDUtils} from '../utils/uuid-utils';
 import {App} from '../app';
 import {Locale} from '../locale/locale';
 import {SmsIo} from '../io/sms-io';
-import {MessageDirection, MessageType, TrackerMessage} from './tracker-message';
+import {InformationData, LocationData, MessageDirection, MessageType, TrackerMessage} from './tracker-message';
 import {Modal} from '../screens/modal';
 import {GPSPosition} from './gps-position';
 
@@ -107,12 +107,35 @@ export class Tracker {
     public iccid: string;
 
     /**
-     * ID of the tracker device.
+     * ID of the tracker device, each tracker has its own ID.
      */
     public id: string;
 
     constructor() {
         this.uuid = UUIDUtils.generate();
+    }
+
+    /**
+     * Navigate to a GPS position, should open in external application.
+     *
+     * The phone should ask which application to use.
+     *
+     * @param position GPS position to navigate to.
+     */
+    public navigateGPS(position?: GPSPosition) {
+        // If position not defined use the last GPS position.
+        if (position === undefined) {
+            for (let i = 0; i < this.messages.length; i++) {
+                if (this.messages[i].type === MessageType.LOCATION && this.messages[i].data.position !== null) {
+                    position = this.messages[i].data.position;
+                    break;
+                }
+            }
+        }
+
+        // Open as a google maps link
+        const url = 'http://maps.google.com/maps?q=N' + position.latitude + ',W' + position.longitude;
+        window.open(url, '_blank');
     }
 
     /**
@@ -140,62 +163,97 @@ export class Tracker {
         // Acknowledge message
         if (message === 'admin ok' || message === 'apn ok' || message === 'password ok' || message === 'speed ok' || message === 'ok') {
             msg.type = MessageType.ACKNOWLEDGE;
+            this.messages.push(msg);
             Modal.toast(Locale.get('trackerAcknowledge', {name: this.name}));
+            App.store();
+            return;
         }
+
         // List of SOS numbers
-        else if (message.startsWith('101#')) {
+        if (message.startsWith('101#')) {
             msg.type = MessageType.SOS_NUMBERS;
-            // console.log('CarTracker: Received list of SOS numbers.', message);
+
             let numbers = message.split(' ');
             for (let i = 0; i < numbers.length;  i++) {
                 this.sosNumbers[i] = numbers[i].substr(4);
             }
+            this.messages.push(msg);
+
             Modal.toast(Locale.get('trackerAcknowledge', {name: this.name}));
-        } else {
-            const locationRegex = new RegExp('http://maps\.google\.cn/maps\?q=N([0-9\.]+),W([0-9\.]+) ID:([0-9]+) ACC:([A-Z]+) GPS:([A-Z]+) Speed:([0-9\.]+)KM/H ([0-9]+)\-([0-9]+)\-([0-9]+) ([0-9]+):([0-9]+):([0-9]+)');
-            console.log(message, locationRegex, message.search(locationRegex));
-            if (message.search(locationRegex) > -1) {
-                let matches = message.match(locationRegex);
-                // TODO <REMOVE>
-                console.log(matches);
-                msg.type = MessageType.LOCATION;
-                Modal.toast(Locale.get('trackerLocation', {name: this.name}));
-            }
+            App.store();
+            return;
+        }
 
+        // GPS Location
+        if (message.startsWith('htt')) {
+            const regex = /https?\:\/\/maps\.google\.cn\/maps\??q?=?N?([0-9\.]*),?W?([0-9\.]*) ID:([0-9]+) ACC:([A-Z]+) GPS:([A-Z]+) Speed:([0-9\.]+) ?KM\/H ([0-9]+)\-([0-9]+)\-([0-9]+) ([0-9]+):([0-9]+):([0-9]+)/;
+            let matches = message.match(regex);
+            let data = new LocationData();
+
+            if (matches[1].length > 0) {
+                data.position = new GPSPosition(Number.parseFloat(matches[1]), Number.parseFloat(matches[2]));
+            }
+            data.id = matches[3];
+            data.acc = matches[4] !== 'OFF';
+            data.gps = matches[5] === 'A';
+            data.speed = Number.parseFloat(matches[6]);
+
+            let year = Number.parseInt(matches[7], 10) + 2000;
+            let month = Number.parseInt(matches[8], 10);
+            let day = Number.parseInt(matches[9], 10);
+            data.date.setFullYear(year, month, day);
+
+            let hour = Number.parseInt(matches[10], 10);
+            let minute = Number.parseInt(matches[11], 10);
+            let seconds = Number.parseInt(matches[12], 10);
+            data.date.setHours(hour, minute, seconds);
+            msg.data = data;
+            msg.type = MessageType.LOCATION;
+
+            this.id = data.id;
+            this.messages.push(msg);
+
+            Modal.toast(Locale.get('trackerLocation', {name: this.name}));
+            App.store();
+            return;
+        }
+
+        // GPS Tracker data
+        const infoRegex = /([A-Za-z0-9_\.]+) ([0-9]+)\/([0-9]+)\/([0-9]+) ID:([0-9]+) IP:([0-9\.a-zA-Z\\]+) ([0-9]+) BAT:([0-9]) APN:([0-9\.a-zA-Z\\]+) GPS:([0-9A-Z\-]+) GSM:([0-9]+) ICCID:([0-9A-Z]+)/;
+        if (message.search(infoRegex) !== -1) {
+            let matches = message.match(infoRegex);
+            let data = new InformationData();
+
+            data.model = matches[1];
+
+            data.id = matches[5];
+            data.ip = matches[6];
+            data.port = matches[7];
+            data.battery = Number.parseInt(matches[8], 10);
+            data.apn = matches[9];
+            data.gps = matches[10];
+            data.gsm = matches[11];
+            data.iccid = matches[12];
+
+            this.battery = data.battery;
+            this.model = data.model;
+            this.apn = data.apn;
+            this.iccid = data.iccid;
+            this.id = data.id;
+
+            msg.data = data;
+            msg.type = MessageType.INFORMATION;
+            this.messages.push(msg);
+
+            Modal.toast(Locale.get('trackerUpdated', {name: this.name}));
+            App.store();
+            return;
             /*
-            // Multiline messages
-            let fields = message.split('\n');
-
-            // Location message
-            if (fields.length === 6) {
-                let coords = null;
-                let values = fields[0].split('=');
-
-                if(values.length > 1) {
-                    values = values[1].split(',');
-                    coords = new GPSPosition(
-                        Number.parseFloat(values[0].substr(1)),
-                        Number.parseFloat(values[1].substr(1))
-                    );
-                }
-
-                msg.type = MessageType.LOCATION;
-                msg.data = {
-                    position: coords,
-                    // tslint:disable-next-line:radix
-                    id: Number.parseInt(fields[1].split(':')[1]),
-                    acc: fields[2].split(':')[1] !== 'OFF',
-                    gps: fields[3].split(':')[1] === 'A',
-                    speed: Number.parseFloat(fields[4].split(':')[1]),
-                    date: fields[5]
-                };
-
-                Modal.toast(Locale.get('trackerLocation', {name: this.name}));
-            }
+            let fields = message.split(' ');
 
             // Information message
             if (fields.length === 8) {
-                msg.type = MessageType.INFORMATION;
+
                 msg.data = {
                     model: fields[0],
                     id: fields[1].split(':')[1],
@@ -207,22 +265,13 @@ export class Tracker {
                     iccid: fields[7].split(':')[1],
                 };
 
-                this.battery = msg.data.battery;
-                this.model = msg.data.model;
-                this.apn = msg.data.apn;
-                this.iccid = msg.data.iccid;
-                this.id = msg.data.id;
 
-                Modal.toast(Locale.get('trackerUpdated', {name: this.name}));
             }
             */
         }
 
-        if (msg.type === MessageType.UNKNOWN) {
-            Modal.toast(Locale.get('receivedUnknown', {name: this.name}));
-        }
-
         this.messages.push(msg);
+        Modal.toast(Locale.get('receivedUnknown', {name: this.name}));
         App.store();
     }
 
@@ -233,6 +282,7 @@ export class Tracker {
      */
     public sendSMS(msg: TrackerMessage) {
         this.messages.push(msg);
+
         SmsIo.sendSMS(this.phoneNumber, msg.data);
         App.store();
     }

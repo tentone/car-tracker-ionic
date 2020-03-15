@@ -42,8 +42,12 @@ export const LocaleEN = {
 	invalidDate: 'Invalid Date',
 	export: 'Export',
 	import: 'Import',
+	navigate: 'Navigate',
 
 	// Attributes
+	id: 'ID',
+	iccid: 'ICCID',
+	apn: 'APN',
 	uuid: 'UUID',
 	name: 'Name',
 	phoneNumber: 'Phone Number',

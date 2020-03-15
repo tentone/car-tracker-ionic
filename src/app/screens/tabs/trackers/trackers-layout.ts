@@ -55,6 +55,21 @@ export class TrackersLayout {
       attribute: 'battery',
       type: FormObjectType.NUMBER,
       editable: false
+    },
+    {
+      attribute: 'iccid',
+      type: FormObjectType.TEXT,
+      editable: false
+    },
+    {
+      attribute: 'id',
+      type: FormObjectType.TEXT,
+      editable: false
+    },
+    {
+      attribute: 'apn',
+      type: FormObjectType.TEXT,
+      editable: false
     }
   ];
 }

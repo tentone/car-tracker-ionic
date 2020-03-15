@@ -88,7 +88,8 @@ export class Gt901Mockup implements Mockup{
             const acc = 'OFF';
             const gps = 'A';
             const date = new Date();
-            const time = date.getUTCDay() + '-' + date.getUTCMonth() + '-' + date.getUTCFullYear() + ' ' + date.getUTCHours() + ':' + date.getUTCMinutes() + ':' + date.getUTCSeconds();
+            const year = date.getFullYear().toString().substr(2, 2);
+            const time = year + '-' + date.getUTCMonth() + '-' + date.getUTCDay() + ' ' + date.getUTCHours() + ':' + date.getUTCMinutes() + ':' + date.getUTCSeconds();
             this.respondSMS('http://maps.google.cn/maps?q=N' + n + ',W' + w + ' ID:' + this.id + ' ACC:' + acc + ' GPS:' + gps + ' Speed:' + speed + 'KM/H ' + time, phoneNumber);
             return;
         }

@@ -1,6 +1,8 @@
 /**
  * Class to represent a message received from a tracker.
  */
+import {GPSPosition} from './gps-position';
+
 export class TrackerMessage {
     /**
      * Type of the message exchanged.
@@ -33,6 +35,35 @@ export class TrackerMessage {
         this.type = MessageType.UNKNOWN;
         this.data = null;
     }
+}
+
+/**
+ * location message data. Received every time that the position of the tracker is requested.
+ *
+ * Sometimes the position of the tracker may be unknown due to lack of GPS signal or sleep mode being active.
+ */
+export class LocationData {
+    public position: GPSPosition = null;
+    public id: string = '';
+    public acc: boolean = false;
+    public gps: boolean = false;
+    public speed: number = 0;
+    public date: Date = new Date();
+}
+
+/**
+ * Tracker information and configuration data, has to be manually requested from the app.
+ */
+export class InformationData {
+    public model: string = '';
+    public id: string = '';
+    public ip: string = '';
+    public port: string = '';
+    public battery: number = 0;
+    public apn: string = '';
+    public gps: string = '';
+    public gsm: string = '';
+    public iccid: string = '';
 }
 
 /**
