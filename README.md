@@ -3,7 +3,7 @@
  - Works with Android due to ionic native plugins compatibility.
  - May be compatible with other SMS based trackers, but it was only tested with this one.
 
-![front](https://raw.githubusercontent.com/tentone/cartracker/master/readme/front.jpg)![back](https://raw.githubusercontent.com/tentone/cartracker/master/readme/back.jpg)
+<img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/front.jpg" width="300"><img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/back.jpg" width="300">
 
 
 
@@ -30,13 +30,7 @@ npm run start
 
 ### Screenshots
 
-<img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/screenshots/1.png" width="100">
-
-<img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/screenshots/2.png" width="100">
-
-<img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/screenshots/3.png" width="100">
-
-<img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/screenshots/4.png" width="100">
+<img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/screenshots/1.png" width="150"><img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/screenshots/2.png" width="150"><img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/screenshots/3.png" width="150"><img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/screenshots/4.png" width="150">
 
 
 
