@@ -2,6 +2,6 @@
 
 <ion-content>
   <form-object [object]="this.tracker" [layout]="this.layout"></form-object>
-  <ion-button expand="block" color="success" (click)="add();">{{'add' | translate}}</ion-button>
-  <ion-button expand="block" (click)="app.navigator.pop()">{{'cancel' | translate}}</ion-button>
+  <ion-button expand="block" color="success" style="text-transform:none" (click)="add();">{{'add' | translate}}</ion-button>
+  <ion-button expand="block" style="text-transform:none" (click)="app.navigator.pop()">{{'cancel' | translate}}</ion-button>
 </ion-content>

@@ -10,6 +10,7 @@ import {MessageTypeLabel} from '../../../../data/tracker-message';
 })
 export class TrackersHistoryPage extends ScreenComponent {
   get app() { return App; }
+  get json() { return JSON; }
   get messageTypeLabel() { return MessageTypeLabel; }
 
   /**

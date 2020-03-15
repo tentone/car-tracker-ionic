@@ -6,7 +6,7 @@
         <ion-label>
             <h4>{{(message.direction === 1 ? 'sent' : 'received') | translate}} - {{message.date | formatDate}}</h4>
             <h3>{{messageTypeLabel.get(message.type) | translate}}</h3>
-            <h3>{{message.data}}</h3>
+            <h3 *ngIf="message.data !== null">{{json.stringify(message.data)}}</h3>
             <h3>{{message.rawData}}</h3>
         </ion-label>
     </ion-item>

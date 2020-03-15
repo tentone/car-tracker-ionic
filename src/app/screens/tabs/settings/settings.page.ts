@@ -47,7 +47,7 @@ export class SettingsPage {
       options: [
         {
           label: 'base',
-          value: ''
+          value: 'base'
         },
         {
           label: 'dark',

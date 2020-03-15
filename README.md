@@ -23,7 +23,7 @@ npm run start
 
  - Manage multiple GPS car trackers.
  - Set multiple parameter of the tracker (speed limit, sleep time, password, distance alarm, etc)
- - Manage and list messages exchanged with the car tracker and keep track of SMS cost.
+ - Manage and list messages exchanged with the car tracker.
  - Export stored data as file for backup as JSON.
 
 
