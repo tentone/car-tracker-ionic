@@ -1,36 +1,26 @@
 # CarTracker
  - Mobile application to track car GPS position for SMS based Chinese tracker marketed under the model number A11, ST-901, GT01 and GT09.
- - Works with Android due to ionic native plugins compatibility.
- - May be compatible with other SMS based trackers, but it was only tested with this one.
+ - Works with any Ionic compatible platform (may have problems on some platforms caused ionic native plugins compatibility).
+ - May be compatible with other SMS based trackers, but it was only tested with these mentioned above.
 
 <img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/front.jpg" width="300"><img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/back.jpg" width="300">
 
 
 
-### Setup
-
-- Install [Java JDK 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and Android development SDK
-
- - Install [NodeJS](https://nodejs.org/en/) and NPM and install dependencies
-```
-npm install
-npm run start
-```
-
-
-
 ### Features
 
- - Manage multiple GPS car trackers.
+ - Manage multiple GPS car trackers using SMS communication.
  - Set multiple parameter of the tracker (speed limit, sleep time, password, distance alarm, etc)
  - Manage and list messages exchanged with the car tracker.
  - Export stored data as file for backup as JSON.
+ - Dark and bright graphical user interface themes (including maps).
+ - Mockup of the ST-901 device that can be used for development testing on the browser.
 
 
 
 ### Screenshots
 
-<img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/screenshots/1.png" width="150"><img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/screenshots/2.png" width="150"><img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/screenshots/3.png" width="150"><img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/screenshots/4.png" width="150">
+<img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/screenshots/1.png" width="180"><img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/screenshots/2.png" width="180"><img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/screenshots/3.png" width="180"><img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/screenshots/4.png" width="180">
 
 
 
@@ -70,6 +60,18 @@ npm run start
 | 您的设备掉主电报警，请关注!                                  | Device was powered off (disconnected from power). |
 | 指令格式错误                                                 | Unknown instruction                               |
 | http://maps.google.cn/maps ID:9171072755 ACC:OFF GPS:V Speed:0 KM/H 19-12-29 23:22:22 | M                                                 |
+
+
+
+### Setup
+
+- Install [Java JDK 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and Android development SDK
+- Install [NodeJS](https://nodejs.org/en/) and NPM and install dependencies
+
+```
+npm install
+npm run start
+```
 
 
 
