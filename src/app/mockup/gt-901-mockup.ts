@@ -23,6 +23,10 @@ export class Gt901Mockup implements Mockup{
     public powerLossSms: boolean;
     public powerLossCall: boolean;
 
+    public gsmChannel: number;
+    public gpsConfig: string;
+    public server: string;
+
     constructor(onSMSResponse: Function) {
         this.onSMSResponse = onSMSResponse;
         this.reset();
@@ -46,6 +50,9 @@ export class Gt901Mockup implements Mockup{
         this.powerLossSms = false;
         this.powerLossCall = false;
         this.sosNumbers = ['', '', ''];
+        this.gsmChannel = 22;
+        this.gpsConfig = 'A-16-13';
+        this.server = '27.aika168.com 8185';
     }
 
     /**
@@ -79,15 +86,16 @@ export class Gt901Mockup implements Mockup{
             const n = (Math.random() * 90).toFixed(5);
             const w = (Math.random() * 180).toFixed(5);
             const acc = 'OFF';
+            const gps = 'A';
             const date = new Date();
             const time = date.getUTCDay() + '-' + date.getUTCMonth() + '-' + date.getUTCFullYear() + ' ' + date.getUTCHours() + ':' + date.getUTCMinutes() + ':' + date.getUTCSeconds();
-            this.respondSMS('http://maps.google.cn/maps?q=N' + n + ',W' + w + '\nID:' + this.id + '\nACC:' + acc + '\nGPS:A\nSpeed:' + speed + 'KM/H\n' + time, phoneNumber);
+            this.respondSMS('http://maps.google.cn/maps?q=N' + n + ',W' + w + ' ID:' + this.id + ' ACC:' + acc + ' GPS:' + gps + ' Speed:' + speed + 'KM/H ' + time, phoneNumber);
             return;
         }
 
         // Information
         if (message === 'CXZT') {
-            this.respondSMS('XM_GT09_SW_33.0 2019/08/08\nID:' + this.id + '\nIP:27.aika168.com 8185\nBAT:' + this.battery + '\nAPN:' + this.apn + '\nGPS:V-13-9\nGSM:22\nICCID:' + this.iccid, phoneNumber);
+            this.respondSMS('XM_GT09_SW_33.0 2019/08/08 ID:' + this.id + ' IP:' + this.server + ' BAT:' + this.battery + ' APN:' + this.apn + ' GPS:' + this.gpsConfig + ' GSM:' + this.gsmChannel + ' ICCID:' + this.iccid, phoneNumber);
             return;
         }
 
@@ -162,7 +170,6 @@ export class Gt901Mockup implements Mockup{
 
         // Toggle language
         if (message === '109#') {
-            // TODO <Set language>
             this.respondSMS('ok', phoneNumber);
             return;
         }
