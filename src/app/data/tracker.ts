@@ -152,6 +152,17 @@ export class Tracker {
             }
             Modal.toast(Locale.get('trackerAcknowledge', {name: this.name}));
         } else {
+            const locationRegex = new RegExp('http://maps\.google\.cn/maps\?q=N([0-9\.]+),W([0-9\.]+) ID:([0-9]+) ACC:([A-Z]+) GPS:([A-Z]+) Speed:([0-9\.]+)KM/H ([0-9]+)\-([0-9]+)\-([0-9]+) ([0-9]+):([0-9]+):([0-9]+)');
+            console.log(message, locationRegex, message.search(locationRegex));
+            if (message.search(locationRegex) > -1) {
+                let matches = message.match(locationRegex);
+                // TODO <REMOVE>
+                console.log(matches);
+                msg.type = MessageType.LOCATION;
+                Modal.toast(Locale.get('trackerLocation', {name: this.name}));
+            }
+
+            /*
             // Multiline messages
             let fields = message.split('\n');
 
@@ -204,6 +215,7 @@ export class Tracker {
 
                 Modal.toast(Locale.get('trackerUpdated', {name: this.name}));
             }
+            */
         }
 
         if (msg.type === MessageType.UNKNOWN) {
