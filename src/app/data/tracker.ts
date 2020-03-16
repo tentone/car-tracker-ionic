@@ -198,7 +198,7 @@ export class Tracker {
         // GPS Location
         if (message.startsWith('http')) {
             try {
-                const regex = /https?\:\/\/maps\.google\.cn\/maps\??q?=?N?([\-0-9\.]*),?W?([\-0-9\.]*)[\n ]+ID:([0-9]+)[\n ]+ACC:([A-Z]+)[\n ]+GPS:([A-Z]+)[\n ]+Speed:([0-9\.]+) ?KM\/H[\n ]+([0-9]+)\-([0-9]+)\-([0-9]+)[\n ]+([0-9]+):([0-9]+):([0-9]+)/;
+                const regex = /https?\:\/\/maps\.google\.cn\/maps\??q?=?N?([\-0-9\.]*),?W?([\-0-9\.]*)\s*ID:([0-9]+)\s*ACC:([A-Z]+)\s*GPS:([A-Z]+)\s*Speed:([0-9\.]+) ?KM\/H\s*([0-9]+)\-([0-9]+)\-([0-9]+)\s*([0-9]+):([0-9]+):([0-9]+)/;
                 let matches = message.match(regex);
                 let data = new LocationData();
 
@@ -235,7 +235,7 @@ export class Tracker {
         }
 
         // GPS Tracker data
-        const infoRegex = /([A-Za-z0-9_\.]+) ([0-9]+)\/([0-9]+)\/([0-9]+) ID:([0-9]+) IP:([0-9\.a-zA-Z\\]+) ([0-9]+) BAT:([0-9]) APN:([0-9\.a-zA-Z\\]+) GPS:([0-9A-Z\-]+) GSM:([0-9]+) ICCID:([0-9A-Z]+)/;
+        const infoRegex = /([A-Za-z0-9_\.]+) ([0-9]+)\/([0-9]+)\/([0-9]+)\s*ID:([0-9]+)\s*IP:([0-9\.a-zA-Z\\]+)\s*([0-9]+) BAT:([0-9])\s*APN:([0-9\.a-zA-Z\\]+)\s*GPS:([0-9A-Z\-]+)\s*GSM:([0-9]+)\s*ICCID:([0-9A-Z]+)/;
         if (message.search(infoRegex) !== -1) {
             let matches = message.match(infoRegex);
 
