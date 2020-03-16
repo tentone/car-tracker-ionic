@@ -136,7 +136,7 @@ export class Tracker {
 
         // Open as a google maps link
         const url = 'http://maps.google.com/maps?q=' + position.latitude + ',' + position.longitude;
-        window.open(url, '_blank');
+        window.open(url, App.isMobile() ? '_system' : '_blank');
     }
 
     /**
