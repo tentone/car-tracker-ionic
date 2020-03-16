@@ -80,7 +80,7 @@ export class App {
             for (let i = 0; i < App.trackers.length; i++) {
                 if (App.trackers[i].phoneNumber === phoneNumber) {
                     console.log('CarTracker: Received data for tracker.', App.trackers[i]);
-                    App.trackers[i].receiveSMS(message);
+                    App.trackers[i].processSMS(message);
                 }
             }
 

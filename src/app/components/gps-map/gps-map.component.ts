@@ -73,8 +73,6 @@ export class GpsMapComponent implements OnInit, AfterContentChecked, OnChanges {
 	 * Update map position from the position attribute.
 	 */
 	public updatePosition() {
-		// console.log('CarTracker: GPS updatePosition()', this.position);
-
 		if (this.map === null || this.position === null) {
 			return;
 		}

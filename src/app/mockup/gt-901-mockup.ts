@@ -90,7 +90,13 @@ export class Gt901Mockup implements Mockup{
             const date = new Date();
             const year = date.getFullYear().toString().substr(2, 2);
             const time = year + '-' + date.getUTCMonth() + '-' + date.getUTCDay() + ' ' + date.getUTCHours() + ':' + date.getUTCMinutes() + ':' + date.getUTCSeconds();
-            this.respondSMS('http://maps.google.cn/maps?q=N' + n + ',W' + w + ' ID:' + this.id + ' ACC:' + acc + ' GPS:' + gps + ' Speed:' + speed + 'KM/H ' + time, phoneNumber);
+            // this.respondSMS('http://maps.google.cn/maps?q=N' + n + ',W' + w + ' ID:' + this.id + ' ACC:' + acc + ' GPS:' + gps + ' Speed:' + speed + 'KM/H ' + time, phoneNumber);
+            this.respondSMS(`http://maps.google.cn/maps?q=N40.93989,W008.53558
+ID:9171072755
+ACC:OFF
+GPS:A
+Speed:0.00KM/H
+20-03-16 18:59:06`, phoneNumber);
             return;
         }
 

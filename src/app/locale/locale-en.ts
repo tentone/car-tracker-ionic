@@ -43,6 +43,7 @@ export const LocaleEN = {
 	export: 'Export',
 	import: 'Import',
 	navigate: 'Navigate',
+	requiredField: 'Required Field',
 
 	// Attributes
 	id: 'ID',
@@ -82,10 +83,8 @@ export const LocaleEN = {
 	trackerLocation: 'Tracker {name} location received.',
 	trackerAcknowledge: 'Tracker {name} updated.',
 	receivedUnknown: 'Tracker {name} responded with an Unknown command.',
-
-	// Error
-	requiredField: 'Required Field',
-	errorLocation: 'Error getting location.',
+	errorLocation: 'Error reading location received from tracker.',
 	errorInvalidSlot: 'Invalid control number slot.',
-	errorImport: 'Error importing data from file.'
+	errorImport: 'Error importing data from file.',
+	errorNavigate: 'Failed to navigate to the tracker location.'
 };
