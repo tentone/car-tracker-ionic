@@ -6,14 +6,9 @@ import {MapPage} from './screens/tabs/map/map.page';
 import {SettingsPage} from './screens/tabs/settings/settings.page';
 import {TrackersAddPage} from './screens/tabs/trackers/add/trackers-add.page';
 import {TrackersViewPage} from './screens/tabs/trackers/view/trackers-view.page';
-import {WizardPage} from './screens/wizard/wizard.page';
 import {TrackersHistoryPage} from './screens/tabs/trackers/history/trackers-history.page';
 
 export const AppRoutes: Routes = [
-  {
-    path: 'wizard',
-    component: WizardPage
-  },
   {
     path: 'tabs',
     component: TabsPage,

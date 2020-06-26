@@ -1,7 +1,7 @@
 import {SmsOptions} from '@ionic-native/sms/ngx';
 import {App} from '../app';
-import {Mockup} from '../mockup/mockup';
-import {Gt901Mockup} from '../mockup/gt-901-mockup';
+import {Mockup} from './mockup/mockup';
+import {Gt901Mockup} from './mockup/gt-901-mockup';
 
 /**
  * Handles the mobile SMS IO, used to send and receive SMS.
