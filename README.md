@@ -24,9 +24,28 @@
 
 
 
+### Setup
+
+- Install [Java JDK 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and [Android development SDK](https://developer.android.com/studio#downloads), there is no need to install the Android Studio IDE, only the build tools are required.
+- Install [NodeJS](https://nodejs.org/en/) and NPM and install dependencies
+
+```bash
+npm install
+npm run start
+```
+
+
+
+### Cordova
+
+ - You can replace icon.png and splash.png assets and then regenerate resources,
+ - Run `ionic cordova resources` to generate icon and splash screen sizes.
+
+
+
 ### SMS Commands
 
-- Here is a list of all the commands that i have tested with the device alongside with the answers returned.
+- Here is a list of all the commands that i have tested with the device alongside with the answers returned by the GPS tracker.
 
 | Command                | Function                                                     | Response Example                                             |
 | ---------------------- | :----------------------------------------------------------- | ------------------------------------------------------------ |
@@ -60,25 +79,6 @@
 | 您的设备掉主电报警，请关注!                                  | Device was powered off (disconnected from power). |
 | 指令格式错误                                                 | Unknown instruction                               |
 | http://maps.google.cn/maps ID:9171072755 ACC:OFF GPS:V Speed:0 KM/H 19-12-29 23:22:22 | M                                                 |
-
-
-
-### Setup
-
-- Install [Java JDK 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and Android development SDK
-- Install [NodeJS](https://nodejs.org/en/) and NPM and install dependencies
-
-```
-npm install
-npm run start
-```
-
-
-
-### Cordova
-
- - You can replace icon.png and splash.png assets and then regenerate resources,
- - Run `ionic cordova resources` to generate icon and splash screen sizes.
 
 
 
