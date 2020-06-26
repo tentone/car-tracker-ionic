@@ -19,7 +19,6 @@ import {SettingsPage} from './screens/tabs/settings/settings.page';
 import {FormObjectComponent} from './components/form-object/form-object.component';
 import {TrackersViewPage} from './screens/tabs/trackers/view/trackers-view.page';
 import {Contacts} from '@ionic-native/contacts/ngx';
-import {WizardPage} from './screens/wizard/wizard.page';
 import {TrackersHistoryPage} from './screens/tabs/trackers/history/trackers-history.page';
 import {AppHeaderComponent} from './components/app-header/app-header.component';
 import {FormatDatePipe} from './screens/screen';
@@ -31,7 +30,6 @@ import {Chooser} from '@ionic-native/chooser/ngx';
     declarations: [
         // Pages
         AppComponent,
-        WizardPage,
         TabsPage,
         TrackersPage,
         TrackersAddPage,
