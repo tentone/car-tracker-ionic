@@ -1,20 +1,15 @@
 # CarTracker
- - Mobile application to track car GPS position for SMS based Chinese tracker marketed under the model number A11, ST-901, GT01 and GT09.
- - Works with any Ionic compatible platform (may have problems on some platforms caused ionic native plugins compatibility).
- - May be compatible with other SMS based trackers, but it was only tested with these mentioned above.
-
-<img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/front.jpg" width="300"><img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/back.jpg" width="300">
-
-
-
-### Features
-
+ - Mobile application to track car GPS position for SMS based Chinese tracker(s) marketed under the model number A11, ST-901, GT01 and GT09.
  - Manage multiple GPS car trackers using SMS communication.
- - Set multiple parameter of the tracker (speed limit, sleep time, password, distance alarm, etc)
+ - Set multiple parameter of the tracker (e.g. speed limit, sleep time, password, distance alarm)
  - Manage and list messages exchanged with the car tracker.
  - Export stored data as file for backup as JSON.
  - Dark and bright graphical user interface themes (including maps).
  - Mockup of the ST-901 device that can be used for development testing on the browser.
+ - Works with any Ionic compatible platform (may have problems on some platforms caused ionic native plugins compatibility).
+ - May be compatible with other SMS based trackers, but it was only tested with these mentioned above.
+
+<img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/front.jpg" width="300"><img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/back.jpg" width="300">
 
 
 
@@ -24,9 +19,12 @@
 
 
 
-### Setup
+### Development Environment
 
 - Install [Java JDK 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and [Android development SDK](https://developer.android.com/studio#downloads), there is no need to install the Android Studio IDE, only the build tools are required.
+  - You may need to install [gradle](https://gradle.org/) [manually](https://gradle.org/install/#manually) and register it in your path.
+- Ensure that you have the environment variables `ANDROID_SDK_ROOT` or `ANDROID_HOME`, and have access to `java` and `gradle` from the your terminal (or command line in windows).
+- Install Android SDK Platform 28 tools from the android SDK manager.
 - Install [NodeJS](https://nodejs.org/en/) and NPM and install dependencies
 
 ```bash
@@ -38,7 +36,8 @@ npm run start
 
 ### Cordova
 
- - You can replace icon.png and splash.png assets and then regenerate resources,
+ - The application is built for mobile devices using Cordova.
+ - You can replace `icon.png`  assets and then regenerate resources,
  - Run `ionic cordova resources` to generate icon and splash screen sizes.
 
 
