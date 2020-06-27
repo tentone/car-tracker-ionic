@@ -1,7 +1,7 @@
 import {SmsOptions} from '@ionic-native/sms/ngx';
 import {App} from '../app';
-import {Mockup} from './mockup/mockup';
-import {Gt901Mockup} from './mockup/gt-901-mockup';
+import {Mockup} from '../mockup/mockup';
+import {Gt901Mockup} from '../mockup/gt-901-mockup';
 
 /**
  * Handles the mobile SMS IO, used to send and receive SMS.
@@ -20,9 +20,11 @@ export class SmsIo {
 	public static onReceive: Function = null;
 
 	/**
-	 * Start SMS listener
+	 * Start SMS listener.
+	 *
+	 * @param onReceive On receive callback used to process SMS received.
 	 */
-	public static startListener(onReceive?: Function) {
+	public static startListener(onReceive?: (message: string, address: string) => void) {
 		if (onReceive !== undefined) {
 			this.onReceive = onReceive;
 		}

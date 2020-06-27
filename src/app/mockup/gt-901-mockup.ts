@@ -1,7 +1,7 @@
 import {Mockup} from './mockup';
 
 /**
- * Mockup objet to simulate the behavior of the GT-901 GPS tracker supports only some of the SMS commands for layout testing purpose.
+ * Mockup object to simulate the behavior of the GT-901 GPS tracker supports only some of the SMS commands for layout testing purpose.
  */
 export class Gt901Mockup implements Mockup{
     /**

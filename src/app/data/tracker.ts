@@ -21,6 +21,16 @@ export class Tracker {
     public name: string = '';
 
     /**
+     * License plate of the vehicle where the tracker is placed
+     */
+    public licensePlate: string = '';
+
+    /**
+     * Chassis number of the vehicle  where the tracker is placed
+     */
+    public chassisNumber: string = '';
+
+    /**
      * Model of the tracker.
      */
     public model: string = '';
@@ -172,11 +182,11 @@ export class Tracker {
         msg.rawData = message;
 
         // Acknowledge message
-        if (message === 'admin ok' || message === 'apn ok' || message === 'password ok' || message === 'speed ok' || message === 'ok') {
+        const ackMsg = message.toLowerCase();
+        if (ackMsg === 'admin ok' || ackMsg === 'apn ok' || ackMsg === 'password ok' || ackMsg === 'speed ok' || ackMsg === 'ok') {
             msg.type = MessageType.ACKNOWLEDGE;
 
             Modal.toast(Locale.get('trackerAcknowledge', {name: this.name}));
-
             this.addMessage(msg);
             return;
         }
@@ -189,8 +199,8 @@ export class Tracker {
             for (let i = 0; i < numbers.length;  i++) {
                 this.sosNumbers[i] = numbers[i].substr(4);
             }
-            Modal.toast(Locale.get('trackerAcknowledge', {name: this.name}));
 
+            Modal.toast(Locale.get('trackerAcknowledge', {name: this.name}));
             this.addMessage(msg);
             return;
         }
@@ -228,38 +238,46 @@ export class Tracker {
                 this.addMessage(msg);
                 return;
             } catch(e) {
-                Modal.alert(Locale.get('error'), Locale.get('errorLocation'));
+                Modal.alert(Locale.get('error'), Locale.get('errorParseLocationMsg'));
                 console.log('CarTracker: Error parsing location message.', e, this);
+                this.addMessage(msg);
+                return;
             }
-
         }
 
         // GPS Tracker data
         const infoRegex = /([A-Za-z0-9_\.]+) ([0-9]+)\/([0-9]+)\/([0-9]+)\s*ID:([0-9]+)\s*IP:([0-9\.a-zA-Z\\]+)\s*([0-9]+) BAT:([0-9])\s*APN:([0-9\.a-zA-Z\\]+)\s*GPS:([0-9A-Z\-]+)\s*GSM:([0-9]+)\s*ICCID:([0-9A-Z]+)/;
-        if (message.search(infoRegex) !== -1) {
-            let matches = message.match(infoRegex);
+        try {
+            if (message.search(infoRegex) !== -1) {
+                let matches = message.match(infoRegex);
 
-            let data = new InformationData();
-            data.model = matches[1];
-            data.id = matches[5];
-            data.ip = matches[6];
-            data.port = matches[7];
-            data.battery = Number.parseInt(matches[8], 10);
-            data.apn = matches[9];
-            data.gps = matches[10];
-            data.gsm = matches[11];
-            data.iccid = matches[12];
-            msg.data = data;
-            msg.type = MessageType.INFORMATION;
+                let data = new InformationData();
+                data.model = matches[1];
+                data.id = matches[5];
+                data.ip = matches[6];
+                data.port = matches[7];
+                data.battery = Number.parseInt(matches[8], 10);
+                data.apn = matches[9];
+                data.gps = matches[10];
+                data.gsm = matches[11];
+                data.iccid = matches[12];
+                msg.data = data;
+                msg.type = MessageType.INFORMATION;
 
-            this.battery = data.battery;
-            this.model = data.model;
-            this.apn = data.apn;
-            this.iccid = data.iccid;
-            this.id = data.id;
+                this.battery = data.battery;
+                this.model = data.model;
+                this.apn = data.apn;
+                this.iccid = data.iccid;
+                this.id = data.id;
 
-            Modal.toast(Locale.get('trackerUpdated', {name: this.name}));
-
+                Modal.toast(Locale.get('trackerUpdated', {name: this.name}));
+                this.addMessage(msg);
+                return;
+            }
+        }
+        catch(e) {
+            Modal.alert(Locale.get('error'), Locale.get('errorParseInfoMsg'));
+            console.log('CarTracker: Error parsing device info message.', e, this);
             this.addMessage(msg);
             return;
         }

@@ -62,6 +62,8 @@ export const LocaleEN = {
 	powerAlarmCall: 'Power Alarm Call',
 	battery: 'Battery',
 	ignitionAlarm: 'Ignition Alarm',
+	licensePlate: 'License Plate',
+	chassisNumber: 'Chassis Number',
 
 	// Message types
 	command: 'Command',
@@ -83,7 +85,8 @@ export const LocaleEN = {
 	trackerLocation: 'Tracker {name} location received.',
 	trackerAcknowledge: 'Tracker {name} updated.',
 	receivedUnknown: 'Tracker {name} responded with an Unknown command.',
-	errorLocation: 'Error reading location received from tracker.',
+	errorParseLocationMsg: 'Error reading location message received from tracker.',
+	errorParseInfoMsg: 'Error reading device information message received from tracker.',
 	errorInvalidSlot: 'Invalid control number slot.',
 	errorImport: 'Error importing data from file.',
 	errorNavigate: 'Failed to navigate to the tracker location.'

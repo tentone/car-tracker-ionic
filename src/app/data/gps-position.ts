@@ -2,10 +2,17 @@
  * Represents a GPS position in the world map.
  */
 export class GPSPosition {
+    /**
+     * Latitude value of the position.
+     */
     public latitude: number;
+
+    /**
+     * Longitude value of the position.
+     */
     public longitude: number;
 
-    constructor(latitude?, longitude?) {
+    constructor(latitude?: number, longitude?: number) {
         this.latitude = latitude !== undefined ? latitude : 0;
         this.longitude = longitude !== undefined ? longitude : 0;
     }

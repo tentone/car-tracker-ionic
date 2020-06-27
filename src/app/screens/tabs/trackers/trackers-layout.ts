@@ -1,13 +1,27 @@
 import {FormObjectField} from '../../../components/form-object/form-object-field';
 import {FormObjectType} from '../../../components/form-object/form-object-type';
 
+/**
+ * Form layouts used for the tracker data. Multiple layouts are used for different information about the tracker.
+ */
 export class TrackersLayout {
+
   public static layout: FormObjectField[] = [
     {
       attribute: 'name',
       type: FormObjectType.TEXT,
       editable: true,
       required: true
+    },
+    {
+      attribute: 'licensePlate',
+      type: FormObjectType.TEXT,
+      editable: true,
+    },
+    {
+      attribute: 'chassisNumber',
+      type: FormObjectType.TEXT,
+      editable: true,
     },
     {
       attribute: 'phoneNumber',
