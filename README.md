@@ -9,7 +9,7 @@
  - Works with any Ionic compatible platform (may have problems on some platforms caused ionic native plugins compatibility).
  - May be compatible with other SMS based trackers, but it was only tested with these mentioned above.
 
-<img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/front.jpg" width="300"><img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/back.jpg" width="300">
+<img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/front.jpg" width="300"><img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/back.jpg" width="300"><img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/pcb.jpg" width="300">
 
 
 
@@ -58,8 +58,8 @@ npm run start
 | CXZT                   | Get the tracker firmware version, identifier, battery level, APN configuration GPS status etc. | XM_GT09_SW_33.0 2019/08/08 ID:9171072755 IP:27.aika168.com 8185 BAT:5 APN:internet GPS:V-13-9 GSM:22 ICCID:89351060000852459823 |
 | format                 | Format the GPS tracker back to its factory values            | 恢复出厂值成功，请从新绑定车主号码!                          |
 | speed[pw] [speed]      | Set the speed alarm value to reset the value set the speed to 0. Speed should be represented with 3 integer digits. | speed ok                                                     |
-| 109#                   | Toggle the language between chinese and english.             | ok                                                           |
-| sleep,[pw],[sleep]     | Configure sleep mode/time of the tracker. (Cannot figure out the right way to use it). | ok                                                           |
+| 109#                   | Toggle the language between Chinese and English.             | ok                                                           |
+| sleep,[pw],[sleep]     | Configure sleep time (in minutes) of the tracker. 0 means no sleep. | ok                                                           |
 | zone[pw] [zone]        | Set the time zone of the SMS tracker. (E02 means, E08, etc)  | ok                                                           |
 | accclock,[pw],[0 or 1] | Enable/disable ignition auto security, used for the tracker to send an SMS every time the ignition is switched. | -                                                            |
 | pwrsms[pw],[0 or 1]    | Enable/disable power SMS alarm sent if the alarm is disconnected from power. | -                                                            |
