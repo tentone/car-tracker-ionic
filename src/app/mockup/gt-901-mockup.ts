@@ -5,9 +5,11 @@ import {Mockup} from './mockup';
  */
 export class Gt901Mockup implements Mockup{
     /**
-     * Method used to return SMS responses to the application, receives the parameters (message, phoneNumber).
+     * Method used to receive SMS from the application, receives the parameters (message, phoneNumber).
+     *
+     * This method should process the message and return a message if necessary.
      */
-    public onSMSResponse: Function = null;
+    public onSMSReceived: Function = null;
 
     public id: string;
     public iccid: string ;
@@ -22,13 +24,12 @@ export class Gt901Mockup implements Mockup{
     public battery: string;
     public powerLossSms: boolean;
     public powerLossCall: boolean;
-
     public gsmChannel: number;
     public gpsConfig: string;
     public server: string;
 
     constructor(onSMSResponse: Function) {
-        this.onSMSResponse = onSMSResponse;
+        this.onSMSReceived = onSMSResponse;
         this.reset();
         console.log('CarTracker: GT-901 mockup created.');
     }
@@ -55,28 +56,16 @@ export class Gt901Mockup implements Mockup{
         this.server = '27.aika168.com 8185';
     }
 
-    /**
-     * Method used to respond to SMS received from the application.
-     *
-     * @param message Message to be sent to the application.
-     * @param phoneNumber Origin phone number of the SMS message.
-     */
-    public respondSMS(message: string, phoneNumber: string) {
+    public processSMS(message: string, phoneNumber: string) {
         console.log('CarTracker: GT-901 mockup respond SMS.', message);
 
         setTimeout(() => {
-            if (this.onSMSResponse !== null) {
-                this.onSMSResponse(message, phoneNumber);
+            if (this.onSMSReceived !== null) {
+                this.onSMSReceived(message, phoneNumber);
             }
         }, Math.random() * 1000 + 1000);
     }
 
-    /**
-     * Send message to the mock device.
-     *
-     * @param message Message content.
-     * @param phoneNumber Destination phone number of the SMS.
-     */
     public sendSMS(message: string, phoneNumber: string) {
         console.log('CarTracker: GT-901 mockup received SMS.', message, phoneNumber);
 
@@ -90,13 +79,13 @@ export class Gt901Mockup implements Mockup{
             const date = new Date();
             const year = date.getFullYear().toString().substr(2, 2);
             const time = year + '-' + date.getUTCMonth() + '-' + date.getUTCDay() + ' ' + date.getUTCHours() + ':' + date.getUTCMinutes() + ':' + date.getUTCSeconds();
-            this.respondSMS('http://maps.google.cn/maps?q=N' + n + ',W' + w + ' ID:' + this.id + ' ACC:' + acc + ' GPS:' + gps + ' Speed:' + speed + 'KM/H ' + time, phoneNumber);
+            this.processSMS('http://maps.google.cn/maps?q=N' + n + ',W' + w + ' ID:' + this.id + ' ACC:' + acc + ' GPS:' + gps + ' Speed:' + speed + 'KM/H ' + time, phoneNumber);
             return;
         }
 
         // Information
         if (message === 'CXZT') {
-            this.respondSMS('XM_GT09_SW_33.0 2019/08/08 ID:' + this.id + ' IP:' + this.server + ' BAT:' + this.battery + ' APN:' + this.apn + ' GPS:' + this.gpsConfig + ' GSM:' + this.gsmChannel + ' ICCID:' + this.iccid, phoneNumber);
+            this.processSMS('XM_GT09_SW_33.0 2019/08/08 ID:' + this.id + ' IP:' + this.server + ' BAT:' + this.battery + ' APN:' + this.apn + ' GPS:' + this.gpsConfig + ' GSM:' + this.gsmChannel + ' ICCID:' + this.iccid, phoneNumber);
             return;
         }
 
@@ -104,7 +93,7 @@ export class Gt901Mockup implements Mockup{
         const adminRegex = new RegExp('admin' + this.password + ' ([0-9a-zA-Z]+)');
         if(message.search(adminRegex) > -1) {
             this.admin = message.match(adminRegex)[1];
-            this.respondSMS('admin ok', phoneNumber);
+            this.processSMS('admin ok', phoneNumber);
             return;
         }
 
@@ -112,7 +101,7 @@ export class Gt901Mockup implements Mockup{
         const apnRegex = new RegExp('apn' + this.password + ' ([0-9a-zA-Z]+)');
         if(message.search(apnRegex) > -1) {
             this.apn = message.match(apnRegex)[1];
-            this.respondSMS('apn ok', phoneNumber);
+            this.processSMS('apn ok', phoneNumber);
             return;
         }
 
@@ -120,7 +109,7 @@ export class Gt901Mockup implements Mockup{
         const passwordRegex = new RegExp('password' + this.password + ' ([0-9a-zA-Z]+)');
         if (message.search(passwordRegex) > -1) {
             this.password = message.match(passwordRegex)[1];
-            this.respondSMS('password ok', phoneNumber);
+            this.processSMS('password ok', phoneNumber);
             return;
         }
 
@@ -128,7 +117,7 @@ export class Gt901Mockup implements Mockup{
         const speedRegex = new RegExp('speed' + this.password + ' ([0-9]+)');
         if (message.search(speedRegex) > -1) {
             this.speed = message.match(speedRegex)[1];
-            this.respondSMS('speed ok', phoneNumber);
+            this.processSMS('speed ok', phoneNumber);
             return;
         }
 
@@ -136,7 +125,7 @@ export class Gt901Mockup implements Mockup{
         const zoneRegex = new RegExp('zone' + this.password + ' ([A-Z]+[0-9]+)');
         if (message.search(zoneRegex) > -1) {
             this.speed = message.match(zoneRegex)[1];
-            this.respondSMS('ok', phoneNumber);
+            this.processSMS('ok', phoneNumber);
             return;
         }
 
@@ -144,7 +133,7 @@ export class Gt901Mockup implements Mockup{
         const sleepRegex = new RegExp('sleep,' + this.password + ',([0-9]+)');
         if (message.search(sleepRegex) > -1) {
             this.sleep = message.match(sleepRegex)[1];
-            this.respondSMS('ok', phoneNumber);
+            this.processSMS('ok', phoneNumber);
             return;
         }
 
@@ -171,14 +160,14 @@ export class Gt901Mockup implements Mockup{
 
         // Toggle language
         if (message === '109#') {
-            this.respondSMS('ok', phoneNumber);
+            this.processSMS('ok', phoneNumber);
             return;
         }
 
         // Format device
         if (message === 'format') {
             this.reset();
-            this.respondSMS('恢复出厂值成功，请从新绑定车主号码!', phoneNumber);
+            this.processSMS('恢复出厂值成功，请从新绑定车主号码!', phoneNumber);
             return;
         }
 
@@ -188,7 +177,7 @@ export class Gt901Mockup implements Mockup{
             let matches = message.match(sosNumberRegex)
             let idx = Number.parseInt(matches[1], 10) - 1;
             this.sosNumbers[idx] = matches[2];
-            this.respondSMS('ok', phoneNumber);
+            this.processSMS('ok', phoneNumber);
             return;
         }
 
@@ -197,7 +186,7 @@ export class Gt901Mockup implements Mockup{
         if (message.search(deleteSosNumberRegex) > -1) {
             let idx = Number.parseInt(message.match(deleteSosNumberRegex)[1], 10) - 1;
             this.sosNumbers[idx] = '';
-            this.respondSMS('ok', phoneNumber);
+            this.processSMS('ok', phoneNumber);
             return;
         }
 
@@ -207,10 +196,10 @@ export class Gt901Mockup implements Mockup{
             for (let i = 0; i < this.sosNumbers.length; i++) {
                 msg += '10' + (i + 1) + '#' + this.sosNumbers[i];
             }
-            this.respondSMS(msg, phoneNumber);
+            this.processSMS(msg, phoneNumber);
             return;
         }
 
-        this.respondSMS('指令格式错误', phoneNumber);
+        this.processSMS('指令格式错误', phoneNumber);
     }
 }

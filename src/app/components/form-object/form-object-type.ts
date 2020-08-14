@@ -41,6 +41,5 @@ export const FormObjectType = {
 	/**
 	 * Phone number, selectable from the device contacts.
 	 */
-	PHONE: 6,
-
+	PHONE: 6
 };

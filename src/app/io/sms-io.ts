@@ -10,7 +10,7 @@ import {Gt901Mockup} from '../mockup/gt-901-mockup';
  */
 export class SmsIo {
 	/**
-	 * Mockup object used to fake comunication when running on development under a browser.
+	 * Mockup object used to fake communication when running on development under a browser.
 	 */
 	public static mockup: Mockup = null;
 

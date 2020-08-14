@@ -1,8 +1,8 @@
+import {GPSPosition} from './gps-position';
+
 /**
  * Class to represent a message received from a tracker.
  */
-import {GPSPosition} from './gps-position';
-
 export class TrackerMessage {
     /**
      * Type of the message exchanged.
