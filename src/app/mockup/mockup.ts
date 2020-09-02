@@ -8,7 +8,7 @@ export interface Mockup {
      * @param message Message to be sent to the application.
      * @param phoneNumber Origin phone number of the SMS message.
      */
-    processSMS(message: string, phoneNumber: string);
+    processSMS(message: string, phoneNumber: string): void;
 
     /**
      * Send message to the mock device.
@@ -16,5 +16,5 @@ export interface Mockup {
      * @param message Message content.
      * @param phoneNumber Destination phone number of the SMS.
      */
-    sendSMS(message: string, phoneNumber: string);
+    sendSMS(message: string, phoneNumber: string): void;
 }

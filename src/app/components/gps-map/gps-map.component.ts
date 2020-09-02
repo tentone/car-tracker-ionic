@@ -13,7 +13,7 @@ export class GpsMapComponent implements OnInit, AfterContentChecked, OnChanges {
 	@Input() position: GPSPosition = null;
 
 	/**
-	 * Mapboxgl instance to display and control the map view.
+	 * Mapbox gl instance to display and control the map view.
 	 */
 	public map: mapboxgl.Map = null;
 

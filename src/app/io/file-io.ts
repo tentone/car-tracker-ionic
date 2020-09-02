@@ -10,7 +10,7 @@ export class FileIo {
 	 * @param fname File name.
 	 * @param data Data to be written into the file.
 	 */
-	static write(fname: string, data: any) {
+	static write(fname: string, data: any): void {
 		if (App.isMobile()) {
 			App.chooser.getFile().then((file) => {
 				if (file === undefined || file.name === 'canceled') {
@@ -49,10 +49,10 @@ export class FileIo {
 	 *
 	 * The onLoad callback receives an array of files as parameter.
 	 *
-	 * @param onLoad onLoad callback that receives array of files choosen as parameter.
+	 * @param onLoad onLoad callback that receives array of files chosen as parameter.
 	 * @param filter File type filter.
 	 */
-	static read(onLoad: Function, filter?: string) {
+	static read(onLoad: Function, filter?: string): void {
 		if (App.isMobile()) {
 			App.chooser.getFile().then((file) => {
 				if (file === undefined || file.name === 'canceled') {
@@ -97,7 +97,7 @@ export class FileIo {
 	 * Read file data from URL, using XHR request.
 	 *
 	 * @param fname File URL.
-	 * @param sync If set to true or undefined the file is read syncronosly.
+	 * @param sync If set to true or undefined the file is read synchronously.
 	 * @param responseType Type of response to be used for the XHR.
 	 * @param onLoad On load callback.
 	 * @param onProgress On progress callback.
@@ -154,27 +154,6 @@ export class FileIo {
 			const b = file.lastIndexOf('/');
 
 			return file.substring((a > b) ? (a + 1) : (b + 1), file.lastIndexOf('.'));
-		}
-
-		return '';
-	}
-
-	/**
-	 * Get file extension from file path string.
-	 *
-	 * If input is a/b/c/abc.d output is d.
-	 *
-	 * @param file File path
-	 * @return File extension
-	 */
-	static getFileExtension(file: (File | string)) {
-		if (file !== undefined) {
-
-			if (file instanceof File) {
-				file = file.name;
-			}
-
-			return file.substring(file.lastIndexOf('.') + 1, file.length);
 		}
 
 		return '';

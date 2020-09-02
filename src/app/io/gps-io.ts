@@ -39,6 +39,7 @@ export class GpsIo {
         // Watch for changes in the GPS position
         let watch = App.geolocation.watchPosition();
         watch.subscribe((data) => {
+            // @ts-ignore
             onChange(data.coords.longitude, data.coords.latitude);
         });
     }

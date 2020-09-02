@@ -37,7 +37,7 @@ export class Gt901Mockup implements Mockup{
     /**
      * Set default values on the GPS tracker.
      */
-    public reset() {
+    public reset(): void {
         this.id = '0000000000';
         this.iccid  = '00000000000000000000';
         this.password = '123456';
@@ -56,7 +56,7 @@ export class Gt901Mockup implements Mockup{
         this.server = '27.aika168.com 8185';
     }
 
-    public processSMS(message: string, phoneNumber: string) {
+    public processSMS(message: string, phoneNumber: string): void {
         console.log('CarTracker: GT-901 mockup respond SMS.', message);
 
         setTimeout(() => {
@@ -66,7 +66,7 @@ export class Gt901Mockup implements Mockup{
         }, Math.random() * 1000 + 1000);
     }
 
-    public sendSMS(message: string, phoneNumber: string) {
+    public sendSMS(message: string, phoneNumber: string): void {
         console.log('CarTracker: GT-901 mockup received SMS.', message, phoneNumber);
 
         // Position
