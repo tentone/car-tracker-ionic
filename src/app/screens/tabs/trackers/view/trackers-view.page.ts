@@ -16,6 +16,7 @@ import {Modal} from '../../../modal';
 export class TrackersViewPage extends ScreenComponent {
   get layout() { return TrackersLayout.layout; }
   get app() { return App; }
+
   get trackerLocation() {
     if (this.tracker === null) {
       return null;

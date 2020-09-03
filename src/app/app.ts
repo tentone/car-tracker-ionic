@@ -14,6 +14,7 @@ import {Chooser} from '@ionic-native/chooser/ngx';
 import {SmsIo} from './io/sms-io';
 import {Geolocation} from "@ionic-native/geolocation/ngx";
 import {Themes} from './theme';
+import {smsreader} from 'cordova-sms-reader';
 
 /**
  * The app class is used to access and store all persistent data used in the application.
@@ -74,6 +75,15 @@ export class App {
         this.geolocation = geolocation;
 
         this.load();
+
+        // TODO <GET ALL SMS STORED AND UPDATE TRACKER DATA>
+        smsreader.getAllSMS().then(function (sms) {
+            console.log('CarTracker: SMS from device', sms);
+            // Fetches all SMS.
+        }, function (err) {
+            console.error('CarTracker: Failed to read SMS stored in the device.');
+        });
+
 
         SmsIo.startListener((message: string, phoneNumber: string) => {
             for (let i = 0; i < App.trackers.length; i++) {
