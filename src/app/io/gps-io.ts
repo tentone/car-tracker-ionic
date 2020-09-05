@@ -28,11 +28,11 @@ export class GpsIo {
      * @param onChange Method called when the position changes receives (longitude, latitude).
      */
     public static setWatcher(onChange: Function) {
-        // Watch for changes in the GPS position
+        // TODO <WATCH GPS POSITION CONINOUSLY>
+        /*// Watch for changes in the GPS position
         let watch = App.geolocation.watchPosition();
         watch.subscribe((data) => {
-            // @ts-ignore
             onChange(data.coords.longitude, data.coords.latitude);
-        });
+        });*/
     }
 }
