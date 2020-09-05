@@ -14,15 +14,7 @@ export class GpsIo {
      */
     public static getPosition(onSuccess: Function, onError?: Function) {
         if (App.isMobile()) {
-            App.androidPermissions.requestPermission(App.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(() => {
-                // Get the current position
-                App.geolocation.getCurrentPosition().then((data) => {
-                    onSuccess(data.coords.longitude, data.coords.latitude);
-                }).catch((error) => {
-                    Modal.alert(Locale.get('error'), Locale.get('errorLocation') + ' (' + error + ')');
-                    console.warn('CarTracker: Error getting location.', error);
-                });
-            });
+            // TODO <GET POSITION>
         } else if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((data) => {
                 onSuccess(data.coords.longitude, data.coords.latitude);

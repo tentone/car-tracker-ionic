@@ -63,7 +63,7 @@ export class Gt901Mockup implements Mockup{
             if (this.onSMSReceived !== null) {
                 this.onSMSReceived(message, phoneNumber);
             }
-        }, Math.random() * 1000 + 1000);
+        }, Math.random() * 2000 + 1000);
     }
 
     public sendSMS(message: string, phoneNumber: string): void {

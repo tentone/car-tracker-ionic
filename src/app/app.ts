@@ -6,13 +6,7 @@ import {Tracker} from './data/tracker';
 import {LocalStorage} from './utils/local-storage';
 import * as mapboxgl from 'mapbox-gl';
 import {Environment} from '../environments/environment';
-import {SMS} from '@ionic-native/sms/ngx';
-import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
-import {Contacts} from '@ionic-native/contacts/ngx';
-import {File} from '@ionic-native/file/ngx';
-import {Chooser} from '@ionic-native/chooser/ngx';
 import {SmsIo} from './io/sms-io';
-import {Geolocation} from "@ionic-native/geolocation/ngx";
 import {Themes} from './theme';
 // import {smsreader} from 'cordova-sms-reader';
 
@@ -32,18 +26,6 @@ export class App {
      */
     public static navigator: Navigation;
 
-    public static androidPermissions: AndroidPermissions;
-
-    public static sms: SMS;
-
-    public static contacts: Contacts;
-
-    public static file: File;
-
-    public static chooser: Chooser;
-
-    public static geolocation: Geolocation;
-
     /**
      * Application general settings.
      */
@@ -59,36 +41,15 @@ export class App {
      *
      * @param platform Platform object created from the app root.
      * @param router Router object created from the app root.
-     * @param androidPermissions Android permissions
-     * @param sms SMS handler,
-     * @param contacts Contact access.
-     * @param file Mobile file access.
-     * @param chooser Mobile file chooser.
-     * @param geolocation Geolocation module.
      */
-    public static initialize(platform: Platform, router: Router, androidPermissions: AndroidPermissions, sms: SMS, contacts: Contacts, file: File, chooser: Chooser, geolocation: Geolocation) {
+    public static initialize(platform: Platform, router: Router) {
         // @ts-ignore
         mapboxgl.accessToken = Environment.mapbox;
 
         this.navigator = new Navigation(router);
         this.platform = platform;
-        this.androidPermissions = androidPermissions;
-        this.sms = sms;
-        this.contacts = contacts;
-        this.file = file;
-        this.chooser = chooser;
-        this.geolocation = geolocation;
 
         this.load();
-
-        // TODO <GET ALL SMS STORED AND UPDATE TRACKER DATA>
-        /*smsreader.getAllSMS().then(function (sms) {
-            console.log('CarTracker: SMS from device', sms);
-            // Fetches all SMS.
-        }, function (err) {
-            console.error('CarTracker: Failed to read SMS stored in the device.');
-        });*/
-
 
         SmsIo.startListener((message: string, phoneNumber: string) => {
             for (let i = 0; i < App.trackers.length; i++) {
