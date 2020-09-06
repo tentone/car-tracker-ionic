@@ -5,7 +5,7 @@ import {App} from '../../../app';
 import {FormObjectField} from '../../../components/form-object/form-object-field';
 import {FormObjectType} from '../../../components/form-object/form-object-type';
 import {Themes} from '../../../theme';
-import {MapStyles} from "../../../data/map-styles";
+import {MapStyles} from "../../../map-styles";
 
 @Component({
   selector: 'app-settings',

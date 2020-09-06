@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {Tracker} from '../../../../data/tracker';
+import {Tracker} from '../../../../tracker/tracker';
 import {App} from '../../../../app';
 import {ScreenComponent} from '../../../screen';
-import {TrackersLayout} from '../trackers-layout';
+import {TrackersLayout} from '../view/trackers-layout';
 
 @Component({
   selector: 'app-trackers-add',
@@ -17,14 +17,14 @@ export class TrackersAddPage extends ScreenComponent {
    */
   public tracker: Tracker = new Tracker();
   
-  public onDisplay() {
+  public onDisplay(): void {
     this.tracker = new Tracker();
   }
 
   /**
    * Add tracker into the list.
    */
-  public add() {
+  public add(): void {
     App.trackers.push(this.tracker);
     App.store();
     App.navigator.pop();

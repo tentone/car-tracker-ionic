@@ -5,6 +5,9 @@ import {LocaleEN} from './locale-en';
  * Handles locales related tasks, locale data is registered here.
  */
 export class Locale {
+	/**
+	 * Service used to translate the interface. Translations have to be registered here.
+	 */
 	public static translate: TranslateService;
 
 	/**

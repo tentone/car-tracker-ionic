@@ -1,7 +1,7 @@
 import {AfterContentChecked, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {App} from '../../app';
 import * as mapboxgl from 'mapbox-gl';
-import {GPSPosition} from '../../data/gps-position';
+import {GPSPosition} from '../../gps-position';
 
 @Component({
 	selector: 'gps-map',

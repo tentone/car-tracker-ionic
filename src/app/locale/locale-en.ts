@@ -1,5 +1,6 @@
 export const LocaleEN = {
 	en: 'English',
+	pt: 'Portuguese',
 
 	theme: 'Theme',
 	base: 'Base',

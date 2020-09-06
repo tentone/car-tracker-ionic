@@ -16,7 +16,7 @@ export class SearchFilter {
  */
 @Pipe({name: 'searchFilter'})
 export class SearchFilterPipe implements PipeTransform {
-    transform(array: any[], options: SearchFilter): any[] {
+    public transform(array: any[], options: SearchFilter): any[] {
         if (options.attributes.length === 0) {
             options.attributes = ['name', 'tag'];
         }
@@ -36,7 +36,7 @@ export class SearchFilterPipe implements PipeTransform {
  */
 @Pipe({name: 'formatDate'})
 export class FormatDatePipe implements PipeTransform {
-    transform(d: string | Date): string {
+    public transform(d: string | Date): string {
         if (d === null || d === undefined) {
             return Locale.get('invalidDate');
         }

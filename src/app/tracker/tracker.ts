@@ -4,7 +4,7 @@ import {Locale} from '../locale/locale';
 import {SmsIo} from '../io/sms-io';
 import {InformationData, LocationData, MessageDirection, MessageType, TrackerMessage} from './tracker-message';
 import {Modal} from '../screens/modal';
-import {GPSPosition} from './gps-position';
+import {GPSPosition} from '../gps-position';
 
 /**
  * Tracker represents a GPS tracker, contains all the metadata required to communicate with the tracker.
@@ -60,7 +60,7 @@ export class Tracker {
      *
      * Usually it is a 4 digit numeric pin.
      */
-    public pin: string = '';
+    public pin: string = '123456';
 
     /**
      * Limit speed in miles per hour, defined on the tracker.
@@ -71,11 +71,6 @@ export class Tracker {
      * Time limit before the tracker enters into sleep mode.
      */
     public sleepLimit: number = null;
-
-    /**
-     * Indicates if the tracker is active and should be displayed on the map.
-     */
-    public active: boolean = true;
 
     /**
      * If enabled the ignition alarm is fired every time the ACC signal changes.

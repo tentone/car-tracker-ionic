@@ -1,4 +1,4 @@
-import {GPSPosition} from './gps-position';
+import {GPSPosition} from '../gps-position';
 
 /**
  * Class to represent a message received from a tracker.

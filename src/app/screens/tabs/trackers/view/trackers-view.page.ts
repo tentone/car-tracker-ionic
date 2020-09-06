@@ -1,8 +1,8 @@
 import {Component, ElementRef} from '@angular/core';
-import {Tracker} from '../../../../data/tracker';
+import {Tracker} from '../../../../tracker/tracker';
 import {App} from '../../../../app';
 import {ScreenComponent} from '../../../screen';
-import {TrackersLayout} from '../trackers-layout';
+import {TrackersLayout} from './trackers-layout';
 import {Locale} from '../../../../locale/locale';
 import {ActivatedRoute} from '@angular/router';
 import {ActionSheetController} from '@ionic/angular';

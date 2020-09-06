@@ -1,5 +1,5 @@
-import {FormObjectField} from '../../../components/form-object/form-object-field';
-import {FormObjectType} from '../../../components/form-object/form-object-type';
+import {FormObjectField} from '../../../../components/form-object/form-object-field';
+import {FormObjectType} from '../../../../components/form-object/form-object-type';
 
 /**
  * Form layouts used for the tracker data. Multiple layouts are used for different information about the tracker.
@@ -14,16 +14,6 @@ export class TrackersLayout {
       required: true
     },
     {
-      attribute: 'licensePlate',
-      type: FormObjectType.TEXT,
-      editable: true,
-    },
-    {
-      attribute: 'chassisNumber',
-      type: FormObjectType.TEXT,
-      editable: true,
-    },
-    {
       attribute: 'phoneNumber',
       type: FormObjectType.PHONE,
       editable: true,
@@ -36,10 +26,18 @@ export class TrackersLayout {
       required: true
     },
     {
-      attribute: 'active',
-      type: FormObjectType.CHECKBOX,
+      attribute: 'licensePlate',
+      type: FormObjectType.TEXT,
       editable: true,
     },
+    {
+      attribute: 'chassisNumber',
+      type: FormObjectType.TEXT,
+      editable: true,
+    }
+  ];
+
+  public static data: FormObjectField[] = [
     {
       attribute: 'speedLimit',
       type: FormObjectType.NUMBER,

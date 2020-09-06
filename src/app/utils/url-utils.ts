@@ -7,7 +7,7 @@ export class URLUtils {
 	 *
 	 * @return Object with parameters read from the URL.
 	 */
-	static getQueryParameters(url?: string): any {
+	public static getQueryParameters(url?: string): any {
 		if (url === undefined) {
 			// Get URL from window location
 			url = window.location.search.substring(1);
@@ -42,7 +42,7 @@ export class URLUtils {
 	 * @param json Object to be encoded.
 	 * @return Form like data to be sent to the server.
 	 */
-	static encodeFormURL(json): string {
+	public static encodeFormURL(json: any): string {
 		let data = [];
 
 		for (let i in json) {

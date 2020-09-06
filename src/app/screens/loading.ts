@@ -21,7 +21,7 @@ export class Loading {
 	/**
 	 * Show the loading box.
 	 */
-	static show() {
+	public static show(): void {
 		Loading.count++;
 
 		if (!Environment.production) {
@@ -32,7 +32,7 @@ export class Loading {
 			Loading.controller.create({
 				message: Locale.get('loadingData'),
 				spinner: 'crescent'
-			}).then((result) => {
+			}).then((result: HTMLIonLoadingElement) => {
 				Loading.loading = result;
 
 				if (Loading.count > 0) {
@@ -47,7 +47,7 @@ export class Loading {
 	/**
 	 * Hide the loading box.
 	 */
-	static hide() {
+	public static hide(): void {
 		Loading.count--;
 
 		if (!Environment.production) {

@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {Tracker} from '../../../../data/tracker';
+import {Tracker} from '../../../../tracker/tracker';
 import {App} from '../../../../app';
 import {ScreenComponent} from '../../../screen';
-import {MessageTypeLabel} from '../../../../data/tracker-message';
+import {MessageTypeLabel} from '../../../../tracker/tracker-message';
 
 @Component({
   selector: 'app-trackers-history',
@@ -18,8 +18,7 @@ export class TrackersHistoryPage extends ScreenComponent {
    */
   public tracker: Tracker;
   
-  public onDisplay() {
+  public onDisplay(): void {
     this.tracker = App.navigator.getData();
-    // console.log('CarTracker: Tracker messages.', this.tracker);
   }
 }

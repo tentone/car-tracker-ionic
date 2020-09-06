@@ -1,8 +1,8 @@
 import {Platform} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {Navigation} from './navigation';
-import {Settings} from './data/settings';
-import {Tracker} from './data/tracker';
+import {Settings} from './settings';
+import {Tracker} from './tracker/tracker';
 import {LocalStorage} from './utils/local-storage';
 import * as mapboxgl from 'mapbox-gl';
 import {Environment} from '../environments/environment';
