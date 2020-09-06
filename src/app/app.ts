@@ -8,7 +8,6 @@ import * as mapboxgl from 'mapbox-gl';
 import {Environment} from '../environments/environment';
 import {SmsIo} from './io/sms-io';
 import {Themes} from './theme';
-// import {smsreader} from 'cordova-sms-reader';
 
 /**
  * The app class is used to access and store all persistent data used in the application.
@@ -42,7 +41,7 @@ export class App {
      * @param platform Platform object created from the app root.
      * @param router Router object created from the app root.
      */
-    public static initialize(platform: Platform, router: Router) {
+    public static initialize(platform: Platform, router: Router): void {
         // @ts-ignore
         mapboxgl.accessToken = Environment.mapbox;
 
@@ -66,7 +65,7 @@ export class App {
     /**
      * Load data from the local storage.
      */
-    public static load() {
+    public static load(): void {
         this.settings = LocalStorage.get('settings');
         this.trackers = LocalStorage.get('trackers');
 
@@ -101,7 +100,7 @@ export class App {
     /**
      * Store data into the local storage.
      */
-    public static store() {
+    public static store(): void {
         LocalStorage.set('settings', this.settings);
         LocalStorage.set('trackers', this.trackers);
 
@@ -112,7 +111,6 @@ export class App {
      * Check if the application is running on a mobile device.
      */
     public static isMobile(): boolean {
-        // @ts-ignore
         return window.cordova !== undefined;
     }
 }
