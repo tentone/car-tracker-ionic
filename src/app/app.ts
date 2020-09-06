@@ -111,6 +111,7 @@ export class App {
      * Check if the application is running on a mobile device.
      */
     public static isMobile(): boolean {
+        // @ts-ignore
         return window.cordova !== undefined;
     }
 }

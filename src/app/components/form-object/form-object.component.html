@@ -15,7 +15,7 @@
             </ng-template>
             <!-- Phone Number -->
             <ng-template [ngIf]="row.type === types.PHONE">
-                <ion-button slot="end" style="display: inline-block;" (click)="this.selectContact(this.object, row);">
+                <ion-button *ngIf="app.isMobile()" slot="end" style="display: inline-block;" (click)="this.selectContact(this.object, row);">
                     <ion-icon name="person"></ion-icon>
                 </ion-button>
                 <ion-input style="text-align: end; text-overflow: ellipsis;" type="tel" inputmode="tel" [disabled]="!(this.editable && row.editable)"

@@ -218,10 +218,12 @@ export class FormObjectComponent implements OnChanges {
 	 * @param row Row of the layout for the attribute.
 	 */
 	public selectContact(object: any, row: any) {
-		App.contacts.pickContact().then((data) => {
-			if (data.phoneNumbers.length > 0) {
-				this.setAttribute(object, row, data.phoneNumbers[0].value);
-			}
-		});
+		if(App.isMobile()) {
+			/*App.contacts.pickContact().then((data) => {
+				if (data.phoneNumbers.length > 0) {
+					this.setAttribute(object, row, data.phoneNumbers[0].value);
+				}
+			});*/
+		}
 	}
 }
