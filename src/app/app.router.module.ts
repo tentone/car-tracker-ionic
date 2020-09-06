@@ -4,9 +4,9 @@ import {TabsPage} from './screens/tabs/tabs.page';
 import {TrackersPage} from './screens/tabs/trackers/trackers.page';
 import {MapPage} from './screens/tabs/map/map.page';
 import {SettingsPage} from './screens/tabs/settings/settings.page';
-import {TrackersAddPage} from './screens/tabs/trackers/add/trackers-add.page';
-import {TrackersViewPage} from './screens/tabs/trackers/view/trackers-view.page';
-import {TrackersHistoryPage} from './screens/tabs/trackers/history/trackers-history.page';
+import {TrackerAddPage} from './screens/tabs/trackers/add/tracker-add.page';
+import {TrackerViewPage} from './screens/tabs/trackers/view/tracker-view.page';
+import {TrackerLogsPage} from './screens/tabs/trackers/logs/tracker-logs.page';
 
 export const AppRoutes: Routes = [
   {
@@ -19,15 +19,15 @@ export const AppRoutes: Routes = [
       },
       {
         path: 'trackers/add',
-        component: TrackersAddPage
+        component: TrackerAddPage
       },
       {
         path: 'trackers/view',
-        component: TrackersViewPage
+        component: TrackerViewPage
       },
       {
-        path: 'trackers/history',
-        component: TrackersHistoryPage
+        path: 'trackers/logs',
+        component: TrackerLogsPage
       },
       {
         path: 'map',

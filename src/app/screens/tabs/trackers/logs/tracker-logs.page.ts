@@ -6,9 +6,9 @@ import {MessageTypeLabel} from '../../../../tracker/tracker-message';
 
 @Component({
   selector: 'app-trackers-history',
-  templateUrl: 'trackers-history.page.html'
+  templateUrl: 'tracker-logs.page.html'
 })
-export class TrackersHistoryPage extends ScreenComponent {
+export class TrackerLogsPage extends ScreenComponent {
   get app() { return App; }
   get json() { return JSON; }
   get messageTypeLabel() { return MessageTypeLabel; }

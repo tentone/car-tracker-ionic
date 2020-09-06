@@ -2,15 +2,15 @@ import {Component} from '@angular/core';
 import {Tracker} from '../../../../tracker/tracker';
 import {App} from '../../../../app';
 import {ScreenComponent} from '../../../screen';
-import {TrackersLayout} from '../view/trackers-layout';
+import {TrackerLayout} from '../view/tracker-layout';
 
 @Component({
   selector: 'app-trackers-add',
-  templateUrl: 'trackers-add.page.html'
+  templateUrl: 'tracker-add.page.html'
 })
-export class TrackersAddPage extends ScreenComponent {
+export class TrackerAddPage extends ScreenComponent {
   get app() { return App; }
-  get layout() { return TrackersLayout.layout; }
+  get layout() { return TrackerLayout.layout; }
 
   /**
    * Tracker being edited on this page.

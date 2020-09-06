@@ -2,7 +2,7 @@ import {Component, ElementRef} from '@angular/core';
 import {Tracker} from '../../../../tracker/tracker';
 import {App} from '../../../../app';
 import {ScreenComponent} from '../../../screen';
-import {TrackersLayout} from './trackers-layout';
+import {TrackerLayout} from './tracker-layout';
 import {Locale} from '../../../../locale/locale';
 import {ActivatedRoute} from '@angular/router';
 import {ActionSheetController} from '@ionic/angular';
@@ -11,10 +11,10 @@ import {Modal} from '../../../modal';
 
 @Component({
   selector: 'app-trackers-view',
-  templateUrl: 'trackers-view.page.html'
+  templateUrl: 'tracker-view.page.html'
 })
-export class TrackersViewPage extends ScreenComponent {
-  get layout() { return TrackersLayout.layout; }
+export class TrackerViewPage extends ScreenComponent {
+  get layout() { return TrackerLayout.layout; }
   get app() { return App; }
 
   get trackerLocation() {
@@ -34,7 +34,7 @@ export class TrackersViewPage extends ScreenComponent {
    */
   public tracker: Tracker = null;
 
-  public onDisplay() {
+  public onDisplay(): void {
     this.tracker = App.navigator.getData();
 
     if (this.tracker === null) {
@@ -54,7 +54,7 @@ export class TrackersViewPage extends ScreenComponent {
           text: Locale.get('history'),
           icon: 'reorder-four',
           handler: () => {
-            App.navigator.navigate('tabs/trackers/history', this.tracker);
+            App.navigator.navigate('tabs/trackers/logs', this.tracker);
           }
         },
         {

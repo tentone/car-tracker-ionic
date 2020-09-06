@@ -9,12 +9,12 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {TabsPage} from './screens/tabs/tabs.page';
 import {TrackersPage} from './screens/tabs/trackers/trackers.page';
-import {TrackersAddPage} from './screens/tabs/trackers/add/trackers-add.page';
+import {TrackerAddPage} from './screens/tabs/trackers/add/tracker-add.page';
 import {MapPage} from './screens/tabs/map/map.page';
 import {SettingsPage} from './screens/tabs/settings/settings.page';
 import {FormObjectComponent} from './components/form-object/form-object.component';
-import {TrackersViewPage} from './screens/tabs/trackers/view/trackers-view.page';
-import {TrackersHistoryPage} from './screens/tabs/trackers/history/trackers-history.page';
+import {TrackerViewPage} from './screens/tabs/trackers/view/tracker-view.page';
+import {TrackerLogsPage} from './screens/tabs/trackers/logs/tracker-logs.page';
 import {AppHeaderComponent} from './components/app-header/app-header.component';
 import {FormatDatePipe} from './screens/screen';
 import {GpsMapComponent} from './components/gps-map/gps-map.component';
@@ -25,9 +25,9 @@ import {GpsMapComponent} from './components/gps-map/gps-map.component';
         AppComponent,
         TabsPage,
         TrackersPage,
-        TrackersAddPage,
-        TrackersViewPage,
-        TrackersHistoryPage,
+        TrackerAddPage,
+        TrackerViewPage,
+        TrackerLogsPage,
         MapPage,
         SettingsPage,
         // Components

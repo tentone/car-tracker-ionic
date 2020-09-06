@@ -4,7 +4,7 @@ import {FormObjectType} from '../../../../components/form-object/form-object-typ
 /**
  * Form layouts used for the tracker data. Multiple layouts are used for different information about the tracker.
  */
-export class TrackersLayout {
+export class TrackerLayout {
 
   public static layout: FormObjectField[] = [
     {
