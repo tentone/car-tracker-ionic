@@ -6,16 +6,9 @@
 
     <div style="position: absolute; bottom:5%; left:5%; width: 90%;">
       <ion-item-sliding>
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Card Title</ion-card-title>
-            <ion-card-subtitle>+1231232353434535</ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-          </ion-card-content>
-        </ion-card>
 
-        <ion-card>
+        <!-- TODO TEST SLIDING CARDS -->
+        <ion-card *ngFor="let i in [0,1,2,3]">
           <ion-card-header>
             <ion-card-title>Card Title</ion-card-title>
             <ion-card-subtitle>+1231232353434535</ion-card-subtitle>
@@ -23,7 +16,6 @@
           <ion-card-content>
           </ion-card-content>
         </ion-card>
-      </ion-item-sliding>
     </div>
   </div>
 </ion-content>
