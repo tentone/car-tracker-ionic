@@ -1,15 +1,13 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import {App} from '../../../app';
-import {ActivatedRoute} from '@angular/router';
-import {ScreenComponent} from '../../screen';
 import {GpsIo} from '../../../io/gps-io';
 
 @Component({
   selector: 'app-map',
   templateUrl: 'map.page.html'
 })
-export class MapPage extends ScreenComponent {
+export class MapPage {
   @ViewChild('mapContainer', {static: true}) mapContainer: ElementRef;
 
   /**
@@ -32,11 +30,7 @@ export class MapPage extends ScreenComponent {
    */
   public trackers: mapboxgl.Marker[] = [];
 
-  constructor(public route: ActivatedRoute, public elementRef: ElementRef) {
-    super(route, elementRef);
-  }
-
-  public onDisplay() {
+  public ngOnInit(): void {
     if (this.map === null) {
       this.map = new mapboxgl.Map({
         container: this.mapContainer.nativeElement,

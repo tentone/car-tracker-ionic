@@ -16,7 +16,7 @@ import {FormObjectComponent} from './components/form-object/form-object.componen
 import {TrackerViewPage} from './screens/tabs/trackers/view/tracker-view.page';
 import {TrackerLogsPage} from './screens/tabs/trackers/logs/tracker-logs.page';
 import {AppHeaderComponent} from './components/app-header/app-header.component';
-import {FormatDatePipe} from './screens/screen';
+import {FormatDatePipe} from './screens/pipes';
 import {GpsMapComponent} from './components/gps-map/gps-map.component';
 
 @NgModule({

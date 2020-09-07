@@ -1,14 +1,13 @@
 import {Component} from '@angular/core';
 import {Tracker} from '../../../../tracker/tracker';
 import {App} from '../../../../app';
-import {ScreenComponent} from '../../../screen';
 import {TrackerLayout} from '../view/tracker-layout';
 
 @Component({
   selector: 'app-trackers-add',
   templateUrl: 'tracker-add.page.html'
 })
-export class TrackerAddPage extends ScreenComponent {
+export class TrackerAddPage {
   get app() { return App; }
   get layout() { return TrackerLayout.layout; }
 
@@ -17,7 +16,7 @@ export class TrackerAddPage extends ScreenComponent {
    */
   public tracker: Tracker = new Tracker();
   
-  public onDisplay(): void {
+  public ngOnInit(): void {
     this.tracker = new Tracker();
   }
 

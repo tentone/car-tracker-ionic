@@ -1,10 +1,8 @@
-import {Component, ElementRef} from '@angular/core';
+import {Component} from '@angular/core';
 import {Tracker} from '../../../../tracker/tracker';
 import {App} from '../../../../app';
-import {ScreenComponent} from '../../../screen';
 import {TrackerLayout} from './tracker-layout';
 import {Locale} from '../../../../locale/locale';
-import {ActivatedRoute} from '@angular/router';
 import {ActionSheetController} from '@ionic/angular';
 import {FileIo} from '../../../../io/file-io';
 import {Modal} from '../../../modal';
@@ -13,7 +11,7 @@ import {Modal} from '../../../modal';
   selector: 'app-trackers-view',
   templateUrl: 'tracker-view.page.html'
 })
-export class TrackerViewPage extends ScreenComponent {
+export class TrackerViewPage {
   get layout() { return TrackerLayout.layout; }
   get app() { return App; }
 
@@ -25,16 +23,12 @@ export class TrackerViewPage extends ScreenComponent {
     return this.tracker.getLastPosition();
   }
 
-  constructor(public route: ActivatedRoute, public elementRef: ElementRef) {
-    super(route, elementRef);
-  }
-
   /**
    * Tracker being edited on this page.
    */
   public tracker: Tracker = null;
 
-  public onDisplay(): void {
+  public ngOnInit(): void {
     this.tracker = App.navigator.getData();
 
     if (this.tracker === null) {

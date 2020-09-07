@@ -1,14 +1,13 @@
 import {Component} from '@angular/core';
 import {Tracker} from '../../../../tracker/tracker';
 import {App} from '../../../../app';
-import {ScreenComponent} from '../../../screen';
 import {MessageTypeLabel} from '../../../../tracker/tracker-message';
 
 @Component({
   selector: 'app-trackers-history',
   templateUrl: 'tracker-logs.page.html'
 })
-export class TrackerLogsPage extends ScreenComponent {
+export class TrackerLogsPage {
   get app() { return App; }
   get json() { return JSON; }
   get messageTypeLabel() { return MessageTypeLabel; }
@@ -18,7 +17,7 @@ export class TrackerLogsPage extends ScreenComponent {
    */
   public tracker: Tracker;
   
-  public onDisplay(): void {
+  public ngOnInit(): void {
     this.tracker = App.navigator.getData();
   }
 }
