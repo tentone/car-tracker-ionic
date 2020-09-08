@@ -8,7 +8,7 @@ export class LocalStorage {
      * @param key Ket where to store data.
      * @param value Data to be stored in the storage.
      */
-    public static set(key: string, value: any) {
+    public static set(key: string, value: any): void {
         if (typeof value === 'object') {
             window.localStorage.setItem(key, JSON.stringify(value));
         } else {
@@ -22,7 +22,7 @@ export class LocalStorage {
      * @param key Key to fetch from storage.
      * @return Value obtained from the storage.
      */
-    public static get(key: string) {
+    public static get(key: string): string {
         let value = window.localStorage.getItem(key);
 
         if (value === 'null' || value === 'undefined' || value === undefined) {
@@ -42,7 +42,7 @@ export class LocalStorage {
      * @param key Key to check.
      * @return True if the key exists false otherwise.
      */
-    public static exists(key: string) {
+    public static exists(key: string): boolean {
         return window.localStorage.getItem(key) !== null;
     }
 
@@ -51,7 +51,7 @@ export class LocalStorage {
      *
      * @param key Key to remove from storage.
      */
-    public static delete(key: string) {
+    public static delete(key: string): any {
         return window.localStorage.removeItem(key);
     }
 }

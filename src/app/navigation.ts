@@ -21,7 +21,7 @@ export class Navigation {
 	 */
 	public route: NavigationNode[];
 
-	constructor(router: Router) {
+	public constructor(router: Router) {
 		this.router = router;
 		this.route = [];
 
@@ -41,7 +41,7 @@ export class Navigation {
 		});
 	}
 
-	public update() {
+	public update(): void {
 		if (this.route.length > 0) {
 			this.router.navigate([this.route[this.route.length - 1].route]);
 		}
@@ -54,7 +54,7 @@ export class Navigation {
 	 * @param data Data to be sent to that path.
 	 * @param title Title of the screen (can also be set on the screen code via the setTitle() method).
 	 */
-	public navigate(route: string, data?: any, title?: string) {
+	public navigate(route: string, data?: any, title?: string): void {
 		if (!Environment.production) {
 			// Search routes recursively, check if some have the route specified
 			// @ts-ignore
@@ -108,7 +108,7 @@ export class Navigation {
 	 *
 	 * If no route available on the stack, remove the last part of the URL (if possible).
 	 */
-	public pop() {
+	public pop(): void {
 		if (this.route.length === 0) {
 			this.checkRoute();
 		}
@@ -160,7 +160,7 @@ export class Navigation {
 	/**
 	 * Compare it against the current URL on the stack and override if necessary.
 	 */
-	public checkRoute() {
+	public checkRoute(): void {
 		let route = this.readRoute().join('/');
 
 		// Check if route is correct
@@ -214,7 +214,7 @@ export class Navigation {
 	/**
 	 * Set the data for the current screen.
 	 */
-	public setData(data: any) {
+	public setData(data: any): void {
 		if (this.route.length === 0) {
 			return;
 		}
@@ -241,7 +241,7 @@ export class Navigation {
 	/**
 	 * Set the title of the current screen.
 	 */
-	public setTitle(title: string) {
+	public setTitle(title: string): void {
 		if (this.route.length === 0 || title === null) {
 			return;
 		}

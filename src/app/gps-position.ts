@@ -12,7 +12,7 @@ export class GPSPosition {
      */
     public longitude: number;
 
-    constructor(latitude?: number, longitude?: number) {
+    public constructor(latitude?: number, longitude?: number) {
         this.latitude = latitude !== undefined ? latitude : 0;
         this.longitude = longitude !== undefined ? longitude : 0;
     }

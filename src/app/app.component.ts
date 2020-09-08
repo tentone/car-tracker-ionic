@@ -14,7 +14,7 @@ import {Router} from '@angular/router';
   ]
 })
 export class AppComponent {
-  constructor(public platform: Platform, public translate: TranslateService, public router: Router) {
+  public constructor(public platform: Platform, public translate: TranslateService, public router: Router) {
     Locale.initialize(this.translate);
     App.initialize(this.platform, this.router);
 

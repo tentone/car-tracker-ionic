@@ -18,7 +18,7 @@ export class StringUtils {
      * @param searchText Search text to be processed.
      * @return Array of already prepared keywords.
      */
-    public static splitKeywords(searchText: string) {
+    public static splitKeywords(searchText: string): string[] {
         const keywords = searchText.split(' ');
         let j = 0;
 
@@ -44,7 +44,7 @@ export class StringUtils {
      * @param attributes Array of attributes of the object to be checked.
      * @return True if the two strings match, false otherwise.
      */
-    public static searchObject(searchText: string, object: any, attributes: string[]) {
+    public static searchObject(searchText: string, object: any, attributes: string[]): boolean {
         if (searchText === null || object === null || searchText.length === 0) {
             return true;
         }
@@ -76,7 +76,7 @@ export class StringUtils {
      * @param text Text to be compared against the keywords provided.
      * @return True if the two strings match, false otherwise.
      */
-    public static search(searchText: string, text: string) {
+    public static search(searchText: string, text: string): boolean {
         if (text === null || text === undefined) {
             return false;
         }
@@ -102,7 +102,7 @@ export class StringUtils {
      * @param str Input string to be processed.
      * @return Processed string without accented chars.
      */
-    public static accentFolding(str: string) {
+    public static accentFolding(str: string): string {
         // tslint:disable-next-line:no-shadowed-variable
         return str.replace(/([àáâãäå])|([ç])|([èéêë])|([ìíîï])|([ñ])|([òóôõöø])|([ß])|([ùúûü])|([ÿ])|([æ])/g, function (str, a, c, e, i, n, o, s, u, y, ae) {
             if (a) {
@@ -146,7 +146,7 @@ export class StringUtils {
      * @param str Input string to be processed.
      * @return Processed string without accented chars.
      */
-    public static removePunctuation(str: string) {
+    public static removePunctuation(str: string): string {
         return str.replace(/[.,\/#!$%\^&\*;:{}=\-_`~() ]/g, '');
     }
 }
