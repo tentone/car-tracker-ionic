@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
-import {Environment} from '../../../../environments/environment';
-import {Locale} from '../../../locale/locale';
-import {App} from '../../../app';
-import {FormObjectField} from '../../../components/form-object/form-object-field';
-import {FormObjectType} from '../../../components/form-object/form-object-type';
-import {Themes} from '../../../theme';
-import {MapStyles} from "../../../map-styles";
+import {Environment} from '../../../environments/environment';
+import {Locale} from '../../locale/locale';
+import {App} from '../../app';
+import {FormObjectField} from '../../components/form-object/form-object-field';
+import {FormObjectType} from '../../components/form-object/form-object-type';
+import {Themes} from '../../theme';
+import {MapStyles} from "../../map-styles";
 
 @Component({
   selector: 'app-settings',

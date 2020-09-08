@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
-import {Tracker} from '../../../../tracker/tracker';
-import {App} from '../../../../app';
-import {TrackerLayout} from './tracker-layout';
-import {Locale} from '../../../../locale/locale';
+import {Tracker} from '../../../tracker/tracker';
+import {App} from '../../../app';
+import {TrackerLayout} from '../tracker-layout';
+import {Locale} from '../../../locale/locale';
 import {ActionSheetController} from '@ionic/angular';
-import {FileIo} from '../../../../io/file-io';
-import {Modal} from '../../../modal';
+import {FileIo} from '../../../io/file-io';
+import {Modal} from '../../modal';
 
 @Component({
   selector: 'app-trackers-view',

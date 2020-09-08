@@ -22,7 +22,7 @@ export class LocalStorage {
      * @param key Key to fetch from storage.
      * @return Value obtained from the storage.
      */
-    public static get(key: string): string {
+    public static get(key: string): any {
         let value = window.localStorage.getItem(key);
 
         if (value === 'null' || value === 'undefined' || value === undefined) {

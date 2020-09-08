@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {Tracker} from '../../../../tracker/tracker';
-import {App} from '../../../../app';
-import {TrackerLayout} from '../view/tracker-layout';
+import {Tracker} from '../../../tracker/tracker';
+import {App} from '../../../app';
+import {TrackerLayout} from '../tracker-layout';
 
 @Component({
   selector: 'app-trackers-add',

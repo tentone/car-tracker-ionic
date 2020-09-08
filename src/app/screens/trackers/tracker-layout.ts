@@ -1,5 +1,5 @@
-import {FormObjectField} from '../../../../components/form-object/form-object-field';
-import {FormObjectType} from '../../../../components/form-object/form-object-type';
+import {FormObjectField} from '../../components/form-object/form-object-field';
+import {FormObjectType} from '../../components/form-object/form-object-type';
 
 /**
  * Form layouts used for the tracker data. Multiple layouts are used for different information about the tracker.

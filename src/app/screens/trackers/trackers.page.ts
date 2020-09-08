@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {App} from '../../../app';
-import {StringUtils} from '../../../utils/string-utils';
-import {Locale} from '../../../locale/locale';
-import {FileIo} from '../../../io/file-io';
+import {App} from '../../app';
+import {StringUtils} from '../../utils/string-utils';
+import {Locale} from '../../locale/locale';
+import {FileIo} from '../../io/file-io';
 import {ActionSheetController} from '@ionic/angular';
-import {Modal} from '../../modal';
+import {Modal} from '../modal';
 
 @Component({
   selector: 'app-trackers',

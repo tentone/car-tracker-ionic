@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {TabsPage} from './screens/tabs/tabs.page';
-import {TrackersPage} from './screens/tabs/trackers/trackers.page';
-import {MapPage} from './screens/tabs/map/map.page';
-import {SettingsPage} from './screens/tabs/settings/settings.page';
-import {TrackerAddPage} from './screens/tabs/trackers/add/tracker-add.page';
-import {TrackerViewPage} from './screens/tabs/trackers/view/tracker-view.page';
-import {TrackerLogsPage} from './screens/tabs/trackers/logs/tracker-logs.page';
+import {TrackersPage} from './screens/trackers/trackers.page';
+import {MapPage} from './screens/map/map.page';
+import {SettingsPage} from './screens/settings/settings.page';
+import {TrackerAddPage} from './screens/trackers/add/tracker-add.page';
+import {TrackerViewPage} from './screens/trackers/view/tracker-view.page';
+import {TrackerLogsPage} from './screens/trackers/logs/tracker-logs.page';
 
 export const AppRoutes: Routes = [
   {

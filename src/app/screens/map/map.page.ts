@@ -1,7 +1,7 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
-import {App} from '../../../app';
-import {GpsIo} from '../../../io/gps-io';
+import {App} from '../../app';
+import {GpsIo} from '../../io/gps-io';
 
 @Component({
   selector: 'app-map',
