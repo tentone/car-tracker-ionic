@@ -2,6 +2,7 @@ import {Component, ElementRef, ViewChild} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import {App} from '../../app';
 import {GpsIo} from '../../io/gps-io';
+import { Tracker } from 'src/app/tracker/tracker';
 
 @Component({
   selector: 'app-map',
@@ -28,9 +29,16 @@ export class MapPage {
   /**
    * Position of the GPS tracker registered in the app.
    */
-  public trackers: mapboxgl.Marker[] = [];
+  public markers: mapboxgl.Marker[] = [];
+
+  /**
+   * List of trackers to display.
+   */
+  public trackers: Tracker[] = [];
 
   public ngOnInit(): void {
+    this.trackers = App.trackers;
+
     if (this.map === null) {
       this.map = new mapboxgl.Map({
         container: this.mapContainer.nativeElement,
@@ -46,13 +54,16 @@ export class MapPage {
 
     this.map.setStyle(App.settings.mapStyle);
 
+
     GpsIo.getPosition((longitude, latitude) => {
       this.setMarker(longitude, latitude);
     });
+  }
 
-    setTimeout(() => {
-      this.map.resize();
-    }, 100);
+  public ngAfterViewInit() {
+    if (this.map !== null) {
+      setTimeout(() => {this.map.resize()}, 300);
+    }
   }
 
   /**
