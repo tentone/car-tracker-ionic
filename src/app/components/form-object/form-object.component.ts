@@ -2,6 +2,9 @@ import {Component, Input, OnChanges} from '@angular/core';
 import {FormObjectType} from './form-object-type';
 import {App} from '../../app';
 import {Environment} from '../../../environments/environment';
+import { Plugins } from "@capacitor/core";
+
+const  {CapContacts} = Plugins;
 
 @Component({
 	selector: 'form-object',
@@ -219,11 +222,15 @@ export class FormObjectComponent implements OnChanges {
 	 */
 	public selectContact(object: any, row: any) {
 		if(App.isMobile()) {
-			/*App.contacts.pickContact().then((data) => {
-				if (data.phoneNumbers.length > 0) {
-					this.setAttribute(object, row, data.phoneNumbers[0].value);
+			CapContacts.getContacts().then((result) => {
+				for (const contact of result.contacts) {
+					if (contact.phoneNumbers.length > 0) {
+						this.setAttribute(object, row, contact.phoneNumbers[0]);
+						return;
+					}
 				}
-			});*/
+
+			});
 		}
 	}
 }

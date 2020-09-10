@@ -4,6 +4,8 @@ import {TranslateService} from '@ngx-translate/core';
 import {Locale} from './locale/locale';
 import {App} from './app';
 import {Router} from '@angular/router';
+import {registerWebPlugin} from "@capacitor/core";
+import {SmsManager} from '@byteowls/capacitor-sms';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +17,8 @@ import {Router} from '@angular/router';
 })
 export class AppComponent {
   public constructor(public platform: Platform, public translate: TranslateService, public router: Router) {
+    registerWebPlugin(SmsManager);
+
     Locale.initialize(this.translate);
     App.initialize(this.platform, this.router);
 
