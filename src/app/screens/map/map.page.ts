@@ -3,6 +3,7 @@ import * as mapboxgl from 'mapbox-gl';
 import {App} from '../../app';
 import {GpsIo} from '../../io/gps-io';
 import { Tracker } from 'src/app/tracker/tracker';
+import {GeolocationPosition} from "@capacitor/core";
 
 @Component({
   selector: 'app-map',
@@ -55,8 +56,8 @@ export class MapPage {
     this.map.setStyle(App.settings.mapStyle);
 
 
-    GpsIo.getPosition((longitude, latitude) => {
-      this.setMarker(longitude, latitude);
+    GpsIo.getPosition().then((position: GeolocationPosition) => {
+      this.setMarker(position.coords.longitude, position.coords.latitude);
     });
   }
 
