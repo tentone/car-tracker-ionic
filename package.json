@@ -23,6 +23,8 @@
     "@angular/router": "^10.0.14",
     "@capacitor/android": "^2.4.0",
     "@capacitor/core": "^2.4.0",
+    "@byteowls/capacitor-sms": "^2.0.0",
+    "@byrds/capacitor-contacts": "^1.1.0",
     "@ionic-native/android-permissions": "^5.28.0",
     "@ionic-native/chooser": "^5.28.0",
     "@ionic-native/contacts": "^5.28.0",
