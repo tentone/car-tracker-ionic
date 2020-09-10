@@ -1,5 +1,5 @@
 import {App} from '../app';
-import { Plugins } from '@capacitor/core';
+import {GeolocationPosition, Plugins} from '@capacitor/core';
 const {Geolocation} = Plugins;
 
 /**
@@ -9,33 +9,35 @@ export class GpsIo {
     /**
      * Get position from GPS or browser location API.
      *
-     * @param onSuccess Method called when the position is obtained receives (longitude, latitude).
-     * @param onError Method called if an error occurs while getting the GPS position.
+     * @return Promise withe the current position of the device.
      */
-    public static async getPosition(onSuccess: Function, onError?: Function) {
+    public static async getPosition(): Promise<GeolocationPosition> {
         if (App.isMobile()) {
-            // TODO <GET POSITION>
+            return Geolocation.getCurrentPosition({enableHighAccuracy: true});
         } else if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition((data) => {
-                onSuccess(data.coords.longitude, data.coords.latitude);
+            return new Promise((resolve, reject) => {
+                navigator.geolocation.getCurrentPosition((data: Position) => {
+                    resolve(data);
+                }, (err: PositionError) => {
+                    reject(err);
+                });
             });
+
         }
     }
 
     /**
      * Set GPS change watcher method, called every time that the GPS position is changed.
      *
-     * @param onChange Method called when the position changes receives (longitude, latitude).
+     * @param onChange Method called when the position changes receives the position of the device.
      */
-    public static setWatcher(onChange: Function) {
-        Geolocation.watchPosition({}, (position, err) => {
-
-        });
-        // TODO <WATCH GPS POSITION CONINOUSLY>
-        /*// Watch for changes in the GPS position
-        let watch = App.geolocation.watchPosition();
-        watch.subscribe((data) => {
-            onChange(data.coords.longitude, data.coords.latitude);
-        });*/
+    public static setWatcher(onChange: (position: GeolocationPosition) => void) {
+        if (App.isMobile()) {
+            Geolocation.watchPosition({enableHighAccuracy: true}, (position: GeolocationPosition, err: any) => {
+                onChange(position);
+            });
+        } else if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(onChange);
+        }
     }
 }

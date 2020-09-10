@@ -8,11 +8,7 @@ android {
 }
 
 apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
-dependencies {
-
-
-}
-
+dependencies {}
 
 if (hasProperty('postBuildExtras')) {
   postBuildExtras()
