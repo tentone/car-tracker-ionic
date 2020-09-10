@@ -1,16 +1,12 @@
 {
   "name": "cartracker",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "tentone",
   "description": "Car GPS tracking application using the ionic framework.",
   "homepage": "https://github.com/tentone",
   "scripts": {
     "start": "ng serve",
     "build": "ionic build",
-    "run-pwa": "npx cap serve",
-    "run-android": "ionic build && npx cap sync android && cd android && gradlew.bat assembleDebug && gradlew.bat installDebug && cd ..",
-    "open-android": "ionic build && npx cap sync android && npx cap open android",
-    "open-ios": "ionic build && npx cap sync ios && npx cap open ios"
   },
   "private": true,
   "dependencies": {
@@ -21,10 +17,6 @@
     "@angular/platform-browser": "^10.0.14",
     "@angular/platform-browser-dynamic": "^10.0.14",
     "@angular/router": "^10.0.14",
-    "@capacitor/android": "^2.4.0",
-    "@capacitor/core": "^2.4.0",
-    "@byteowls/capacitor-sms": "^2.0.0",
-    "@byrds/capacitor-contacts": "^1.1.0",
     "@ionic-native/android-permissions": "^5.28.0",
     "@ionic-native/chooser": "^5.28.0",
     "@ionic-native/contacts": "^5.28.0",
@@ -54,7 +46,6 @@
     "@ionic/angular-toolkit": "^2.3.3",
     "@ngx-translate/core": "^13.0.0",
     "@types/node": "12.12.6",
-    "@capacitor/cli": "^2.4.0",
     "ionic": "^5.4.16",
     "codelyzer": "^5.2.2",
     "native-run": "^0.3.0",

@@ -3,7 +3,6 @@ import * as mapboxgl from 'mapbox-gl';
 import {App} from '../../app';
 import {GpsIo} from '../../io/gps-io';
 import { Tracker } from 'src/app/tracker/tracker';
-import {GeolocationPosition} from "@capacitor/core";
 
 @Component({
   selector: 'app-map',

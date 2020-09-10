@@ -1,6 +1,4 @@
 import {App} from '../app';
-import {GeolocationPosition, Plugins} from '@capacitor/core';
-const {Geolocation} = Plugins;
 
 /**
  * Handles access to the GPS information, booth for mobile devices and the browser.
