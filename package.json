@@ -6,9 +6,11 @@
   "homepage": "https://github.com/tentone",
   "scripts": {
     "start": "ng serve",
-    "start-android": "npx cap open android",
     "build": "ionic build",
-    "copy": "copyfiles ./www/* ./android/app/build/assets/public/"
+    "run-pwa": "npx cap serve",
+    "run-android": "ionic build && npx cap sync android && cd android && gradlew.bat assembleDebug && gradlew.bat installDebug && cd ..",
+    "open-android": "ionic build && npx cap sync android && npx cap open android",
+    "open-ios": "ionic build && npx cap sync ios && npx cap open ios"
   },
   "private": true,
   "dependencies": {
