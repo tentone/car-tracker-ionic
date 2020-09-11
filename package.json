@@ -6,7 +6,7 @@
   "homepage": "https://github.com/tentone",
   "scripts": {
     "start": "ng serve",
-    "build": "ionic build",
+    "build": "ionic build"
   },
   "private": true,
   "dependencies": {
