@@ -12,7 +12,7 @@ export class FileIo {
 	 */
 	static write(fname: string, data: any): void {
 		if (App.isMobile()) {
-			/*App.chooser.getFile().then((file) => {
+			App.chooser.getFile().then((file) => {
 				if (file === undefined || file.name === 'canceled') {
 					return;
 				}
@@ -20,7 +20,7 @@ export class FileIo {
 				console.log('Cartracker: Write file.', file);
 
 				App.file.writeFile(file.uri, fname, data);
-			});*/
+			});
 		} else {
 			if (typeof data === 'object') {
 				data = JSON.stringify(data, null, '\t');
@@ -54,7 +54,7 @@ export class FileIo {
 	 */
 	static read(onLoad: Function, filter?: string): void {
 		if (App.isMobile()) {
-			/*App.chooser.getFile().then((file) => {
+			App.chooser.getFile().then((file) => {
 				if (file === undefined || file.name === 'canceled') {
 					return;
 				}
@@ -65,7 +65,7 @@ export class FileIo {
 				if (onLoad !== undefined) {
 					onLoad(data);
 				}
-			});*/
+			});
 		} else {
 			const chooser = document.createElement('input');
 			chooser.type = 'file';

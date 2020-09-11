@@ -17,7 +17,7 @@ export class SmsIo {
 	/**
 	 * Method used to process SMS received, receives the parameters (message, phoneNumber).
 	 */
-	public static onReceive: (message: string, phoneNumber: string) => void = null;
+	public static onReceive: Function = null;
 
 	/**
 	 * Start SMS listener.
@@ -30,9 +30,26 @@ export class SmsIo {
 		}
 
 		if (App.isMobile()) {
-			// TODO <LISTEN TO SMS RECEIVED>
+			// @ts-ignore
+			if (window.SMSReceive !== undefined) {
+				// @ts-ignore
+				window.SMSReceive.startWatch(() => {
+					console.log('CarTracker: SMS Receiver watcher started.');
+				}, () => {
+					console.warn('CarTracker: Failed to start watching for SMS.');
+				});
+
+				// SMS Received event
+				document.addEventListener('onSMSArrive', (e: any) => {
+					console.log('CarTracker: SMS data received.', e, e.data);
+					this.onReceive(e.data.body, e.data.address);
+				});
+			} else {
+				console.warn('CarTracker: SMSReceive plugin undefined.');
+			}
 		} else {
 			this.mockup = new Gt901Mockup(this.onReceive);
+
 		}
 	}
 
@@ -41,7 +58,13 @@ export class SmsIo {
 	 */
 	public static stopListener() {
 		if (App.isMobile()) {
-			// TODO <STOP LISTENING TO SMS RECEIVED>
+			// @ts-ignore
+			if (window.SMSReceive !== undefined) {
+				// @ts-ignore
+				window.SMSReceive.stopWatch(() => {
+					console.log('CarTracker: SMS Receiver watching stopped.');
+				});
+			}
 		}
 	}
 
@@ -55,7 +78,26 @@ export class SmsIo {
 	 */
 	public static sendSMS(phoneNumber: string, message: string, onSuccess?: Function, onError?: Function) {
 		if (App.isMobile()) {
-			// TODO <SEND SMS>
+			App.androidPermissions.requestPermission(App.androidPermissions.PERMISSION.SEND_SMS).then(() => {
+				let options: SmsOptions = {
+					replaceLineBreaks: false,
+					android: {
+						intent: ''
+					}
+				};
+
+				if (App.sms.hasPermission()) {
+					App.sms.send(phoneNumber, message, options).then(() => {
+						if (onSuccess !== undefined) {
+							onSuccess();
+						}
+					}).catch(() => {
+						if (onError !== undefined) {
+							onError();
+						}
+					});
+				}
+			});
 		} else {
 			this.mockup.sendSMS(message, phoneNumber);
 

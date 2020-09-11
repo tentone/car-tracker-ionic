@@ -9,9 +9,11 @@ export class GpsIo {
      *
      * @return Promise withe the current position of the device.
      */
-    public static async getPosition(): Promise<GeolocationPosition> {
+    public static async getPosition(): Promise<Position> {
         if (App.isMobile()) {
-            return Geolocation.getCurrentPosition({enableHighAccuracy: true});
+            App.androidPermissions.requestPermission(App.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(() => {
+               return App.geolocation.getCurrentPosition();
+            });
         } else if (navigator.geolocation) {
             return new Promise((resolve, reject) => {
                 navigator.geolocation.getCurrentPosition((data: Position) => {
@@ -29,10 +31,12 @@ export class GpsIo {
      *
      * @param onChange Method called when the position changes receives the position of the device.
      */
-    public static setWatcher(onChange: (position: GeolocationPosition) => void) {
+    public static setWatcher(onChange: (position: Position) => void) {
         if (App.isMobile()) {
-            Geolocation.watchPosition({enableHighAccuracy: true}, (position: GeolocationPosition, err: any) => {
-                onChange(position);
+            // Watch for changes in the GPS position
+            let watch = App.geolocation.watchPosition();
+            watch.subscribe((data: Position) => {
+                onChange(data);
             });
         } else if (navigator.geolocation) {
             navigator.geolocation.watchPosition(onChange);
