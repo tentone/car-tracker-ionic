@@ -35,7 +35,7 @@ export class GpsIo {
         if (App.isMobile()) {
             // Watch for changes in the GPS position
             let watch = App.geolocation.watchPosition();
-            watch.subscribe((data: Position) => {
+            watch.subscribe((data: any) => {
                 onChange(data);
             });
         } else if (navigator.geolocation) {

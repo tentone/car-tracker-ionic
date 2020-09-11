@@ -1,8 +1,6 @@
 import {Platform} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {Navigation} from './navigation';
-import {Settings} from './data/settings';
-import {Tracker} from './data/tracker';
 import {LocalStorage} from './utils/local-storage';
 import * as mapboxgl from 'mapbox-gl';
 import {Environment} from '../environments/environment';
@@ -14,6 +12,8 @@ import {Chooser} from '@ionic-native/chooser/ngx';
 import {SmsIo} from './io/sms-io';
 import {Geolocation} from "@ionic-native/geolocation/ngx";
 import {Themes} from './theme';
+import {Settings} from "./settings";
+import {Tracker} from "./tracker/tracker";
 
 /**
  * The app class is used to access and store all persistent data used in the application.
