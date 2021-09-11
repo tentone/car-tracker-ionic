@@ -55,7 +55,7 @@ export class MapPage {
     this.map.setStyle(App.settings.mapStyle);
 
 
-    GpsIo.getPosition().then((position: GeolocationPosition) => {
+    GpsIo.getPosition().then((position: any) => {
       this.setMarker(position.coords.longitude, position.coords.latitude);
     });
   }
@@ -94,6 +94,7 @@ export class MapPage {
 
       let labelLayerId;
       for (let i = 0; i < layers.length; i++) {
+        // @ts-ignore
         if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
           labelLayerId = layers[i].id;
           break;
