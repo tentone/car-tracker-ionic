@@ -19,7 +19,6 @@
     "@angular/platform-browser-dynamic": "^10.0.14",
     "@angular/router": "^10.0.14",
     "@capacitor/android": "^3.2.2",
-    "@capacitor/cli": "^3.2.2",
     "@capacitor/core": "^3.2.2",
     "@capacitor/ios": "^3.2.2",
     "@ionic-native/android-permissions": "^5.28.0",
@@ -33,23 +32,6 @@
     "@ionic-native/status-bar": "^5.28.0",
     "@ionic/angular": "^5.3.2",
     "@types/mapbox-gl": "^1.11.2",
-    "cordova-android": "^9.0.0",
-    "cordova-plugin-android-permissions": "^1.0.2",
-    "cordova-plugin-background-mode": "^0.7.3",
-    "cordova-plugin-chooser": "^1.3.2",
-    "cordova-plugin-contacts": "^3.0.1",
-    "cordova-plugin-device": "^2.0.3",
-    "cordova-plugin-file": "^6.0.2",
-    "cordova-plugin-geolocation": "^4.0.2",
-    "cordova-plugin-inappbrowser": "^4.0.0",
-    "cordova-plugin-ionic-keyboard": "^2.2.0",
-    "cordova-plugin-ionic-webview": "^5.0.0",
-    "cordova-plugin-sms": "^1.0.5",
-    "cordova-plugin-sms-receive": "^1.0.2",
-    "cordova-plugin-splashscreen": "^6.0.0",
-    "cordova-plugin-statusbar": "^2.4.3",
-    "cordova-plugin-whitelist": "^1.3.4",
-    "cordova-sms-plugin": "^1.0.0",
     "core-js": "^3.6.5",
     "mapbox-gl": "^1.12.0",
     "rxjs": "^6.6.2",
@@ -65,41 +47,16 @@
     "@angular/compiler": "^10.0.14",
     "@angular/compiler-cli": "^10.0.14",
     "@angular/language-service": "^10.0.14",
+    "@capacitor/cli": "^3.2.2",
     "@ionic/angular-toolkit": "^2.3.3",
     "@ngx-translate/core": "^13.0.0",
     "@types/node": "12.12.6",
-    "ionic": "^5.4.16",
-    "cordova": "^10.0.0",
     "codelyzer": "^5.2.2",
+    "copyfiles": "^2.3.0",
+    "ionic": "^5.4.16",
     "native-run": "^0.3.0",
     "ts-node": "^8.10.2",
     "tslint": "^6.1.3",
-    "typescript": "^3.9.7",
-    "copyfiles": "^2.3.0"
-  },
-  "cordova": {
-    "plugins": {
-      "cordova-plugin-whitelist": {},
-      "cordova-plugin-statusbar": {},
-      "cordova-plugin-device": {},
-      "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {
-        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
-      },
-      "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-android-permissions": {},
-      "cordova-sms-plugin": {},
-      "cordova-plugin-sms": {},
-      "cordova-plugin-geolocation": {},
-      "cordova-plugin-contacts": {},
-      "cordova-plugin-sms-receive": {},
-      "cordova-plugin-file": {},
-      "cordova-plugin-chooser": {},
-      "cordova-plugin-inappbrowser": {},
-      "cordova-plugin-background-mode": {}
-    },
-    "platforms": [
-      "android"
-    ]
+    "typescript": "^3.9.7"
   }
 }
