@@ -23,22 +23,35 @@
 
 - Install [Java JDK 8](https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) and [Android development SDK](https://developer.android.com/studio#downloads), there is no need to install the Android Studio IDE, only the build tools are required.
   - You may need to install [gradle](https://gradle.org/) [manually](https://gradle.org/install/#manually) and register it in your path.
-- Ensure that you have the environment variables `ANDROID_SDK_ROOT` or `ANDROID_HOME`, and have access to `java` and `gradle` from the your terminal (or command line in windows).
+- Ensure that you have the environment variables `GRADLE_HOME`, `JAVA_HOME` and `ANDROID_SDK_ROOT`, and have access to `java` and `gradle` from the your terminal (or command line in windows).
+  - `GRADLE_HOME` ...\Gradle\gradle-7.2
+  - `JAVA_HOME` ...\Java\jdk1.8.0_301
+  - `ANDROID_SDK_ROOT` ...\AppData\Local\Android\Sdk
 - Install Android SDK Platform 28 tools from the android SDK manager.
 - Install [NodeJS](https://nodejs.org/en/) and NPM and install dependencies
 
 ```bash
+npm install -g @ionic/cli
 npm install
 npm run start
 ```
+
+- The application can be built using Ionic Native for mobile devices using [Cordova](https://cordova.apache.org/) or [Capacitor](https://capacitorjs.com/), by default capacitor is used.
+
+
+
+### Capacitor
+
+- TODO
 
 
 
 ### Cordova
 
- - The application is built for mobile devices using Cordova.
- - You can replace `icon.png`  assets and then regenerate resources,
- - Run `ionic cordova resources` to generate icon and splash screen sizes.
+ - You can replace `icon.png`  assets and then regenerate resources by running  `ionic cordova resources` to generate icon and splash screen sizes.
+ - To add platforms to the project run `cordova platform add <platform>` and to remove `cordova platform remove <platform>`
+- To run the application run `cordova run <platform>`.
+- If any errors occurs regarding `dx.bat` file open android sdk Directory and copy `d8.bat` as `dx.bat`
 
 
 
