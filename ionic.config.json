@@ -1,7 +1,5 @@
 {
   "name": "cartracker",
-  "integrations": {
-    "cordova": {}
-  },
+  "integrations": {},
   "type": "angular"
 }
