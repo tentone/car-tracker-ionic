@@ -6,7 +6,8 @@
   "homepage": "https://github.com/tentone",
   "scripts": {
     "start": "ng serve",
-    "build": "ng build"
+    "build": "ionic build",
+    "run": "ionic build && npx cap run android"
   },
   "private": true,
   "dependencies": {
