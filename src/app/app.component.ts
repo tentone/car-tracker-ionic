@@ -11,7 +11,6 @@ import {SMS} from '@ionic-native/sms/ngx';
 import {File} from '@ionic-native/file/ngx';
 import {Chooser} from '@ionic-native/chooser/ngx';
 import {Geolocation} from '@ionic-native/geolocation/ngx';
-import {Plugins} from '@capacitor/core';
 
 @Component({
   selector: 'app-root',
