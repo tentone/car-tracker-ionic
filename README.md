@@ -31,18 +31,26 @@
 - Install [NodeJS](https://nodejs.org/en/) and NPM and install dependencies
 
 ```bash
+npm install -g @angular/cli
 npm install -g @ionic/cli
 npm install
 npm run start
 ```
 
-- The application can be built using Ionic Native for mobile devices using [Cordova](https://cordova.apache.org/) or [Capacitor](https://capacitorjs.com/), by default capacitor is used.
+- The application can be built using Ionic Native for mobile devices using [Cordova](https://cordova.apache.org/) or [Capacitor](https://capacitorjs.com/).
 
 
 
 ### Capacitor
 
-- TODO
+- [Capacitor](https://capacitorjs.com/) is a replacement for cordova developed by the Ionic team, that contains its own plugins for access to native functionalities.
+- To add a native platform to the project run
+
+```bash
+npm i @capacitor/ios @capacitor/android
+npx cap add android
+npx cap add ios
+```
 
 
 
