@@ -17,7 +17,7 @@ export class SmsIo {
 	/**
 	 * Method used to process SMS received, receives the parameters (message, phoneNumber).
 	 */
-	public static onReceive: Function = null;
+	public static onReceive: (data: any, address: string) => void = null;
 
 	/**
 	 * Start SMS listener.

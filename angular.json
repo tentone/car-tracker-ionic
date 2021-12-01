@@ -40,7 +40,6 @@
               }
             ],
             "scripts": [],
-            "showCircularDependencies": false,
             "aot": true,
             "deleteOutputPath": false,
             "statsJson": true,
@@ -49,7 +48,6 @@
             "buildOptimizer": false,
             "optimization": false,
             "outputHashing": "all",
-            "extractCss": false,
             "namedChunks": false,
             "extractLicenses": true,
             "vendorChunk": false,
@@ -129,6 +127,7 @@
     }
   },
   "cli": {
+    "analytics": false,
     "defaultCollection": "@ionic/angular-toolkit"
   },
   "schematics": {

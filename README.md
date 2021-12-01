@@ -44,22 +44,29 @@ npm run start
 ### Capacitor
 
 - [Capacitor](https://capacitorjs.com/) is a replacement for cordova developed by the Ionic team, that contains its own plugins for access to native functionalities.
-- To add a native platform to the project run
+- Install the capacitor CLI globally, and install the required dependencies for Android and iOS development.
 
 ```bash
+# Add a native platform to the project run
 npm i @capacitor/ios @capacitor/android
 npx cap add android
 npx cap add ios
+
+# Check system requirements
+npm install -g @capacitor/cli
+capacitor doctor android
 ```
 
 
 
 ### Cordova
 
+ - Install [node](https://nodejs.org/en/download/), [npm](https://www.npmjs.com/) and [cordova](https://cordova.apache.org/) globally `npm install -g cordova`.
  - You can replace `icon.png`  assets and then regenerate resources by running  `ionic cordova resources` to generate icon and splash screen sizes.
  - To add platforms to the project run `cordova platform add <platform>` and to remove `cordova platform remove <platform>`
 - To run the application run `cordova run <platform>`.
 - If any errors occurs regarding `dx.bat` file open android sdk Directory and copy `d8.bat` as `dx.bat`
+- After installing everything run `cordova requirements` to check if all dependencies are installed.
 
 
 
