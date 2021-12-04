@@ -1,9 +1,10 @@
 import {App} from '../app';
+import {Geolocation} from '@capacitor/geolocation';
 
 /**
  * Handles access to the GPS information, booth for mobile devices and the browser.
  */
-export class GpsIo {
+export class GeolocationIo {
     /**
      * Get position from GPS or browser location API.
      *
@@ -11,9 +12,11 @@ export class GpsIo {
      */
     public static async getPosition(): Promise<GeolocationPosition> {
         if (App.isMobile()) {
-            App.androidPermissions.requestPermission(App.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION).then(() => {
-               return App.geolocation.getCurrentPosition();
-            });
+            await App.androidPermissions.requestPermission(App.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION);
+            const coordinates = await Geolocation.getCurrentPosition();
+
+            console.log('Current position:', coordinates);
+
         } else if (navigator.geolocation) {
             return new Promise((resolve, reject) => {
                 navigator.geolocation.getCurrentPosition((data: GeolocationPosition) => {
@@ -34,8 +37,7 @@ export class GpsIo {
     public static setWatcher(onChange: (position: GeolocationPosition) => void) {
         if (App.isMobile()) {
             // Watch for changes in the GPS position
-            let watch = App.geolocation.watchPosition();
-            watch.subscribe((data: any) => {
+            let watch = Geolocation.watchPosition({enableHighAccuracy: true}, (data: any) => {
                 onChange(data);
             });
         } else if (navigator.geolocation) {

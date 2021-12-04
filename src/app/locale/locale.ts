@@ -20,7 +20,7 @@ export class Locale {
 	 */
 	static code: string;
 
-	public static initialize(translate: TranslateService) {
+	public static initialize(translate: TranslateService): void {
 		this.code = 'en';
 
 		this.translate = translate;

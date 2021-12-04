@@ -10,10 +10,9 @@ import {Contacts} from '@ionic-native/contacts/ngx';
 import {File} from '@ionic-native/file/ngx';
 import {Chooser} from '@ionic-native/chooser/ngx';
 import {SmsIo} from './io/sms-io';
-import {Geolocation} from "@ionic-native/geolocation/ngx";
 import {Themes} from './theme';
-import {Settings} from "./settings";
-import {Tracker} from "./tracker/tracker";
+import {Settings} from './settings';
+import {Tracker} from './tracker/tracker';
 
 /**
  * The app class is used to access and store all persistent data used in the application.
@@ -36,7 +35,6 @@ export class App {
     public static contacts: Contacts;
     public static file: File;
     public static chooser: Chooser;
-    public static geolocation: Geolocation;
 
     /**
      * Application general settings.
@@ -58,9 +56,8 @@ export class App {
      * @param contacts Contact access.
      * @param file Mobile file access.
      * @param chooser Mobile file chooser.
-     * @param geolocation Geolocation module.
      */
-    public static initialize(platform: Platform, router: Router, androidPermissions: AndroidPermissions, sms: SMS, contacts: Contacts, file: File, chooser: Chooser, geolocation: Geolocation) {
+    public static initialize(platform: Platform, router: Router, androidPermissions: AndroidPermissions, sms: SMS, contacts: Contacts, file: File, chooser: Chooser) {
         // @ts-ignore
         mapboxgl.accessToken = Environment.mapbox;
 
@@ -71,7 +68,6 @@ export class App {
         this.contacts = contacts;
         this.file = file;
         this.chooser = chooser;
-        this.geolocation = geolocation;
 
         this.load();
 

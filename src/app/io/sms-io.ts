@@ -1,19 +1,11 @@
 import {SmsOptions} from '@ionic-native/sms/ngx';
 import {App} from '../app';
-import {Mockup} from '../mockup/mockup';
-import {Gt901Mockup} from '../mockup/gt-901-mockup';
-
 /**
  * Handles the mobile SMS IO, used to send and receive SMS.
  *
  * Also handles mock data environment for browser testing.
  */
 export class SmsIo {
-	/**
-	 * Mockup object used to fake communication when running on development under a browser.
-	 */
-	public static mockup: Mockup = null;
-
 	/**
 	 * Method used to process SMS received, receives the parameters (message, phoneNumber).
 	 */
@@ -47,9 +39,6 @@ export class SmsIo {
 			} else {
 				console.warn('CarTracker: SMSReceive plugin undefined.');
 			}
-		} else {
-			this.mockup = new Gt901Mockup(this.onReceive);
-
 		}
 	}
 
@@ -98,12 +87,6 @@ export class SmsIo {
 					});
 				}
 			});
-		} else {
-			this.mockup.sendSMS(message, phoneNumber);
-
-			if (onSuccess !== undefined) {
-				onSuccess();
-			}
 		}
 	}
 

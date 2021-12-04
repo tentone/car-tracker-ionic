@@ -1,7 +1,7 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import {App} from '../../app';
-import {GpsIo} from '../../io/gps-io';
+import {GeolocationIo} from '../../io/geolocation-io';
 import { Tracker } from 'src/app/tracker/tracker';
 
 @Component({
@@ -55,7 +55,7 @@ export class MapPage {
     this.map.setStyle(App.settings.mapStyle);
 
 
-    GpsIo.getPosition().then((position: any) => {
+    GeolocationIo.getPosition().then((position: any) => {
       this.setMarker(position.coords.longitude, position.coords.latitude);
     });
   }

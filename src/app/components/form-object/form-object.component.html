@@ -37,7 +37,7 @@
 
             <!-- Password -->
             <ng-template [ngIf]="row.type === types.PASSWORD">
-                <ion-icon slot="end" style="display: inline-block;" name="eye-outline"></ion-icon> <!-- eye-off-outline -->
+                <ion-icon slot="end" style="display: inline-block;" name="eye-outline"></ion-icon>
                 <ion-input style="text-align: end; text-overflow: ellipsis;" type="password" [disabled]="!(this.editable && row.editable)"
                     [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="this.setAttribute(this.object, row, $event);"
