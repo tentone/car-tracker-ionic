@@ -19,7 +19,6 @@ import {AppHeaderComponent} from './components/app-header/app-header.component';
 import {FormatDatePipe} from './screens/pipes';
 import {GpsMapComponent} from './components/gps-map/gps-map.component';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
-import { UniqueDeviceID } from '@ionic-native/unique-device-id';
 import { SMS } from '@ionic-native/sms/ngx';
 import { Contacts } from '@ionic-native/contacts/ngx';
 import { File } from '@ionic-native/file/ngx';
