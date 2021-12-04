@@ -1,59 +1,83 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
-import * as mapboxgl from 'mapbox-gl';
+import {AfterContentChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {App} from '../../app';
 import {GeolocationIo} from '../../io/geolocation-io';
 import { Tracker } from 'src/app/data/tracker/tracker';
+import {Environment} from '../../../environments/environment';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import {Control, Map, Marker, NavigationControl} from 'mapbox-gl';
+import {MapboxStyleDefinition, MapboxStyleSwitcherControl} from 'mapbox-gl-style-switcher';
+import {Locale} from '../../locale/locale';
+import {MapStylesLabel} from '../../theme/map-styles';
 
 @Component({
   selector: 'app-map',
   templateUrl: 'map.page.html'
 })
-export class MapPage {
+export class MapPage implements OnInit, AfterContentChecked, AfterViewInit {
   @ViewChild('mapContainer', {static: true}) mapContainer: ElementRef;
 
   /**
    * Mapboxgl instance to display and control the map view.
    */
-  public map: mapboxgl.Map = null;
+  public map: Map = null;
 
   /**
    * Used to navigate the map using the mouse or touch controls.
    */
-  public controls: mapboxgl.Control = null;
+  public controls: Control = null;
 
   /**
    * Marker with the user GPS position.
    */
-  public marker: mapboxgl.Marker = null;
+  public marker: Marker = null;
 
   /**
    * Position of the GPS tracker registered in the app.
    */
-  public markers: mapboxgl.Marker[] = [];
+  public markers: Marker[] = [];
 
   /**
    * List of trackers to display.
    */
   public trackers: Tracker[] = [];
 
+  /**
+   * Indicates if the component is visible.
+   */
+  public visible = false;
+
   public ngOnInit(): void {
     this.trackers = App.trackers;
 
     if (this.map === null) {
-      this.map = new mapboxgl.Map({
+      this.map = new Map({
         container: this.mapContainer.nativeElement,
         style: App.settings.mapStyle,
         zoom: 13,
         center: [0, 0]
       });
 
-      this.controls = new mapboxgl.NavigationControl();
+      this.controls = new NavigationControl();
       this.map.addControl(this.controls);
-      this.enable3DBuildings();
     }
 
     this.map.setStyle(App.settings.mapStyle);
 
+    // Map search box
+    this.map.addControl(new MapboxGeocoder({
+      accessToken: Environment.mapbox,
+      mapboxgl: this.map
+    }), 'bottom-left');
+
+    const styles: MapboxStyleDefinition[] = [];
+    MapStylesLabel.forEach(function(value, key) {
+      styles.push({
+        title: Locale.get(MapStylesLabel.get(key)),
+        uri: key
+      });
+    });
+    this.map.addControl(new MapboxStyleSwitcherControl(styles), 'top-right');
+    this.map.addControl(new NavigationControl(), 'top-right');
 
     GeolocationIo.getPosition().then((position: any) => {
       this.setMarker(position.coords.longitude, position.coords.latitude);
@@ -71,7 +95,7 @@ export class MapPage {
    */
   public setMarker(longitude: number, latitude: number, flyTo: boolean = true) {
     if(this.marker === null) {
-      this.marker = new mapboxgl.Marker();
+      this.marker = new Marker();
       this.marker.setLngLat([longitude, latitude]);
       this.marker.addTo(this.map);
     }
@@ -85,44 +109,12 @@ export class MapPage {
     }
   }
 
-  /**
-   * Use to enable a 3D extruded building layer.
-   */
-  public enable3DBuildings() {
-    this.map.on('load', () => {
-      let layers = this.map.getStyle().layers;
-
-      let labelLayerId;
-      for (let i = 0; i < layers.length; i++) {
-        // @ts-ignore
-        if (layers[i].type === 'symbol' && layers[i].layout['text-field']) {
-          labelLayerId = layers[i].id;
-          break;
-        }
-      }
-
-      this.map.addLayer({
-        id: '3d-buildings',
-        source: 'composite',
-        'source-layer': 'building',
-        filter: ['==', 'extrude', 'true'],
-        type: 'fill-extrusion',
-        minzoom: 15,
-        paint: {
-          'fill-extrusion-color': '#aaa',
-          'fill-extrusion-height': [
-            'interpolate', ['linear'], ['zoom'],
-            15, 0,
-            15.05, ['get', 'height']
-          ],
-          'fill-extrusion-base': [
-            'interpolate', ['linear'], ['zoom'],
-            15, 0,
-            15.05, ['get', 'min_height']
-          ],
-          'fill-extrusion-opacity': .6
-        }
-      }, labelLayerId);
-    });
+  public ngAfterContentChecked(): void {
+    if (this.map && this.map.resize && !this.visible && this.mapContainer.nativeElement.offsetParent !== null) {
+      this.visible = true;
+      this.map.resize();
+    } else if (this.visible && !this.mapContainer.nativeElement.offsetParent) {
+      this.visible = false;
+    }
   }
 }
