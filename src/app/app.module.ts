@@ -18,6 +18,13 @@ import {TrackerLogsPage} from './screens/trackers/logs/tracker-logs.page';
 import {AppHeaderComponent} from './components/app-header/app-header.component';
 import {FormatDatePipe} from './screens/pipes';
 import {GpsMapComponent} from './components/gps-map/gps-map.component';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { UniqueDeviceID } from '@ionic-native/unique-device-id';
+import { SMS } from '@ionic-native/sms/ngx';
+import { Contacts } from '@ionic-native/contacts/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { Chooser } from '@ionic-native/chooser/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
     declarations: [
@@ -55,7 +62,13 @@ import {GpsMapComponent} from './components/gps-map/gps-map.component';
     RouterModule
   ],
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AndroidPermissions,
+    SMS,
+    Contacts,
+    File,
+    Chooser,
+    Geolocation
   ],
   bootstrap: [AppComponent]
 })
