@@ -5,7 +5,8 @@
 	"bundledWebRuntime": false,
 	"loggingBehavior": "debug",
 	"server": {
-		"cleartext": true
+		"cleartext": true,
+		"url": "http://192.168.0.233:8100"
 	},
 	"cordova": {}
 }

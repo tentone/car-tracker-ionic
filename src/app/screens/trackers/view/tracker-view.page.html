@@ -2,7 +2,7 @@
 
 <ion-content>
   <form-object [object]="this.tracker" [layout]="this.layout"></form-object>
-  <div style="width: 100%; height: 60%">
+  <div style="width: 100%; height: 40%">
     <gps-map [position]="this.trackerLocation"></gps-map>
   </div>
   <ion-button expand="block" style="text-transform:none" (click)="this.tracker.getLocation();">{{'updateLocation' | translate}}</ion-button>

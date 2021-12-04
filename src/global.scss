@@ -3,6 +3,9 @@
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
 @import '~@ionic/angular/css/display.css';
+@import "~mapbox-gl/dist/mapbox-gl.css";
+@import "~mapbox-gl-style-switcher/styles.css";
+@import "~@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 
 // Form label disabled style (keep opacity)
 .item-interactive-disabled.sc-ion-label-md-h:not(.item-multiple-inputs),

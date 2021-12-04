@@ -67,7 +67,7 @@ export class MapPage implements OnInit, AfterContentChecked, AfterViewInit {
     this.map.addControl(new MapboxGeocoder({
       accessToken: Environment.mapbox,
       mapboxgl: this.map
-    }), 'bottom-left');
+    }), 'top-left');
 
     const styles: MapboxStyleDefinition[] = [];
     MapStylesLabel.forEach(function(value, key) {
@@ -76,8 +76,8 @@ export class MapPage implements OnInit, AfterContentChecked, AfterViewInit {
         uri: key
       });
     });
+
     this.map.addControl(new MapboxStyleSwitcherControl(styles), 'top-right');
-    this.map.addControl(new NavigationControl(), 'top-right');
 
     GeolocationIo.getPosition().then((position: any) => {
       this.setMarker(position.coords.longitude, position.coords.latitude);
