@@ -1,7 +1,7 @@
 /**
  * Represents a GPS position in the world map.
  */
-export class GPSPosition {
+export class Geolocation {
     /**
      * Latitude value of the position.
      */

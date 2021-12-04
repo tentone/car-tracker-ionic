@@ -23,7 +23,6 @@ import { SMS } from '@ionic-native/sms/ngx';
 import { Contacts } from '@ionic-native/contacts/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { Chooser } from '@ionic-native/chooser/ngx';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
     declarations: [
@@ -66,8 +65,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     SMS,
     Contacts,
     File,
-    Chooser,
-    Geolocation
+    Chooser
   ],
   bootstrap: [AppComponent]
 })

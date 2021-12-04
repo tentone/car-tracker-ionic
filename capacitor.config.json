@@ -1,5 +1,5 @@
 {
-  "appId": "com.tentone.cartracker",
+  "appId": "io.ionic.starter",
   "appName": "cartracker",
   "webDir": "www",
   "bundledWebRuntime": false,

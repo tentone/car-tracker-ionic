@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {Tracker} from '../../../tracker/tracker';
+import {Tracker} from '../../../data/tracker/tracker';
 import {App} from '../../../app';
-import {MessageTypeLabel} from '../../../tracker/tracker-message';
+import {MessageTypeLabel} from '../../../data/tracker/tracker-message';
 
 @Component({
   selector: 'app-trackers-history',

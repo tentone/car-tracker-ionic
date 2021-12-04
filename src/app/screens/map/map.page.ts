@@ -2,7 +2,7 @@ import {Component, ElementRef, ViewChild} from '@angular/core';
 import * as mapboxgl from 'mapbox-gl';
 import {App} from '../../app';
 import {GeolocationIo} from '../../io/geolocation-io';
-import { Tracker } from 'src/app/tracker/tracker';
+import { Tracker } from 'src/app/data/tracker/tracker';
 
 @Component({
   selector: 'app-map',

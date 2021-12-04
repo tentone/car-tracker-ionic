@@ -9,7 +9,6 @@ import {Contacts} from '@ionic-native/contacts/ngx';
 import {SMS} from '@ionic-native/sms/ngx';
 import {File} from '@ionic-native/file/ngx';
 import {Chooser} from '@ionic-native/chooser/ngx';
-import {Geolocation} from '@ionic-native/geolocation/ngx';
 
 @Component({
   selector: 'app-root',
@@ -20,8 +19,8 @@ import {Geolocation} from '@ionic-native/geolocation/ngx';
   ]
 })
 export class AppComponent {
-  constructor(public platform: Platform, public translate: TranslateService, public router: Router, public androidPermissions: AndroidPermissions, public sms: SMS, public contacts: Contacts, public file: File, public chooser: Chooser, public geolocation: Geolocation) {
+  constructor(public platform: Platform, public translate: TranslateService, public router: Router, public androidPermissions: AndroidPermissions, public sms: SMS, public contacts: Contacts, public file: File, public chooser: Chooser) {
     Locale.initialize(this.translate);
-    App.initialize(this.platform, this.router, androidPermissions, sms, contacts, file, chooser, geolocation);
+    App.initialize(this.platform, this.router, androidPermissions, sms, contacts, file, chooser);
   }
 }

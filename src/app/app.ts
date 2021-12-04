@@ -10,9 +10,10 @@ import {Contacts} from '@ionic-native/contacts/ngx';
 import {File} from '@ionic-native/file/ngx';
 import {Chooser} from '@ionic-native/chooser/ngx';
 import {SmsIo} from './io/sms-io';
-import {Themes} from './theme';
+import {Themes} from './theme/theme';
 import {Settings} from './settings';
-import {Tracker} from './tracker/tracker';
+import {Tracker} from './data/tracker/tracker';
+import {Capacitor} from '@capacitor/core';
 
 /**
  * The app class is used to access and store all persistent data used in the application.
@@ -31,9 +32,13 @@ export class App {
     public static navigator: Navigation;
 
     public static androidPermissions: AndroidPermissions;
+
     public static sms: SMS;
+
     public static contacts: Contacts;
+
     public static file: File;
+
     public static chooser: Chooser;
 
     /**
@@ -132,7 +137,6 @@ export class App {
      * Check if the application is running on a mobile device.
      */
     public static isMobile(): boolean {
-        // @ts-ignore
-        return window.cordova !== undefined;
+        return Capacitor.isNativePlatform();
     }
 }

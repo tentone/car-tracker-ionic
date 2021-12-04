@@ -16,6 +16,7 @@ export class GeolocationIo {
             const coordinates = await Geolocation.getCurrentPosition();
 
             console.log('Current position:', coordinates);
+            alert(coordinates);
 
         } else if (navigator.geolocation) {
             return new Promise((resolve, reject) => {

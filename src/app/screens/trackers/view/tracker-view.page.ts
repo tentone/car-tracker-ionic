@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Tracker} from '../../../tracker/tracker';
+import {Tracker} from '../../../data/tracker/tracker';
 import {App} from '../../../app';
 import {TrackerLayout} from '../tracker-layout';
 import {Locale} from '../../../locale/locale';

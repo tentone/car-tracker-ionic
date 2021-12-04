@@ -13,9 +13,6 @@ dependencies {
     implementation project(':capacitor-geolocation')
     implementation project(':capacitor-storage')
     implementation project(':capacitor-app')
-    implementation project(':capacitor-haptics')
-    implementation project(':capacitor-keyboard')
-    implementation project(':capacitor-status-bar')
 
 }
 

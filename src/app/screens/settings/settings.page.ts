@@ -4,8 +4,8 @@ import {Locale} from '../../locale/locale';
 import {App} from '../../app';
 import {FormObjectField} from '../../components/form-object/form-object-field';
 import {FormObjectType} from '../../components/form-object/form-object-type';
-import {Themes} from '../../theme';
-import {MapStyles} from "../../map-styles";
+import {Themes} from '../../theme/theme';
+import {MapStyles} from "../../theme/map-styles";
 
 @Component({
   selector: 'app-settings',
