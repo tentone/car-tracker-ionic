@@ -102,6 +102,43 @@ npx cap sync
 
 
 
+### Android Permissions
+
+- When new plugins are added to provide additional native functionality, the permissions list in the `AndroidManifest.xml` should be updated.
+- It might be necessary to also request for permission during runtime before using the feature.
+
+```xml
+<!-- Network -->
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+<!-- Geolocation API -->
+<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<uses-feature android:name="android.hardware.location.gps" />
+
+<!-- File API-->
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+<!-- Contacts -->
+<uses-permission android:name="android.permission.READ_CONTACTS" />
+<uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+
+<!-- Storage -->
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+<!-- Camera -->
+<uses-permission android:name="android.permission.CAMERA" />
+
+<!-- Audio -->
+<uses-permission android:name="android.permission.RECORD_AUDIO" />
+<uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+```
+
+
+
 
 ### License
 - This project is distributed under MIT license. (Available on the project Git repository on GitHub).
