@@ -7,10 +7,10 @@
   "scripts": {
     "serve": "ng serve",
     "build": "ionic build",
-    "dev": "ionic capacitor run android -l --external",
+    "start": "ionic capacitor run android --livereload --external",
+    "run": "ionic capacitor run android",
     "open": "npx cap open android",
-    "sync": "npx cap sync",
-    "start": "ionic capacitor run android"
+    "sync": "npx cap sync"
   },
   "private": true,
   "dependencies": {
