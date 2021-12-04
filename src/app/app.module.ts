@@ -16,7 +16,7 @@ import {FormObjectComponent} from './components/form-object/form-object.componen
 import {TrackerViewPage} from './screens/trackers/view/tracker-view.page';
 import {TrackerLogsPage} from './screens/trackers/logs/tracker-logs.page';
 import {AppHeaderComponent} from './components/app-header/app-header.component';
-import {FormatDatePipe} from './screens/pipes';
+import {FormatDatePipe} from './pipes';
 import {GpsMapComponent} from './components/gps-map/gps-map.component';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { SMS } from '@ionic-native/sms/ngx';

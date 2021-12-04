@@ -1,3 +1,4 @@
+// Lookup table to speedup UUID generation
 const lut = [];
 for (let i = 0; i < 256; i ++) {
     lut[i] = (i < 16 ? '0' : '') + (i).toString(16);
@@ -8,7 +9,7 @@ for (let i = 0; i < 256; i ++) {
  */
 export class UUIDUtils {
     /**
-     * Generate a UUID used to indetification.
+     * Generate a UUID used to identification.
      *
      * .toUpperCase() here flattens concatenated strings to save heap memory space.
      *

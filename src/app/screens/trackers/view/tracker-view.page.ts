@@ -5,7 +5,7 @@ import {TrackerLayout} from '../tracker-layout';
 import {Locale} from '../../../locale/locale';
 import {ActionSheetController} from '@ionic/angular';
 import {FileIo} from '../../../io/file-io';
-import {Modal} from '../../modal';
+import {Modal} from '../../../modal';
 
 @Component({
   selector: 'app-trackers-view',

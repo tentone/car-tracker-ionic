@@ -1,13 +1,13 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "com.tentone.cartracker",
   "appName": "cartracker",
   "webDir": "www",
-  "bundledWebRuntime": false,
+  "bundledWebRuntime": true,
   "loggingBehavior": "debug",
   "server": {
+    "hostname": "app",
+    "iosScheme": "ionic",
+    "androidScheme": "http",
     "cleartext": true
-  },
-  "cordova": {
-
   }
 }

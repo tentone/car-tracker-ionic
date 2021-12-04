@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {StringUtils} from '../utils/string-utils';
-import {Locale} from '../locale/locale';
+import {StringUtils} from './utils/string-utils';
+import {Locale} from './locale/locale';
 
 /**
  * Structure used to filter data on a search pipe.

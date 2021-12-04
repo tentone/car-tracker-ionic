@@ -3,12 +3,12 @@ import {Theme} from './theme';
 /**
  * Handle integration with theming from the operative system.
  */
-export class ThemeOS {
+export class ThemeUtils {
 	/**
 	 * Get preferred theme based on the Operative System configurations.
 	 */
 	public static preferredTheme(): string {
-		return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? ThemeOS.DARK : ThemeOS.LIGHT;
+		return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? Theme.DARK : Theme.LIGHT;
 	}
 
 	/**

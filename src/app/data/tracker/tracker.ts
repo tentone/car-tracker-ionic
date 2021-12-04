@@ -3,7 +3,7 @@ import {App} from '../../app';
 import {Locale} from '../../locale/locale';
 import {SmsIo} from '../../io/sms-io';
 import {InformationData, LocationData, MessageDirection, MessageType, TrackerMessage} from './tracker-message';
-import {Modal} from '../../screens/modal';
+import {Modal} from '../../modal';
 import {Geolocation} from '../geolocation';
 
 /**

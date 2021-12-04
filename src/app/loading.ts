@@ -1,6 +1,6 @@
 import {LoadingController} from '@ionic/angular';
-import {Locale} from '../locale/locale';
-import {Environment} from '../../environments/environment';
+import {Locale} from './locale/locale';
+import {Environment} from '../environments/environment';
 
 export class Loading {
 	/**

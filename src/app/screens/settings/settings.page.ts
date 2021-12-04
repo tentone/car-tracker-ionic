@@ -6,6 +6,7 @@ import {FormObjectField} from '../../components/form-object/form-object-field';
 import {FormObjectType} from '../../components/form-object/form-object-type';
 import {Themes} from '../../theme/themes';
 import {MapStyles} from '../../theme/map-styles';
+import {Theme} from '../../theme/theme';
 
 @Component({
   selector: 'app-settings',
@@ -46,12 +47,12 @@ export class SettingsPage {
       onChange: (object, attribute, oldValue, newValue) => {Themes.setTheme(newValue);},
       options: [
         {
-          label: 'base',
-          value: 'base'
+          label: 'light',
+          value: Theme.LIGHT
         },
         {
           label: 'dark',
-          value: 'dark'
+          value: Theme.DARK
         }
       ]
     },

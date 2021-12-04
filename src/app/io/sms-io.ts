@@ -1,5 +1,6 @@
 import {SmsOptions} from '@ionic-native/sms/ngx';
 import {App} from '../app';
+
 /**
  * Handles the mobile SMS IO, used to send and receive SMS.
  *

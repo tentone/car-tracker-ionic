@@ -9,12 +9,12 @@ export class Themes {
      */
     static themes: Theme[] = [
         {
-            id: 'base',
-            label: 'base',
+            id: Theme.LIGHT,
+            label: 'light',
             class: ''
         },
         {
-            id: 'dark',
+            id: Theme.DARK,
             label: 'dark',
             class: 'dark'
         }

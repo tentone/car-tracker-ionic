@@ -1,5 +1,5 @@
 import {AlertController, ToastController} from '@ionic/angular';
-import {Locale} from '../locale/locale';
+import {Locale} from './locale/locale';
 
 /**
  * Handles the creating and display of modal boxes with messages for the user.
