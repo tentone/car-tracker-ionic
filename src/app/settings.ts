@@ -1,4 +1,4 @@
-import {MapStyles} from "./theme/map-styles";
+import {MapStyles} from './theme/map-styles';
 
 /**
  * Stores the application global settings for booth appearance and functionality.

@@ -10,7 +10,7 @@
     "dev": "ionic capacitor run android -l --external",
     "open": "npx cap open android",
     "sync": "npx cap sync",
-    "start": "npm run build && npm run sync && npx cap run android"
+    "start": "ionic capacitor run android"
   },
   "private": true,
   "dependencies": {
@@ -59,6 +59,7 @@
     "@angular/language-service": "~12.2.14",
     "@capacitor/app": "~1.0.6",
     "@capacitor/cli": "3.3.2",
+    "@ionic/cli": "~6.18.1",
     "@ionic/angular-toolkit": "~5.0.3",
     "@ngx-translate/core": "~14.0.0",
     "@types/node": "~14.18.0",

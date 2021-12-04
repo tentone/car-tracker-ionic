@@ -10,7 +10,7 @@ import {Contacts} from '@ionic-native/contacts/ngx';
 import {File} from '@ionic-native/file/ngx';
 import {Chooser} from '@ionic-native/chooser/ngx';
 import {SmsIo} from './io/sms-io';
-import {Themes} from './theme/theme';
+import {Themes} from './theme/themes';
 import {Settings} from './settings';
 import {Tracker} from './data/tracker/tracker';
 import {Capacitor} from '@capacitor/core';
