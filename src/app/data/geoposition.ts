@@ -1,7 +1,7 @@
 /**
  * Represents a position in the world map.
  */
-export class Geolocation {
+export class Geoposition {
     /**
      * Latitude in degrees relative to the meridian.
      */

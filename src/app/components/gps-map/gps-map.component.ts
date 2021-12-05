@@ -1,7 +1,7 @@
 import {AfterContentChecked, Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {App} from '../../app';
 import * as mapboxgl from 'mapbox-gl';
-import {Geolocation} from '../../data/geolocation';
+import {Geoposition} from '../../data/geoposition';
 
 @Component({
 	selector: 'gps-map',
@@ -10,7 +10,7 @@ import {Geolocation} from '../../data/geolocation';
 export class GpsMapComponent implements OnInit, AfterContentChecked, OnChanges {
 	@ViewChild('mapContainer', {static: true}) mapContainer: ElementRef;
 
-	@Input() position: Geolocation = null;
+	@Input() position: Geoposition = null;
 
 	/**
 	 * Mapbox gl instance to display and control the map view.

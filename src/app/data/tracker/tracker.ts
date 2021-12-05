@@ -4,7 +4,7 @@ import {Locale} from '../../locale/locale';
 import {SmsIo} from '../../io/sms-io';
 import {InformationData, LocationData, MessageDirection, MessageType, TrackerMessage} from './tracker-message';
 import {Modal} from '../../modal';
-import {Geolocation} from '../geolocation';
+import {Geoposition} from '../geoposition';
 
 /**
  * Tracker represents a GPS tracker, contains all the metadata required to communicate with the tracker.
@@ -127,7 +127,7 @@ export class Tracker {
      *
      * @param position GPS position to navigate to.
      */
-    public navigateGPS(position?: Geolocation) {
+    public navigateGPS(position?: Geoposition) {
         // If position not defined use the last GPS position.
         if (position === undefined) {
             position = this.getLastPosition();
@@ -147,7 +147,7 @@ export class Tracker {
     /**
      * Get last known location of the tracker from its message list.
      */
-    public getLastPosition(): Geolocation {
+    public getLastPosition(): Geoposition {
         for (let i = this.messages.length - 1; i >= 0; i--) {
             if (this.messages[i].type === MessageType.LOCATION && this.messages[i].data.position !== null) {
                 return this.messages[i].data.position;
@@ -208,7 +208,7 @@ export class Tracker {
                 let data = new LocationData();
 
                 if (matches[1].length > 0) {
-                    data.position = new Geolocation(Number.parseFloat(matches[1]), -Number.parseFloat(matches[2]));
+                    data.position = new Geoposition(Number.parseFloat(matches[1]), -Number.parseFloat(matches[2]));
                 }
                 data.id = matches[3];
                 data.acc = matches[4] !== 'OFF';

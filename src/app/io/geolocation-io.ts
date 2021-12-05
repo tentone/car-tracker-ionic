@@ -1,5 +1,6 @@
 import {App} from '../app';
 import {Geolocation} from '@capacitor/geolocation';
+import {Geoposition} from '../data/geoposition';
 
 /**
  * Handles access to the GPS information, booth for mobile devices and the browser.
@@ -10,17 +11,16 @@ export class GeolocationIo {
 	 *
 	 * @return Promise withe the current position of the device.
 	 */
-	public static async getPosition(): Promise<GeolocationPosition> {
+	public static async getPosition(): Promise<Geoposition> {
 		if (App.isMobile()) {
 			await App.androidPermissions.requestPermission(App.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION);
 			const coordinates = await Geolocation.getCurrentPosition();
 
-			console.log('Current position:', coordinates);
-
+			return new Geoposition(coordinates.coords.latitude, coordinates.coords.longitude, coordinates.coords.altitude);
 		} else if (navigator.geolocation) {
 			return new Promise((resolve, reject) => {
 				navigator.geolocation.getCurrentPosition((data: GeolocationPosition) => {
-					resolve(data);
+					resolve(new Geoposition(data.coords.latitude, data.coords.longitude, data.coords.altitude));
 				}, (err: GeolocationPositionError) => {
 					reject(err);
 				});
@@ -34,14 +34,15 @@ export class GeolocationIo {
 	 *
 	 * @param onChange Method called when the position changes receives the position of the device.
 	 */
-	public static setWatcher(onChange: (position: GeolocationPosition) => void) {
+	public static async setWatcher(onChange: (position: Geoposition) => void) {
 		if (App.isMobile()) {
-			// Watch for changes in the GPS position
-			let watch = Geolocation.watchPosition({enableHighAccuracy: true}, (data: any) => {
-				onChange(data);
+			let watcher = await Geolocation.watchPosition({enableHighAccuracy: true}, (data: any) => {
+				onChange(new Geoposition(data.coords.latitude, data.coords.longitude, data.coords.altitude));
 			});
 		} else if (navigator.geolocation) {
-			navigator.geolocation.watchPosition(onChange);
+			navigator.geolocation.watchPosition(function (data: GeolocationPosition) {
+				onChange(new Geoposition(data.coords.latitude, data.coords.longitude, data.coords.altitude));
+			});
 		}
 	}
 }

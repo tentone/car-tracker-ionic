@@ -1,4 +1,4 @@
-import {Geolocation} from '../geolocation';
+import {Geoposition} from '../geoposition';
 
 /**
  * Class to represent a message received from a tracker.
@@ -43,7 +43,7 @@ export class TrackerMessage {
  * Sometimes the position of the tracker may be unknown due to lack of GPS signal or sleep mode being active.
  */
 export class LocationData {
-    public position: Geolocation = null;
+    public position: Geoposition = null;
     public id: string = '';
     public acc: boolean = false;
     public gps: boolean = false;
