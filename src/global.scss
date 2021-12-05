@@ -7,10 +7,6 @@
 @import "~mapbox-gl-style-switcher/styles.css";
 @import "~@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
 
-// Form label disabled style (keep opacity)
-.item-interactive-disabled.sc-ion-label-md-h:not(.item-multiple-inputs),
-.item-interactive-disabled:not(.item-multiple-inputs) .sc-ion-label-md-h {
-  cursor: default;
-  opacity: 1.0;
-  pointer-events: none;
-}
+@import "app/theme/ionic.scss";
+@import "app/theme/dark.scss";
+@import "app/theme/light.scss";
