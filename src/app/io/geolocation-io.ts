@@ -14,6 +14,7 @@ export class GeolocationIo {
 	public static async getPosition(): Promise<Geoposition> {
 		if (App.isMobile()) {
 			await App.androidPermissions.requestPermission(App.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION);
+			
 			const coordinates = await Geolocation.getCurrentPosition();
 
 			return new Geoposition(coordinates.coords.latitude, coordinates.coords.longitude, coordinates.coords.altitude);
