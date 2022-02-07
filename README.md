@@ -1,15 +1,15 @@
-# CarTracker
+# Car Tracker Ionic
  - Mobile application to track car GPS position for SMS based Chinese tracker(s) marketed under the model number A11, ST-901, GT01 and GT09.
  - Manage multiple GPS car trackers using SMS communication.
  - Set multiple parameter of the tracker (e.g. speed limit, sleep time, password, distance alarm)
  - Manage and list messages exchanged with the car tracker.
  - Export stored data as file for backup as JSON.
  - Dark and bright graphical user interface themes (including maps).
- - Mockup of the ST-901 device that can be used for development testing on the browser.
+ - Mock-up of the ST-901 device that can be used for development testing on the browser.
  - Works with any Ionic compatible platform (may have problems on some platforms caused ionic native plugins compatibility).
  - May be compatible with other SMS based trackers, but it was only tested with these mentioned above.
 
-<img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/front.jpg" width="300"><img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/back.jpg" width="300"><img src="https://raw.githubusercontent.com/tentone/cartracker/master/readme/pcb.jpg" width="300">
+<img src="https://raw.githubusercontent.com/tentone/car-tracker-ionic/master/readme/front.jpg" width="250"><img src="https://raw.githubusercontent.com/tentone/car-tracker-ionic/master/readme/back.jpg" width="250"><img src="https://raw.githubusercontent.com/tentone/car-tracker-ionic/master/readme/pcb.jpg" width="250">
 
 
 
